@@ -24,9 +24,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/Theme.UIandroidGameEngine" >
-        <activity android:name="com.tfg.UIandroidGameEngine.EditorActivity" />
-        <activity android:name="com.tfg.UIandroidGameEngine.MainActivity" >
+        android:theme="@style/Theme.AppCompat.NoActionBar" >
+        <activity
+            android:name="com.tfg.UIandroidGameEngine.EditorActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.tfg.UIandroidGameEngine.MainActivity"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
