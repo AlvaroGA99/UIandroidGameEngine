@@ -27,7 +27,8 @@
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <activity
             android:name="com.tfg.UIandroidGameEngine.EditorActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+        </activity>
         <activity
             android:name="com.tfg.UIandroidGameEngine.MainActivity"
             android:screenOrientation="landscape" >
