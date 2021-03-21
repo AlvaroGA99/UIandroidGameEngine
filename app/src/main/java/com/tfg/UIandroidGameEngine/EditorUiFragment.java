@@ -1,9 +1,15 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.fragment.app.Fragment;
 
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +25,19 @@ public class EditorUiFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Activity parentActivity;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    private  boolean inspectorReverse = false;
+    private boolean hierarchyReverse = true;
+
+
     public EditorUiFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -52,6 +64,8 @@ public class EditorUiFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }else{
+            parentActivity = getActivity();
         }
     }
 
@@ -64,6 +78,33 @@ public class EditorUiFragment extends Fragment {
 
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
-        
+        View ObjectHierarchy = parentActivity.findViewById(R.id.objectHierarchy);
+        View inspector = parentActivity.findViewById(R.id.inspector);
+        ValueAnimator animation = ObjectAnimator.ofFloat(ObjectHierarchy, "translationX", -100f);
+        animation.setDuration(2000);
+        ValueAnimator animation2 = ObjectAnimator.ofFloat(inspector, "translationX", 100f);
+        animation2.setDuration(2000);
+        ObjectHierarchy.setTranslationX(-100f);
+        inspector.setTranslationX(100f);
+
+
+        inspector.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                v.animate().translationX(100f);
+
+            }
+        });
+
+        ObjectHierarchy.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                inspectorReverse = false;
+                v.animate().translationX(v.getTranslationX()*-1);
+
+                //animation.reverse();
+            }
+        });
     }
 }

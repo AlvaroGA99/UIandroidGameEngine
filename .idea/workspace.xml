@@ -36,6 +36,18 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -60,6 +72,9 @@
     <property name="android.sdk.path" value="C:/androidSDK" />
   </component>
   <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.tfg.UIandroidGameEngine" />
+    </key>
     <key name="android.template.541800380">
       <recent name="com.tfg.UIandroidGameEngine" />
     </key>
@@ -160,10 +175,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="845" y="382" key="#Notifications/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1615201658215" />
-    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1615657142027">
+    <state x="742" y="238" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1616345661088">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1615657142027" />
+    <state x="742" y="238" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616345661088" />
+    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1616367611063">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616367611063" />
     <state x="580" y="413" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615432013807">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

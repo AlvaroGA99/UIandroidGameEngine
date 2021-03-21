@@ -1,5 +1,9 @@
 [
     {
+        "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\xml_fragment_editor_ui_scene.xml.flat",
+        "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\xml\\fragment_editor_ui_scene.xml"
+    },
+    {
         "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
@@ -36,8 +40,16 @@
         "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\layout\\activity_editor.xml"
     },
     {
+        "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_editor_ui.xml.flat",
+        "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\layout\\fragment_editor_ui.xml"
+    },
+    {
         "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_editor_game_surface.xml.flat",
+        "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\layout\\fragment_editor_game_surface.xml"
     },
     {
         "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_users_project.xml.flat",

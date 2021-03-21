@@ -971,6 +971,7 @@ color accent_material_dark
 color accent_material_light
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
+color backgroundEditorUI
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -1885,6 +1886,7 @@ id easeIn
 id easeInOut
 id easeOut
 id edit_query
+id editorContainer
 id elastic
 id end
 id endToStart
@@ -1904,6 +1906,7 @@ id fixed
 id flip
 id floating
 id forever
+id framelayout
 id ghost_view
 id ghost_view_holder
 id gone
@@ -1926,6 +1929,7 @@ id ignore
 id ignoreRequest
 id image
 id info
+id inspector
 id invisible
 id inward
 id italic
@@ -1942,6 +1946,7 @@ id light
 id line1
 id line3
 id linear
+id linearLayout
 id listMode
 id list_item
 id localprojects
@@ -2009,6 +2014,7 @@ id normal
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id objectHierarchy
 id off
 id on
 id outline
@@ -2233,6 +2239,8 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_editor_game_surface
+layout fragment_editor_ui
 layout fragment_local_projects
 layout fragment_main_menu
 layout fragment_new_project
@@ -3295,6 +3303,7 @@ styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
+xml fragment_editor_ui_scene
 xml standalone_badge
 xml standalone_badge_gravity_bottom_end
 xml standalone_badge_gravity_bottom_start
