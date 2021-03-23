@@ -84,15 +84,15 @@ public class EditorUiFragment extends Fragment {
         animation.setDuration(2000);
         ValueAnimator animation2 = ObjectAnimator.ofFloat(inspector, "translationX", 100f);
         animation2.setDuration(2000);
-        ObjectHierarchy.setTranslationX(-100f);
-        inspector.setTranslationX(100f);
+        ObjectHierarchy.setTranslationX(-400f);
+        inspector.setTranslationX(400f);
 
 
         inspector.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
 
-                v.animate().translationX(100f);
+                v.animate().translationX(v.getTranslationX()*-1);
 
             }
         });

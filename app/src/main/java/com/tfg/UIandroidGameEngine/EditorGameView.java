@@ -13,6 +13,7 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
     private  Thread drawThread;
     private SurfaceHolder holder;
     private Canvas canvas;
+    private GameEngine theGameEngine = new GameEngine();
 
     public EditorGameView(Context context) {
         super(context);
@@ -23,6 +24,7 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
+        theGameEngine.addGameObject(new GameObject((float)(getWidth()/2), (float)(getHeight()/2)));
         this.holder = holder;
         drawThread = new Thread(this);
         drawThread.start();
@@ -43,7 +45,8 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
         while(true){
             canvas = holder.lockCanvas();
             if (canvas != null){
-                canvas.drawARGB(255,255,0,0);
+                canvas.drawARGB(255,0,0,0);
+                theGameEngine.drawAll(canvas);
                 holder.unlockCanvasAndPost(canvas);
             }
         }

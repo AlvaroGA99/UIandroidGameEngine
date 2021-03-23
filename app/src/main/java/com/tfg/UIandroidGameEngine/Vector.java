@@ -2,10 +2,10 @@ package com.tfg.UIandroidGameEngine;
 
 public class Vector {
 
-    public double x;
-    public double y;
+    public float x;
+    public float y;
 
-    public Vector(double x, double y){
+    public Vector(float x, float y){
         this.x = x;
         this.y = y;
     }
@@ -15,12 +15,12 @@ public class Vector {
         return   Math.sqrt(x*x + y*y);
     }
 
-    public double dotProduct(Vector other){
+    public float dotProduct(Vector other){
         return this.x*other.x + this.y*other.y;
     }
 
     public Vector normalized(){
-        return new Vector(this.x/this.magnitude(),this.y/this.magnitude());
+        return new Vector((float  ) (this.x/this.magnitude()),(float)(this.y/this.magnitude()));
 
     }
 

@@ -18,11 +18,19 @@ com/tfg/UIandroidGameEngine/MainMenuFragment.java
  com.tfg.UIandroidGameEngine.MainMenuFragment$1
  com.tfg.UIandroidGameEngine.MainMenuFragment$2
  com.tfg.UIandroidGameEngine.MainMenuFragment$3
-com/tfg/UIandroidGameEngine/DrawThread.java
- com.tfg.UIandroidGameEngine.DrawThread
 com/tfg/UIandroidGameEngine/EditorActivity.java
  com.tfg.UIandroidGameEngine.EditorActivity
-com/tfg/UIandroidGameEngine/EditorGameView.java
- com.tfg.UIandroidGameEngine.EditorGameView
+com/tfg/UIandroidGameEngine/Component.java
+ com.tfg.UIandroidGameEngine.Component
+com/tfg/UIandroidGameEngine/Event.java
+ com.tfg.UIandroidGameEngine.Event
+com/tfg/UIandroidGameEngine/Vector.java
+ com.tfg.UIandroidGameEngine.Vector
 com/tfg/UIandroidGameEngine/EditorGameSurfaceFragment.java
  com.tfg.UIandroidGameEngine.EditorGameSurfaceFragment
+com/tfg/UIandroidGameEngine/GameEngine.java
+ com.tfg.UIandroidGameEngine.GameEngine
+com/tfg/UIandroidGameEngine/EditorGameView.java
+ com.tfg.UIandroidGameEngine.EditorGameView
+com/tfg/UIandroidGameEngine/GameObject.java
+ com.tfg.UIandroidGameEngine.GameObject
