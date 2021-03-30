@@ -187,6 +187,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616754122778" />
+    <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617121964554">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617121964554" />
     <state x="580" y="413" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615432013807">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

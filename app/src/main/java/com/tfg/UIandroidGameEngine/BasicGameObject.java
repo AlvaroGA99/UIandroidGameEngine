@@ -6,7 +6,7 @@ import android.graphics.Paint;
 
 import java.util.ArrayList;
 
-public  class BasicGameObject {
+public  class BasicGameObject  {
 
         public Vector position;
         public Vector scale;
@@ -22,7 +22,7 @@ public  class BasicGameObject {
             rotation = 0;
         }
 
-        public void addComponent(Component toAdd){
+        public  void  addComponent(Component toAdd){
             components.add(toAdd);
         }
 
