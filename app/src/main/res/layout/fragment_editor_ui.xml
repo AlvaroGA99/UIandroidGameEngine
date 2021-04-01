@@ -5,27 +5,67 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layoutDescription="@xml/fragment_editor_ui_scene"
-    tools:context=".EditorUiFragment" >
+    tools:context=".EditorUiFragment">
 
-    <View
-        android:id="@+id/objectHierarchy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="40dp"
-        android:layout_weight="1"
-        android:background="@color/backgroundEditorUI" />
 
-    <View
-        android:id="@+id/inspector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-        android:layout_weight="1"
-        android:background="@color/backgroundEditorUI" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="300dp"
+        android:layout_marginRight="300dp"
+        android:layout_weight="10"
+        android:background="@color/backgroundEditorUI"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="7dp"
+            android:layout_weight="1"
+            android:background="@drawable/playbutton_drawable" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/pausebutton_drawable"
+            android:layout_marginBottom="7dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:id="@+id/objectHierarchy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="40dp"
+            android:layout_weight="1"
+            android:background="@color/backgroundEditorUI" />
+
+        <View
+            android:id="@+id/inspector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
+            android:layout_weight="1"
+            android:background="@color/backgroundEditorUI" />
+    </LinearLayout>
 
 </LinearLayout>

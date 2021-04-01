@@ -26,6 +26,14 @@ public  class BasicGameObject  {
             components.add(toAdd);
         }
 
+        public void addComponent(String component){
+             switch(component){
+                 case "component" :
+                     components.add(new Component(this));
+                     break;
+             }
+        }
+
         public void draw(Canvas renderCanvas){
             Paint aux = new Paint();
             aux.setARGB(255,255,0,0);

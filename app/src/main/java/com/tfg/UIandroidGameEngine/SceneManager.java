@@ -21,8 +21,21 @@ public class SceneManager {
         }
     }
 
-    public void loadScene(ArrayList<BasicGameObject> sceneObjects){
-        objectsInCurrentScene =  sceneObjects;
+    private BasicGameObject castDescriptionToObject(String[] objectDescription){
+        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[0]),Float.parseFloat(objectDescription[1]));
+        aux.scale = new Vector(Float.parseFloat(objectDescription[2]),Float.parseFloat(objectDescription[3]));
+        aux.rotation = Float.parseFloat(objectDescription[4]);
+        for (int i = 5; i < objectDescription.length; i++){
+            aux.addComponent(objectDescription[i]);
+        }
+        return aux;
+    }
+
+    public void loadScene(ArrayList<String[]> sceneObjects){
+       objectsInCurrentScene.clear();
+       for (int i = 0; i < sceneObjects.size();i++){
+            objectsInCurrentScene.add(castDescriptionToObject(sceneObjects.get(i)));
+       }
     }
 
 

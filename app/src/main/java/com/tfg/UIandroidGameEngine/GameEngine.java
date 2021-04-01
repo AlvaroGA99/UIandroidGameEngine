@@ -9,7 +9,7 @@ public class GameEngine {
 
 
 
-    private HashMap<String,ArrayList<BasicGameObject>> SceneHierarchyDescription = new HashMap<>();
+    private HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<>();
 
     private SceneManager theSceneManager = new SceneManager();
 
