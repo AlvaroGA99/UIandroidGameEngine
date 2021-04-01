@@ -11,6 +11,7 @@ public  class BasicGameObject  {
         public Vector position;
         public Vector scale;
         public float rotation;
+        public int sceneHierarchyID;
 
 
         private ArrayList<Component> components = new ArrayList<Component>();
@@ -28,10 +29,19 @@ public  class BasicGameObject  {
 
         public void addComponent(String component){
              switch(component){
-                 case "component" :
+                 case "Component" :
                      components.add(new Component(this));
                      break;
              }
+        }
+
+        public String[] castObjectToDescription(){
+             String aux = "";
+             aux += "" + position.x + " " + position.y + " " + scale.x + " " + scale.y + " " + rotation;
+             for(int i = 0; i < components.size(); i ++){
+                 aux += components.get(i).getClass();
+             }
+             return aux.split(" ");
         }
 
         public void draw(Canvas renderCanvas){
@@ -39,6 +49,12 @@ public  class BasicGameObject  {
             aux.setARGB(255,255,0,0);
             renderCanvas.drawRect(position.x,position.y,position.x + 50, position.y + 50, aux);
 
+        }
+
+        public void update(){
+             for (int i = 0; i < components.size(); i++){
+                 components.get(i).process();
+             }
         }
 
     }

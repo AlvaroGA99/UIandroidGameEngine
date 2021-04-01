@@ -8,6 +8,8 @@ public class SceneManager {
 
     private ArrayList<BasicGameObject> objectsInCurrentScene;
 
+    public String currentScene;
+
     public void addObjectToCurrentScene(BasicGameObject toAdd){
         objectsInCurrentScene.add(toAdd);
     }
@@ -18,6 +20,12 @@ public class SceneManager {
     public void drawCurrentScene(Canvas renderCanvas){
         for (int i = 0; i < objectsInCurrentScene.size(); i ++){
             objectsInCurrentScene.get(i).draw(renderCanvas);
+        }
+    }
+
+    public void updateCurrentScene(){
+        for (int i = 0; i < objectsInCurrentScene.size(); i++){
+            objectsInCurrentScene.get(i).update();
         }
     }
 

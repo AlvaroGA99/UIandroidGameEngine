@@ -18,6 +18,8 @@ public class GameEngine {
     }
 
     public void addGameObject(BasicGameObject toAdd){
+        toAdd.sceneHierarchyID = SceneHierarchyDescription.get(theSceneManager.currentScene).size();
+        SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
         theSceneManager.addObjectToCurrentScene(toAdd);
     }
 
@@ -25,10 +27,20 @@ public class GameEngine {
        theSceneManager.drawCurrentScene(renderCanvas);
     }
 
-    public void loadScene(String key){
+    public void addScene(String key){
         if(!SceneHierarchyDescription.containsKey(key)){
-            theSceneManager.loadScene(SceneHierarchyDescription.get(key));
+            SceneHierarchyDescription.put(key, new ArrayList<String[]>());
         }
+    }
+
+    public void updateAll(){
+        theSceneManager.updateCurrentScene();
+    }
+
+    public void loadScene(String key){
+
+            theSceneManager.loadScene(SceneHierarchyDescription.get(key));
+
     }
 
 }

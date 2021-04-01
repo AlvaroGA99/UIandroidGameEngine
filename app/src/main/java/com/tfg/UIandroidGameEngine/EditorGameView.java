@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 public class EditorGameView extends SurfaceView implements SurfaceHolder.Callback,Runnable {
 
     private  Thread drawThread;
+    private UpdateThread updateThread;
     private SurfaceHolder holder;
     private Canvas canvas;
     private GameEngine theGameEngine = new GameEngine();
