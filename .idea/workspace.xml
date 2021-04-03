@@ -52,6 +52,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -66,8 +67,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="d9889d5" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-03-13T17:33:02.061Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3a_API_30" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-02T10:32:30.092Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="C:/androidSDK" />
@@ -180,10 +181,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="742" y="238" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616345661088" />
-    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1616367611063">
+    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1617415328827">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616367611063" />
+    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617415328827" />
     <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1616754122778">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -192,10 +193,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617121964554" />
+    <state x="176" y="158" width="1349" height="789" key="AVDManager" timestamp="1617376722322">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="176" y="158" width="1349" height="789" key="AVDManager/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617376722322" />
     <state x="540" y="274" key="AndroidCreateResourceFileDialog" timestamp="1617232960102">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="540" y="274" key="AndroidCreateResourceFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617232960102" />
+    <state x="351" y="197" key="SettingsEditor" timestamp="1617365396394">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="351" y="197" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617365396394" />
     <state x="580" y="413" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615432013807">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

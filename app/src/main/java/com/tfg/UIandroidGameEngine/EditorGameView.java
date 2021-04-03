@@ -25,7 +25,7 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
-        theGameEngine.addGameObject(new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2)));
+        theGameEngine.addGameObject(new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0));
         this.holder = holder;
         drawThread = new Thread(this);
         drawThread.start();

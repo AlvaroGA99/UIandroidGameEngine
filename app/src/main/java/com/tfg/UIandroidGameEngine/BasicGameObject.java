@@ -3,6 +3,7 @@ package com.tfg.UIandroidGameEngine;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 
 import java.util.ArrayList;
 
@@ -14,10 +15,23 @@ public  class BasicGameObject  {
         public int sceneHierarchyID;
 
 
+        private Sprite sprite;
         private ArrayList<Component> components = new ArrayList<Component>();
 
 
-         public BasicGameObject(float posX, float posY){
+         public BasicGameObject(float posX, float posY, int spriteType){
+             switch(spriteType){
+                 case 0 :
+                     sprite = new RectangleSprite();
+                     break;
+                 case 1:
+                     sprite = new CircleSprite();
+                     break;
+                 case 2:
+                     sprite = new BitmapSprite();
+                     break;
+
+             }
            position = new Vector(posX,posY);
             scale = new Vector(1,1);
             rotation = 0;
@@ -39,7 +53,7 @@ public  class BasicGameObject  {
              String aux = "";
              aux += "" + position.x + " " + position.y + " " + scale.x + " " + scale.y + " " + rotation;
              for(int i = 0; i < components.size(); i ++){
-                 aux += components.get(i).getClass();
+                 aux += " " + components.get(i).getClass().getName();
              }
              return aux.split(" ");
         }
@@ -47,6 +61,7 @@ public  class BasicGameObject  {
         public void draw(Canvas renderCanvas){
             Paint aux = new Paint();
             aux.setARGB(255,255,0,0);
+
             renderCanvas.drawRect(position.x,position.y,position.x + 50, position.y + 50, aux);
 
         }
