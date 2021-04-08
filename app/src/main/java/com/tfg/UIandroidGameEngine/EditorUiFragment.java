@@ -26,6 +26,8 @@ public class EditorUiFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Activity parentActivity;
+    private boolean canAnimateInspector = true;
+    private boolean canAnimateHierarchy = true;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -33,6 +35,9 @@ public class EditorUiFragment extends Fragment {
 
     private  boolean inspectorReverse = false;
     private boolean hierarchyReverse = true;
+
+    private int translationInspector;
+    private int translationHierarchy;
 
 
     public EditorUiFragment() {
@@ -78,21 +83,73 @@ public class EditorUiFragment extends Fragment {
 
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
+        translationHierarchy =  -500;
+        translationInspector = 500;
         View ObjectHierarchy = parentActivity.findViewById(R.id.objectHierarchy);
         View inspector = parentActivity.findViewById(R.id.inspector);
-        ValueAnimator animation = ObjectAnimator.ofFloat(ObjectHierarchy, "translationX", -100f);
+       /* ValueAnimator animation = ObjectAnimator.ofFloat(ObjectHierarchy, "translationX", -100f);
         animation.setDuration(2000);
         ValueAnimator animation2 = ObjectAnimator.ofFloat(inspector, "translationX", 100f);
-        animation2.setDuration(2000);
-        ObjectHierarchy.setTranslationX(-400f);
-        inspector.setTranslationX(400f);
+        animation2.setDuration(2000)*/;
+
+        ObjectHierarchy.animate().setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                canAnimateHierarchy = false;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                canAnimateHierarchy = true;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+
+        inspector.animate().setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                canAnimateInspector = false;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                canAnimateInspector = true;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        ObjectHierarchy.setTranslationX(-1000f);
+        inspector.setTranslationX(1000f);
 
 
         inspector.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                //if(canAnimateInspector){
 
-                v.animate().translationX(v.getTranslationX()*-1);
+                    v.animate().translationX(-1*translationInspector);
+                    translationInspector*= -1;
+                //}
+
 
             }
         });
@@ -100,8 +157,12 @@ public class EditorUiFragment extends Fragment {
         ObjectHierarchy.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                inspectorReverse = false;
-                v.animate().translationX(v.getTranslationX()*-1);
+                //if(canAnimateHierarchy){
+
+                    v.animate().translationX(-1*translationHierarchy);
+                    translationHierarchy *= -1;
+                //}
+
 
                 //animation.reverse();
             }

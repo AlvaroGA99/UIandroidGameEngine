@@ -14,12 +14,13 @@ public  class BasicGameObject  {
         public float rotation;
         public int sceneHierarchyID;
 
-
+        private int spriteType;
         private Sprite sprite;
         private ArrayList<Component> components = new ArrayList<Component>();
 
 
          public BasicGameObject(float posX, float posY, int spriteType){
+             this.spriteType = spriteType;
              switch(spriteType){
                  case 0 :
                      sprite = new RectangleSprite();
@@ -51,7 +52,7 @@ public  class BasicGameObject  {
 
         public String[] castObjectToDescription(){
              String aux = "";
-             aux += "" + position.x + " " + position.y + " " + scale.x + " " + scale.y + " " + rotation;
+             aux += "" + position.x + " " + position.y + " " + scale.x + " " + scale.y + " " + rotation + " " + spriteType;
              for(int i = 0; i < components.size(); i ++){
                  aux += " " + components.get(i).getClass().getName();
              }
@@ -59,10 +60,7 @@ public  class BasicGameObject  {
         }
 
         public void draw(Canvas renderCanvas){
-            Paint aux = new Paint();
-            aux.setARGB(255,255,0,0);
-
-            renderCanvas.drawRect(position.x,position.y,position.x + 50, position.y + 50, aux);
+           sprite.draw( position,  scale,  rotation,renderCanvas);
 
         }
 

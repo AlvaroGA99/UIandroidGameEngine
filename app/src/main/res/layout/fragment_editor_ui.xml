@@ -16,7 +16,7 @@
         android:layout_marginLeft="300dp"
         android:layout_marginRight="300dp"
         android:layout_weight="10"
-        android:background="@color/backgroundEditorUI"
+        android:background="@drawable/roundborder_drawable"
         android:orientation="horizontal">
 
         <View
@@ -55,7 +55,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="40dp"
             android:layout_weight="1"
-            android:background="@color/backgroundEditorUI" />
+            android:background="@drawable/roundborder_drawable" />
 
         <View
             android:id="@+id/inspector"
@@ -65,7 +65,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="40dp"
             android:layout_weight="1"
-            android:background="@color/backgroundEditorUI" />
+            android:background="@drawable/roundborder_drawable" />
     </LinearLayout>
 
 </LinearLayout>

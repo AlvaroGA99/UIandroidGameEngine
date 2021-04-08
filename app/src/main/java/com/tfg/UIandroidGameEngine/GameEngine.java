@@ -9,12 +9,13 @@ public class GameEngine {
 
 
 
-    private HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<>();
 
-    private SceneManager theSceneManager = new SceneManager();
+    private HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
+
+    private SceneManager theSceneManager =  new SceneManager();
 
     public GameEngine(){
-
+        addScene(theSceneManager.currentScene);
     }
 
     public void addGameObject(BasicGameObject toAdd){

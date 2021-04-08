@@ -3,6 +3,7 @@ package com.tfg.UIandroidGameEngine;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -16,6 +17,8 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
     private Canvas canvas;
     private GameEngine theGameEngine = new GameEngine();
 
+    private BasicGameObject testgameObject;
+
     public EditorGameView(Context context) {
         super(context);
         getHolder().addCallback(this);
@@ -25,7 +28,9 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
-        theGameEngine.addGameObject(new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0));
+         theGameEngine.addGameObject(new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0));
+        //testgameObject = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0);
+       theGameEngine.addGameObject(new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0));
         this.holder = holder;
         drawThread = new Thread(this);
         drawThread.start();
@@ -48,6 +53,7 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
             if (canvas != null){
                 canvas.drawARGB(255,0,0,0);
                 theGameEngine.drawAll(canvas);
+                //testgameObject.draw(canvas);
                 holder.unlockCanvasAndPost(canvas);
             }
         }
