@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 
+import androidx.appcompat.widget.VectorEnabledTintResources;
+
 import java.util.ArrayList;
 
 public  class BasicGameObject  {
@@ -12,6 +14,11 @@ public  class BasicGameObject  {
         public Vector position;
         public Vector scale;
         public float rotation;
+
+        public Vector preUpdatePosition;
+        public Vector preUpdateScale;
+        public float preUpdateRotation;
+
         public int sceneHierarchyID;
 
         private int spriteType;
@@ -33,6 +40,10 @@ public  class BasicGameObject  {
                      break;
 
              }
+             preUpdatePosition = new Vector(0,0);
+             preUpdateRotation = 0.0f;
+             preUpdateScale = new Vector(0,0);
+
            position = new Vector(posX,posY);
             scale = new Vector(1,1);
             rotation = 0;
@@ -69,5 +80,16 @@ public  class BasicGameObject  {
                  components.get(i).process();
              }
         }
+
+        public void postUpdate(){
+             scale.x = preUpdateScale.x;
+            scale.y = preUpdateScale.y;
+
+            position.x = preUpdatePosition.x;
+            position.y = preUpdatePosition.y;
+
+            rotation = preUpdateRotation;
+        }
+
 
     }

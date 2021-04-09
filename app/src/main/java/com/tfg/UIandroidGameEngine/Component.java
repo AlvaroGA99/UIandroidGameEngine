@@ -2,7 +2,7 @@ package com.tfg.UIandroidGameEngine;
 
 public class Component  {
 
-    private BasicGameObject container;
+    protected BasicGameObject container;
 
     public Component(BasicGameObject container){
         this.container = container;

@@ -8,7 +8,9 @@ import java.util.HashMap;
 public class GameEngine {
 
 
+    public InputManager theInputManager = new InputManager();
 
+    private boolean isGameRunning = false;
 
     private HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
 
@@ -42,6 +44,19 @@ public class GameEngine {
 
             theSceneManager.loadScene(SceneHierarchyDescription.get(key));
 
+    }
+
+    public void playGame(){
+       isGameRunning = true;
+    }
+
+    public void pause_restartGame(){
+        if(isGameRunning){
+            isGameRunning = false; //pause
+            //change pause button for restart button
+        }else{
+            //restart : replace all gameobjects to its original position
+        }
     }
 
 }

@@ -29,6 +29,9 @@ public class SceneManager {
         for (int i = 0; i < objectsInCurrentScene.size(); i++){
             objectsInCurrentScene.get(i).update();
         }
+        for (int i = 0; i < objectsInCurrentScene.size(); i++){
+            objectsInCurrentScene.get(i).postUpdate();
+        }
     }
 
     private BasicGameObject castDescriptionToObject(String[] objectDescription){

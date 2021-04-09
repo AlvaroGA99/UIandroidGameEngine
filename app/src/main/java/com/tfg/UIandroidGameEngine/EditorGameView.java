@@ -4,12 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
-public class EditorGameView extends SurfaceView implements SurfaceHolder.Callback,Runnable {
+public class EditorGameView extends SurfaceView implements SurfaceHolder.Callback,Runnable, View.OnTouchListener {
 
     private  Thread drawThread;
     private UpdateThread updateThread;
@@ -33,7 +35,9 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
        theGameEngine.addGameObject(new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0));
         this.holder = holder;
         drawThread = new Thread(this);
+        updateThread = new UpdateThread(theGameEngine);
         drawThread.start();
+        updateThread.start();
     }
 
     @Override
@@ -46,6 +50,8 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
 
     }
 
+
+
     @Override
     public void run() {
         while(true){
@@ -57,5 +63,14 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
                 holder.unlockCanvasAndPost(canvas);
             }
         }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        //pasar datos al InputManager
+            theGameEngine.theInputManager.motionEvent = event;
+        //referencia al gameEngine en el EditorUIfragment para poner en pausa el juego
+
+        return false;
     }
 }

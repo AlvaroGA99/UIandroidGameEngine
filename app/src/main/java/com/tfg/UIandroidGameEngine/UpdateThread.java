@@ -10,7 +10,9 @@ public class UpdateThread extends Thread {
 
     @Override
     public void run(){
-        theGameEngine.updateAll();
+        while(true){
+            theGameEngine.updateAll();
+        }
     }
 
 }

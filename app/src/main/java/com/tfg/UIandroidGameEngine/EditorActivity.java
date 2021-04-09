@@ -14,7 +14,9 @@ public class EditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editor/*new EditorGameView(this)*/);
         //if (savedInstanceState == null) {
             FragmentManager fm = getSupportFragmentManager();
+
             fm.beginTransaction().add(R.id.editorContainer, new EditorGameSurfaceFragment()).add(R.id.editorContainer, new EditorUiFragment(),null).commit();
         //}
+
     }
 }

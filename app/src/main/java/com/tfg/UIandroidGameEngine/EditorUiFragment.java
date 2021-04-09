@@ -87,6 +87,23 @@ public class EditorUiFragment extends Fragment {
         translationInspector = 500;
         View ObjectHierarchy = parentActivity.findViewById(R.id.objectHierarchy);
         View inspector = parentActivity.findViewById(R.id.inspector);
+        View pause = parentActivity.findViewById(R.id.pause);
+        View resume = parentActivity.findViewById(R.id.resume);
+
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        resume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
        /* ValueAnimator animation = ObjectAnimator.ofFloat(ObjectHierarchy, "translationX", -100f);
         animation.setDuration(2000);
         ValueAnimator animation2 = ObjectAnimator.ofFloat(inspector, "translationX", 100f);
