@@ -7,7 +7,7 @@ public class InputMovementPlatformerComponent extends Component {
     }
 
     @Override
-    public void process(){
+    public void process(long elapsedTime){
 
     }
 }

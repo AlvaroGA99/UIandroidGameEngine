@@ -25,9 +25,9 @@ public class SceneManager {
         }
     }
 
-    public void updateCurrentScene(){
+    public void updateCurrentScene(long elapsedTime){
         for (int i = 0; i < objectsInCurrentScene.size(); i++){
-            objectsInCurrentScene.get(i).update();
+            objectsInCurrentScene.get(i).update(elapsedTime);
         }
         for (int i = 0; i < objectsInCurrentScene.size(); i++){
             objectsInCurrentScene.get(i).postUpdate();

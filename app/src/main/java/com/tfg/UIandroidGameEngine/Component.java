@@ -8,7 +8,7 @@ public class Component  {
         this.container = container;
     }
 
-    public void process(){
+    public void process(long elapsedTime){
 
     }
 

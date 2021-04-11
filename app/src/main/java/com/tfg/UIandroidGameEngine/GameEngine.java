@@ -36,8 +36,8 @@ public class GameEngine {
         }
     }
 
-    public void updateAll(){
-        theSceneManager.updateCurrentScene();
+    public void updateAll(long elapsedTime){
+        theSceneManager.updateCurrentScene(elapsedTime);
     }
 
     public void loadScene(String key){

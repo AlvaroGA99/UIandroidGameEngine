@@ -75,9 +75,9 @@ public  class BasicGameObject  {
 
         }
 
-        public void update(){
+        public void update(long elapsedTime){
              for (int i = 0; i < components.size(); i++){
-                 components.get(i).process();
+                 components.get(i).process(elapsedTime);
              }
         }
 
