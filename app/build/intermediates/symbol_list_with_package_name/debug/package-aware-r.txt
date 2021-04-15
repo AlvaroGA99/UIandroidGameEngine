@@ -2032,6 +2032,7 @@ id parent_matrix
 id password_toggle
 id path
 id pathRelative
+id pause
 id peekHeight
 id percent
 id pin
@@ -2042,6 +2043,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id resume
 id reverseSawtooth
 id right
 id rightToLeft
@@ -2156,8 +2158,6 @@ id unlabeled
 id up
 id useLogo
 id usersprojects
-id view2
-id view3
 id view_offset_helper
 id visible
 id wide

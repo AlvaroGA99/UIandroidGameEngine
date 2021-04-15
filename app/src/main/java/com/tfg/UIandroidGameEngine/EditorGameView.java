@@ -8,16 +8,18 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-public class EditorGameView extends SurfaceView implements SurfaceHolder.Callback,Runnable, View.OnTouchListener {
+public class EditorGameView extends SurfaceView implements SurfaceHolder.Callback,Runnable {
 
     private  Thread drawThread;
     private UpdateThread updateThread;
     private SurfaceHolder holder;
     private Canvas canvas;
-    private GameEngine theGameEngine = new GameEngine();
+    public GameEngine theGameEngine  = new GameEngine();
+
 
     private BasicGameObject testgameObject;
 
@@ -30,9 +32,48 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
-         theGameEngine.addGameObject(new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0));
+        theGameEngine.getTheInputManager().setInputScreen(this.getWidth(),this.getHeight());
+        BasicGameObject aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0, theGameEngine.getTheInputManager());
+        aux.addComponent("InputMovementPlatformerComponent");
+        aux.addComponent("GravityComponent");
+         theGameEngine.addGameObject(aux);
+         aux = new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
+         aux.addComponent("InputMovementPlatformerComponent");
         //testgameObject = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0);
-       theGameEngine.addGameObject(new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0));
+
+        this.setOnTouchListener(new View.OnTouchListener(){
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+               theGameEngine.getTheInputManager().processInput(event);
+
+                //pasar datos al InputManager
+               /* if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    for(int i = 0 ; i < event.getPointerCount() ; i ++){
+                        if(event.getX(i) > 10/2){
+                            theGameEngine.getTheInputManager().isRightPressed = true;
+                        }else {
+                            theGameEngine.getTheInputManager().isLeftPressed = true;
+                        }
+                    }
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    for(int i = 0 ; i < event.getPointerCount() ; i ++){
+                        if(event.getX(i) > 1/2){
+                            theGameEngine.getTheInputManager().isRightPressed = false;
+                        }else{
+                            theGameEngine.getTheInputManager().isLeftPressed = false;
+                        }
+                    }
+                }
+*/
+                //referencia al gameEngine en el EditorUIfragment para poner en pausa el juego
+
+                return true;
+            }
+        });
+       theGameEngine.addGameObject(aux);
+
         this.holder = holder;
         drawThread = new Thread(this);
         updateThread = new UpdateThread(theGameEngine);
@@ -65,12 +106,4 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
         }
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        //pasar datos al InputManager
-            theGameEngine.theInputManager.motionEvent = event;
-        //referencia al gameEngine en el EditorUIfragment para poner en pausa el juego
-
-        return false;
-    }
 }

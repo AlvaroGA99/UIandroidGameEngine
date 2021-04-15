@@ -40,12 +40,12 @@
         "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\layout\\fragment_editor_game_surface.xml"
     },
     {
-        "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
-        "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
-    },
-    {
         "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
         "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
         "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",

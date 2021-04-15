@@ -30,7 +30,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[d9889d5]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -71,7 +71,9 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-02T10:32:30.092Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android-custom-viewC:/androidSDK/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android.sdk.path" value="C:/androidSDK" />
+    <property name="multi-representation-previewC:/androidSDK/sources/android-30/android/view/View.java_selected" value="Custom views" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -181,10 +183,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="742" y="238" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616345661088" />
-    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1617882680301">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2496" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1618276812659">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617882680301" />
+    <state x="2496" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618276812659" />
     <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1616754122778">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

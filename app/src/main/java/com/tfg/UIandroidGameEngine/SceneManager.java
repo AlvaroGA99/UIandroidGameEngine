@@ -12,6 +12,9 @@ public class SceneManager {
 
     public String currentScene;
 
+    public InputManager theInputManager = new InputManager();
+
+
     public void addObjectToCurrentScene(BasicGameObject toAdd){
         objectsInCurrentScene.add(toAdd);
     }
@@ -35,7 +38,7 @@ public class SceneManager {
     }
 
     private BasicGameObject castDescriptionToObject(String[] objectDescription){
-        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[0]),Float.parseFloat(objectDescription[1]),Integer.parseInt(objectDescription[2]));
+        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[0]),Float.parseFloat(objectDescription[1]),Integer.parseInt(objectDescription[2]),theInputManager);
         aux.scale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
         aux.rotation = Float.parseFloat(objectDescription[5]);
         for (int i = 6; i < objectDescription.length; i++){

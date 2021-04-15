@@ -8,7 +8,10 @@ import java.util.HashMap;
 public class GameEngine {
 
 
-    public InputManager theInputManager = new InputManager();
+    public  int WIDTH;
+
+    public  int HEIGHT;
+
 
     private boolean isGameRunning = false;
 
@@ -18,6 +21,10 @@ public class GameEngine {
 
     public GameEngine(){
         addScene(theSceneManager.currentScene);
+    }
+
+    public InputManager getTheInputManager(){
+        return theSceneManager.theInputManager;
     }
 
     public void addGameObject(BasicGameObject toAdd){

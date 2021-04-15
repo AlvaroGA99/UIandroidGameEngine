@@ -161,6 +161,7 @@ public class EditorUiFragment extends Fragment {
         inspector.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                
                 //if(canAnimateInspector){
 
                     v.animate().translationX(-1*translationInspector);

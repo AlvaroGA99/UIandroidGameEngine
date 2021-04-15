@@ -19,6 +19,8 @@ public  class BasicGameObject  {
         public Vector preUpdateScale;
         public float preUpdateRotation;
 
+        public InputManager inputManager;
+
         public int sceneHierarchyID;
 
         private int spriteType;
@@ -26,7 +28,8 @@ public  class BasicGameObject  {
         private ArrayList<Component> components = new ArrayList<Component>();
 
 
-         public BasicGameObject(float posX, float posY, int spriteType){
+         public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager){
+             this.inputManager = inputmanager;
              this.spriteType = spriteType;
              switch(spriteType){
                  case 0 :
@@ -40,13 +43,15 @@ public  class BasicGameObject  {
                      break;
 
              }
-             preUpdatePosition = new Vector(0,0);
-             preUpdateRotation = 0.0f;
-             preUpdateScale = new Vector(0,0);
+
 
            position = new Vector(posX,posY);
             scale = new Vector(1,1);
             rotation = 0;
+
+             preUpdatePosition = new Vector(posX,posY);
+             preUpdateRotation = 0f;
+             preUpdateScale = new Vector(1,1);
         }
 
         public  void  addComponent(Component toAdd){
@@ -55,8 +60,11 @@ public  class BasicGameObject  {
 
         public void addComponent(String component){
              switch(component){
-                 case "Component" :
-                     components.add(new Component(this));
+                 case "InputMovementPlatformerComponent" :
+                     components.add(new InputMovementPlatformerComponent(this));
+                     break;
+                 case "GravityComponent" :
+                     components.add(new GravityComponent(this));
                      break;
              }
         }

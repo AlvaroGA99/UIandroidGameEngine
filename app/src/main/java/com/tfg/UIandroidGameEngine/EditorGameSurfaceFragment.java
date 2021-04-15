@@ -29,6 +29,7 @@ public class EditorGameSurfaceFragment extends Fragment  {
 
     public EditorGameSurfaceFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -56,6 +57,8 @@ public class EditorGameSurfaceFragment extends Fragment  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        gv = new EditorGameView(getContext());
+
 
     }
 
@@ -69,9 +72,10 @@ public class EditorGameSurfaceFragment extends Fragment  {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         FrameLayout ff = (FrameLayout) getActivity().findViewById(R.id.framelayout);
-        gv = new EditorGameView(getContext());
+
 
         ff.addView(gv);
+
 
     }
 

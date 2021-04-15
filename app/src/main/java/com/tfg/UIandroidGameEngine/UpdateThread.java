@@ -4,7 +4,9 @@ public class UpdateThread extends Thread {
 
     private GameEngine theGameEngine;
 
-    private long elapsedTime = System.currentTimeMillis();
+    private long elapsedTime  ;
+
+    private long previousTimeMilis  ;
 
     public UpdateThread(GameEngine gameEngine){
         this.theGameEngine = gameEngine;
@@ -12,9 +14,14 @@ public class UpdateThread extends Thread {
 
     @Override
     public void run(){
+        previousTimeMilis = System.currentTimeMillis();
         while(true){
-            elapsedTime = System.currentTimeMillis() - elapsedTime;
-            theGameEngine.updateAll(elapsedTime);
+
+            elapsedTime = System.currentTimeMillis();
+
+            theGameEngine.updateAll(elapsedTime - previousTimeMilis);
+            previousTimeMilis = elapsedTime;
+
         }
     }
 
