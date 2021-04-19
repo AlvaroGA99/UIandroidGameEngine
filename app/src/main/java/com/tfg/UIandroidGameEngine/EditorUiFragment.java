@@ -13,6 +13,7 @@ import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,19 +26,19 @@ public class EditorUiFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private Activity parentActivity;
-    private boolean canAnimateInspector = true;
-    private boolean canAnimateHierarchy = true;
+    private EditorActivity parentActivity;
+    private GameEngine theGameEngine;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private  boolean inspectorReverse = false;
-    private boolean hierarchyReverse = true;
+    private boolean hierarchyReverse = false;
 
-    private int translationInspector;
-    private int translationHierarchy;
+
+
 
 
     public EditorUiFragment() {
@@ -70,7 +71,7 @@ public class EditorUiFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }else{
-            parentActivity = getActivity();
+            parentActivity = (EditorActivity) getActivity();
         }
     }
 
@@ -83,9 +84,8 @@ public class EditorUiFragment extends Fragment {
 
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
-        translationHierarchy =  -500;
-        translationInspector = 500;
-        View ObjectHierarchy = parentActivity.findViewById(R.id.objectHierarchy);
+
+        View ObjectHierarchy =  parentActivity.findViewById(R.id.objectHierarchy);
         View inspector = parentActivity.findViewById(R.id.inspector);
         View pause = parentActivity.findViewById(R.id.pause);
         View resume = parentActivity.findViewById(R.id.resume);
@@ -109,50 +109,8 @@ public class EditorUiFragment extends Fragment {
         ValueAnimator animation2 = ObjectAnimator.ofFloat(inspector, "translationX", 100f);
         animation2.setDuration(2000)*/;
 
-        ObjectHierarchy.animate().setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                canAnimateHierarchy = false;
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                canAnimateHierarchy = true;
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
 
 
-        inspector.animate().setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                canAnimateInspector = false;
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                canAnimateInspector = true;
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
 
         ObjectHierarchy.setTranslationX(-1000f);
         inspector.setTranslationX(1000f);
@@ -164,8 +122,14 @@ public class EditorUiFragment extends Fragment {
                 
                 //if(canAnimateInspector){
 
-                    v.animate().translationX(-1*translationInspector);
-                    translationInspector*= -1;
+                if(!inspectorReverse){
+                    v.animate().translationX(-45);
+
+                }else{
+                    v.animate().translationX(1000);
+                }
+                inspectorReverse = !inspectorReverse;
+
                 //}
 
 
@@ -176,14 +140,17 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v){
                 //if(canAnimateHierarchy){
+                if(!hierarchyReverse){
+                    v.animate().translationX(45);
 
-                    v.animate().translationX(-1*translationHierarchy);
-                    translationHierarchy *= -1;
-                //}
-
+                }else{
+                    v.animate().translationX(-1000);
+                }
+                hierarchyReverse = !hierarchyReverse;
 
                 //animation.reverse();
             }
         });
+         theGameEngine = ((EditorGameSurfaceFragment)parentActivity.fm.getFragments().get(0)).gv.theGameEngine;
     }
 }

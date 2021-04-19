@@ -14,9 +14,9 @@ public class InputManager {
 
     public boolean isLeftPressed = false;
 
-    private int screenWidth = 0;
+    public int screenWidth = 0;
 
-    private int screenHeight = 0;
+    public int screenHeight = 0;
 
     public  InputManager(){
 
@@ -29,7 +29,7 @@ public class InputManager {
     public void processInput(MotionEvent e){
         boolean auxR = false;
         boolean auxL = false;
-        if(e.getAction() == MotionEvent.ACTION_DOWN || e.getAction() == MotionEvent.ACTION_MOVE || e.getAction() == MotionEvent.ACTION_UP){
+        if(e.getAction() == MotionEvent.ACTION_DOWN || e.getAction() == MotionEvent.ACTION_MOVE ){
             for(int i = 0; i < e.getPointerCount(); i ++){
                 if(e.getX(i) > screenWidth/2){
                     auxR = true;

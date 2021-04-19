@@ -47,25 +47,44 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <View
+        <RelativeLayout
             android:id="@+id/objectHierarchy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/roundborder_drawable" />
+            android:orientation="horizontal"
+            >
 
-        <View
+            <View
+                android:id="@+id/h_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundborder_drawable" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/inspector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/roundborder_drawable" />
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/inspector_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundborder_drawable" />
+        </RelativeLayout>
+
     </LinearLayout>
 
 </LinearLayout>

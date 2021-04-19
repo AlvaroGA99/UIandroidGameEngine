@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="33"
+        android:background="@drawable/roundborder_drawable"
+
         android:text="Atrás" />
 
 

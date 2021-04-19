@@ -66,6 +66,9 @@ public  class BasicGameObject  {
                  case "GravityComponent" :
                      components.add(new GravityComponent(this));
                      break;
+                 case "GroundColliderComponent" :
+                     components.add(new GroundColliderComponent(this));
+                     break;
              }
         }
 

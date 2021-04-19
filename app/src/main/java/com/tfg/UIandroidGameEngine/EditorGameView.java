@@ -36,9 +36,15 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
         BasicGameObject aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0, theGameEngine.getTheInputManager());
         aux.addComponent("InputMovementPlatformerComponent");
         aux.addComponent("GravityComponent");
+        aux.addComponent("GroundColliderComponent");
          theGameEngine.addGameObject(aux);
          aux = new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
          aux.addComponent("InputMovementPlatformerComponent");
+        theGameEngine.addGameObject(aux);
+        aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
+        aux.preUpdateScale.x = 7;
+        theGameEngine.addGameObject(aux);
+
         //testgameObject = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0);
 
         this.setOnTouchListener(new View.OnTouchListener(){
@@ -72,7 +78,7 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
                 return true;
             }
         });
-       theGameEngine.addGameObject(aux);
+
 
         this.holder = holder;
         drawThread = new Thread(this);

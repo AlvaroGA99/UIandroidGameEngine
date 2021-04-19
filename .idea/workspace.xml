@@ -183,10 +183,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="742" y="238" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616345661088" />
-    <state x="2496" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1618276812659">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1618511558208">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617882680301" />
+    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618511558208" />
     <state x="2496" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618276812659" />
     <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1616754122778">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -204,6 +204,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="540" y="274" key="AndroidCreateResourceFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617824079349" />
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1618511241432">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618511241432" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1618511241432">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618511241432" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1618511241432">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618511241432" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1618511241432">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618511241432" />
     <state x="351" y="197" key="SettingsEditor" timestamp="1617365396394">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -216,9 +232,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="580" y="413" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1615432013807" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1616424478165">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1618768849784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616424478165" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618768849784" />
   </component>
 </project>
