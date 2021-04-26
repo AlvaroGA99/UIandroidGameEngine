@@ -1,19 +1,16 @@
 package com.tfg.UIandroidGameEngine;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.os.Bundle;
 
-import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,6 +86,7 @@ public class EditorUiFragment extends Fragment {
         View inspector = parentActivity.findViewById(R.id.inspector);
         View pause = parentActivity.findViewById(R.id.pause);
         View resume = parentActivity.findViewById(R.id.resume);
+        RecyclerView objectsInScene = (RecyclerView) parentActivity.findViewById(R.id.objectsInCurrentScene);
 
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +149,40 @@ public class EditorUiFragment extends Fragment {
                 //animation.reverse();
             }
         });
-         theGameEngine = ((EditorGameSurfaceFragment)parentActivity.fm.getFragments().get(0)).gv.theGameEngine;
+         theGameEngine = ((EditorGameSurfaceFragment)parentActivity.fm.getFragments().get(0)).theGameEngine;
+        ObjectsInSceneAdapter os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene());
+        objectsInScene.setAdapter(os);
+        objectsInScene.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        Button addObject = (Button) parentActivity.findViewById(R.id.addObject);
+        addObject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = theGameEngine.addGameObject();
+                Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                theGameEngine.pause_restartGame();
+            }
+        });
+
+        resume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                theGameEngine.playGame();
+            }
+        });
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Toast.makeText(getContext(), "" + theGameEngine.isGameRunning,Toast.LENGTH_LONG).show();
     }
 }

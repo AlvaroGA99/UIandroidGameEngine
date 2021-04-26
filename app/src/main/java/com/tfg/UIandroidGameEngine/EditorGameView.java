@@ -18,43 +18,45 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
     private UpdateThread updateThread;
     private SurfaceHolder holder;
     private Canvas canvas;
-    public GameEngine theGameEngine  = new GameEngine();
+    public GameEngine theGameEngine;
 
 
     private BasicGameObject testgameObject;
 
-    public EditorGameView(Context context) {
+    public EditorGameView(Context context, GameEngine theGameEngine) {
         super(context);
         getHolder().addCallback(this);
-
+        this.theGameEngine = theGameEngine;
+        drawThread = new Thread(this);
+        updateThread = new UpdateThread(this.theGameEngine);
     }
 
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
         theGameEngine.getTheInputManager().setInputScreen(this.getWidth(),this.getHeight());
-        BasicGameObject aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0, theGameEngine.getTheInputManager());
-        aux.addComponent("InputMovementPlatformerComponent");
-        aux.addComponent("GravityComponent");
-        aux.addComponent("GroundColliderComponent");
-         theGameEngine.addGameObject(aux);
-         aux = new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
-         aux.addComponent("InputMovementPlatformerComponent");
-        theGameEngine.addGameObject(aux);
-        aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
-        aux.preUpdateScale.x = 7;
-        theGameEngine.addGameObject(aux);
 
-        //testgameObject = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0);
+       if(theGameEngine.getObjectsInScene().size() == 0){
+            Toast.makeText(getContext(),"CReación", Toast.LENGTH_SHORT).show();
+            BasicGameObject aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0, theGameEngine.getTheInputManager());
+            aux.addComponent("InputMovementPlatformerComponent");
+            aux.addComponent("GravityComponent");
+            aux.addComponent("GroundColliderComponent");
+            theGameEngine.addGameObject(aux);
+            aux = new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
+            aux.addComponent("InputMovementPlatformerComponent");
+            theGameEngine.addGameObject(aux);
+            aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
+            aux.preUpdateScale.x = 7;
+            theGameEngine.addGameObject(aux);
+           this.setOnTouchListener(new View.OnTouchListener(){
 
-        this.setOnTouchListener(new View.OnTouchListener(){
+               @Override
+               public boolean onTouch(View v, MotionEvent event) {
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
+                   theGameEngine.getTheInputManager().processInput(event);
 
-               theGameEngine.getTheInputManager().processInput(event);
-
-                //pasar datos al InputManager
+                   //pasar datos al InputManager
                /* if(event.getAction() == MotionEvent.ACTION_DOWN){
                     for(int i = 0 ; i < event.getPointerCount() ; i ++){
                         if(event.getX(i) > 10/2){
@@ -73,17 +75,23 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
                     }
                 }
 */
-                //referencia al gameEngine en el EditorUIfragment para poner en pausa el juego
+                   //referencia al gameEngine en el EditorUIfragment para poner en pausa el juego
 
-                return true;
-            }
-        });
+                   return true;
+               }
+           });
+        }
+
+        //testgameObject = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0);
+
+
 
 
         this.holder = holder;
-        drawThread = new Thread(this);
-        updateThread = new UpdateThread(theGameEngine);
+
+       if(!drawThread.isAlive())
         drawThread.start();
+        if(!updateThread.isAlive())
         updateThread.start();
     }
 

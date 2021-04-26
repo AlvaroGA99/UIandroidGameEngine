@@ -16,11 +16,15 @@ public class UpdateThread extends Thread {
     public void run(){
         previousTimeMilis = System.currentTimeMillis();
         while(true){
+            if(theGameEngine.isGameRunning){
+                elapsedTime = System.currentTimeMillis();
 
-            elapsedTime = System.currentTimeMillis();
+                theGameEngine.updateAll(elapsedTime - previousTimeMilis);
+                previousTimeMilis = elapsedTime;
+            }else{
+                previousTimeMilis = System.currentTimeMillis();
+            }
 
-            theGameEngine.updateAll(elapsedTime - previousTimeMilis);
-            previousTimeMilis = elapsedTime;
 
         }
     }

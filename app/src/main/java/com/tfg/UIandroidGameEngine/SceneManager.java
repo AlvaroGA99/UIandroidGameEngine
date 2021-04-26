@@ -8,7 +8,7 @@ public class SceneManager {
 
 
 
-    private ArrayList<BasicGameObject> objectsInCurrentScene = new ArrayList<BasicGameObject>();
+    public ArrayList<BasicGameObject> objectsInCurrentScene = new ArrayList<BasicGameObject>();
 
     public String currentScene;
 

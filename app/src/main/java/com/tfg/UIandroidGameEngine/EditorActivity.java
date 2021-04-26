@@ -10,6 +10,8 @@ import android.view.View;
 public class EditorActivity extends AppCompatActivity   {
 
    public FragmentManager fm;
+   private EditorGameSurfaceFragment f1 = new EditorGameSurfaceFragment();
+    private EditorUiFragment f2 = new EditorUiFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +21,7 @@ public class EditorActivity extends AppCompatActivity   {
              fm = getSupportFragmentManager();
 
 
-            fm.beginTransaction().add(R.id.editorContainer, new EditorGameSurfaceFragment()).add(R.id.editorContainer, new EditorUiFragment(),null).commit();
+            fm.beginTransaction().add(R.id.editorContainer, f1).add(R.id.editorContainer, f2,null).commit();
         //}
 
         // View decorview = getWindow().getDecorView();

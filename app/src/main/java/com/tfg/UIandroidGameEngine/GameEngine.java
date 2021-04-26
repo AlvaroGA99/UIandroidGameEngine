@@ -1,7 +1,9 @@
 package com.tfg.UIandroidGameEngine;
 
 import android.graphics.Canvas;
+import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +15,7 @@ public class GameEngine {
     public  int HEIGHT;
 
 
-    private boolean isGameRunning = false;
+    public boolean isGameRunning = false;
 
     private HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
 
@@ -32,6 +34,22 @@ public class GameEngine {
         SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
         theSceneManager.addObjectToCurrentScene(toAdd);
     }
+
+    public ArrayList getObjectsInScene(){
+       return theSceneManager.objectsInCurrentScene;
+    }
+
+    public int addGameObject(){
+
+        BasicGameObject toAdd = new BasicGameObject(theSceneManager.theInputManager.screenWidth/2 + 100,theSceneManager.theInputManager.screenHeight/2,0,this.getTheInputManager());
+        toAdd.addComponent("GravityComponent");
+        toAdd.sceneHierarchyID = SceneHierarchyDescription.get(theSceneManager.currentScene).size();
+        SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
+        theSceneManager.addObjectToCurrentScene(toAdd);
+
+        return toAdd.sceneHierarchyID;
+    }
+
 
     public void drawAll(Canvas renderCanvas){
        theSceneManager.drawCurrentScene(renderCanvas);

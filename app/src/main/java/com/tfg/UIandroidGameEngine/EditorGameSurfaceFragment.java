@@ -22,6 +22,7 @@ public class EditorGameSurfaceFragment extends Fragment  {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public EditorGameView gv ;
+    public GameEngine theGameEngine = new GameEngine();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -57,7 +58,11 @@ public class EditorGameSurfaceFragment extends Fragment  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        gv = new EditorGameView(getContext());
+
+
+        gv = new EditorGameView(getContext(),theGameEngine);
+
+
 
 
     }
@@ -74,7 +79,9 @@ public class EditorGameSurfaceFragment extends Fragment  {
         FrameLayout ff = (FrameLayout) getActivity().findViewById(R.id.framelayout);
 
 
-    ff.addView(gv);
+        ff.addView(gv);
+
+
 
 
 
