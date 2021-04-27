@@ -71,13 +71,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3a_API_30" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-02T10:32:30.092Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="d9889d5" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-26T19:19:11.644Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android-custom-viewC:/androidSDK/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android.sdk.path" value="C:/androidSDK" />
     <property name="multi-representation-previewC:/androidSDK/sources/android-30/android/view/View.java_selected" value="Custom views" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -192,10 +193,10 @@
     </state>
     <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619441070286" />
     <state x="2496" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618276812659" />
-    <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1616754122778">
+    <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1619473326247">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616754122778" />
+    <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619473326247" />
     <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617121964554">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -204,10 +205,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="176" y="158" width="1349" height="789" key="AVDManager/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617376722322" />
-    <state x="540" y="274" key="AndroidCreateResourceFileDialog" timestamp="1619441348170">
+    <state x="540" y="274" key="AndroidCreateResourceFileDialog" timestamp="1619446768798">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="274" key="AndroidCreateResourceFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619441348170" />
+    <state x="540" y="274" key="AndroidCreateResourceFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619446768798" />
     <state width="1877" height="484" key="GridCell.Tab.0.bottom" timestamp="1619443206538">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -224,10 +225,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="484" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619443206538" />
-    <state x="351" y="197" key="SettingsEditor" timestamp="1617365396394">
+    <state x="351" y="197" key="SettingsEditor" timestamp="1619454240846">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="351" y="197" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617365396394" />
+    <state x="351" y="197" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619454240846" />
     <state x="610" y="183" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1617891728085">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -10,6 +10,7 @@ public class GroundColliderComponent extends Component{
     public void process(long elapsedTime){
         if(container.position.y > (container.inputManager.screenHeight/5)*4){
             container.preUpdatePosition.y =  (container.inputManager.screenHeight/5)*4;
+            container.speed = 0;
         }
     }
 }

@@ -55,6 +55,30 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
                public boolean onTouch(View v, MotionEvent event) {
 
                    theGameEngine.getTheInputManager().processInput(event);
+                   if(!theGameEngine.isGameRunning){
+                       for(int i = 0 ; i < event.getPointerCount() ; i ++){
+                           int topId = -1;
+                           //Toast.makeText(getContext(),"" + event.getX(i) + " , " + event.getY(i) ,Toast.LENGTH_SHORT).show();
+                           for(int j = 0; j < theGameEngine.getObjectsInScene().size();j++){
+                               if(event.getX(i) > theGameEngine.getObjectsInScene().get(j).position.x-25*theGameEngine.getObjectsInScene().get(j).scale.x
+                                       &&  event.getX(i) < theGameEngine.getObjectsInScene().get(j).position.x+25*theGameEngine.getObjectsInScene().get(j).scale.x
+                                       &&   event.getY(i) > theGameEngine.getObjectsInScene().get(j).position.y-25*theGameEngine.getObjectsInScene().get(j).scale.y
+                                       &&   event.getY(i) < theGameEngine.getObjectsInScene().get(j).position.y+25*theGameEngine.getObjectsInScene().get(j).scale.y) {
+                                   if(theGameEngine.getObjectsInScene().get(j).sceneHierarchyID > topId){
+                                       topId = theGameEngine.getObjectsInScene().get(j).sceneHierarchyID;
+                                   }
+                               }
+                           }
+                           if(topId > -1){
+                               theGameEngine.getObjectsInScene().get(topId).position.x = event.getX(i);
+                               theGameEngine.getObjectsInScene().get(topId).position.y = event.getY(i);
+                               theGameEngine.getObjectsInScene().get(topId).preUpdatePosition.x = event.getX(i);
+                               theGameEngine.getObjectsInScene().get(topId).preUpdatePosition.y = event.getY(i);
+
+                           }
+
+                       }
+                   }
 
                    //pasar datos al InputManager
                /* if(event.getAction() == MotionEvent.ACTION_DOWN){

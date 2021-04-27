@@ -35,7 +35,7 @@ public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scene_object_layout,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.objects_layout,parent,false);
         return new ViewHolder(view);
     }
 

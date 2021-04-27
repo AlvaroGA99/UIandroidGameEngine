@@ -1737,6 +1737,7 @@ id ALT
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
+id Componentes
 id FUNCTION
 id META
 id NO_DEBUG
@@ -1899,6 +1900,7 @@ id endToStart
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
+id eventos
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -2025,6 +2027,7 @@ id notification_main_column_container
 id objectHierarchy
 id objectHierarchyStructure
 id objectId
+id objectProperties
 id objectsInCurrentScene
 id off
 id on
@@ -2316,6 +2319,7 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout objects_layout
 layout scene_object_layout
 layout select_dialog_item_material
 layout select_dialog_multichoice_material

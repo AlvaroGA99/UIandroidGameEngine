@@ -21,6 +21,8 @@ public  class BasicGameObject  {
 
         public InputManager inputManager;
 
+        public float speed ;
+
         public int sceneHierarchyID;
 
         private int spriteType;
@@ -43,7 +45,7 @@ public  class BasicGameObject  {
                      break;
 
              }
-
+            speed = 0;
 
            position = new Vector(posX,posY);
             scale = new Vector(1,1);

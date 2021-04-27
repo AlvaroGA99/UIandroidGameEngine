@@ -35,7 +35,7 @@ public class GameEngine {
         theSceneManager.addObjectToCurrentScene(toAdd);
     }
 
-    public ArrayList getObjectsInScene(){
+    public ArrayList<BasicGameObject> getObjectsInScene(){
        return theSceneManager.objectsInCurrentScene;
     }
 

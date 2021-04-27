@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
@@ -25,8 +26,8 @@ public class EditorUiFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private EditorActivity parentActivity;
     private GameEngine theGameEngine;
-
-
+    private ObjectsInSceneAdapter os;
+    private RecyclerView objectsInScene;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -76,6 +77,7 @@ public class EditorUiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_editor_ui, container, false);
     }
 
@@ -86,7 +88,7 @@ public class EditorUiFragment extends Fragment {
         View inspector = parentActivity.findViewById(R.id.inspector);
         View pause = parentActivity.findViewById(R.id.pause);
         View resume = parentActivity.findViewById(R.id.resume);
-        RecyclerView objectsInScene = (RecyclerView) parentActivity.findViewById(R.id.objectsInCurrentScene);
+         objectsInScene = (RecyclerView) parentActivity.findViewById(R.id.objectsInCurrentScene);
 
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,9 +152,13 @@ public class EditorUiFragment extends Fragment {
             }
         });
          theGameEngine = ((EditorGameSurfaceFragment)parentActivity.fm.getFragments().get(0)).theGameEngine;
-        ObjectsInSceneAdapter os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene());
+        os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene());
         objectsInScene.setAdapter(os);
-        objectsInScene.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        objectsInScene.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+
 
 
         Button addObject = (Button) parentActivity.findViewById(R.id.addObject);
@@ -160,6 +166,7 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int id = theGameEngine.addGameObject();
+                os.notifyItemInserted(theGameEngine.getObjectsInScene().size());
                 Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
             }
         });
@@ -183,6 +190,14 @@ public class EditorUiFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        os.notifyDataSetChanged();
         Toast.makeText(getContext(), "" + theGameEngine.isGameRunning,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        os.notifyDataSetChanged();
     }
 }
