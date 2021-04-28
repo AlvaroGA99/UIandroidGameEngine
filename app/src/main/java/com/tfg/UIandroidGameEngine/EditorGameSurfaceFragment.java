@@ -1,5 +1,6 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -23,6 +24,7 @@ public class EditorGameSurfaceFragment extends Fragment  {
     private static final String ARG_PARAM2 = "param2";
     public EditorGameView gv ;
     public GameEngine theGameEngine = new GameEngine();
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -59,7 +61,9 @@ public class EditorGameSurfaceFragment extends Fragment  {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        theGameEngine.ctx = getContext();
 
+        //Resources r = theGameEngine.ctx.getResources();
         gv = new EditorGameView(getContext(),theGameEngine);
 
 

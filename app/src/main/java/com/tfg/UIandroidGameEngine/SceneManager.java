@@ -1,5 +1,6 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.content.Context;
 import android.graphics.Canvas;
 
 import java.util.ArrayList;
@@ -14,13 +15,16 @@ public class SceneManager {
 
     public InputManager theInputManager = new InputManager();
 
+    private Context ctx;
+
 
     public void addObjectToCurrentScene(BasicGameObject toAdd){
         objectsInCurrentScene.add(toAdd);
     }
 
-    public SceneManager(){
+    public SceneManager(Context ctx){
         this.currentScene = "ScaffoldScene";
+        this.ctx = ctx;
     }
     public void drawCurrentScene(Canvas renderCanvas){
         for (int i = 0; i < objectsInCurrentScene.size(); i ++){
@@ -38,7 +42,7 @@ public class SceneManager {
     }
 
     private BasicGameObject castDescriptionToObject(String[] objectDescription){
-        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[0]),Float.parseFloat(objectDescription[1]),Integer.parseInt(objectDescription[2]),theInputManager);
+        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[0]),Float.parseFloat(objectDescription[1]),Integer.parseInt(objectDescription[2]),theInputManager,ctx);
         aux.scale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
         aux.rotation = Float.parseFloat(objectDescription[5]);
         for (int i = 6; i < objectDescription.length; i++){

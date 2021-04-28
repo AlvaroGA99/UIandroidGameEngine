@@ -1,5 +1,6 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -7,6 +8,7 @@ import android.os.Build;
 
 import androidx.appcompat.widget.VectorEnabledTintResources;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public  class BasicGameObject  {
@@ -30,7 +32,7 @@ public  class BasicGameObject  {
         private ArrayList<Component> components = new ArrayList<Component>();
 
 
-         public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager){
+         public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager, Context ctx)  {
              this.inputManager = inputmanager;
              this.spriteType = spriteType;
              switch(spriteType){
@@ -41,7 +43,7 @@ public  class BasicGameObject  {
                      sprite = new CircleSprite();
                      break;
                  case 2:
-                     sprite = new BitmapSprite();
+                     sprite = new BitmapSprite(ctx);
                      break;
 
              }

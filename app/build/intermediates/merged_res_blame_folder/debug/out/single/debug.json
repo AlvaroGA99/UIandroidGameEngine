@@ -68,6 +68,10 @@
         "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\layout\\objects_layout.xml"
     },
     {
+        "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sprite.png.flat",
+        "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\drawable\\sprite.png"
+    },
+    {
         "merged": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },

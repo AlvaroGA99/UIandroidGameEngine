@@ -38,16 +38,21 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
 
        if(theGameEngine.getObjectsInScene().size() == 0){
             Toast.makeText(getContext(),"CReación", Toast.LENGTH_SHORT).show();
-            BasicGameObject aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0, theGameEngine.getTheInputManager());
-            aux.addComponent("InputMovementPlatformerComponent");
+            BasicGameObject aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0, theGameEngine.getTheInputManager(),theGameEngine.ctx);
+
             aux.addComponent("GravityComponent");
             aux.addComponent("GroundColliderComponent");
             theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
-            aux.addComponent("InputMovementPlatformerComponent");
+            aux = new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0,theGameEngine.getTheInputManager(),theGameEngine.ctx);
+            aux.addComponent("GravityComponent");
+           aux.addComponent("GroundColliderComponent");
             theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0,theGameEngine.getTheInputManager());
-            aux.preUpdateScale.x = 7;
+            aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),2,theGameEngine.getTheInputManager(),theGameEngine.ctx);
+            aux.preUpdateScale.x = 3;
+            aux.preUpdateScale.y = 3;
+            aux.addComponent("InputMovementPlatformerComponent");
+            aux.addComponent("GravityComponent");
+           aux.addComponent("GroundColliderComponent");
             theGameEngine.addGameObject(aux);
            this.setOnTouchListener(new View.OnTouchListener(){
 
