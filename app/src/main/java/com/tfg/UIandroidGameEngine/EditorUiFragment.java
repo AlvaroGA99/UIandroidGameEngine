@@ -22,12 +22,15 @@ public class EditorUiFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
+
     private EditorActivity parentActivity;
     private GameEngine theGameEngine;
     private ObjectsInSceneAdapter os;
+    private ComponentsInObjectAdapter oc;
     private RecyclerView objectsInScene;
+    private RecyclerView componentsInObject;
+    private View selectComponent;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -48,29 +51,22 @@ public class EditorUiFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param gameEngine Parameter 1.
      * @return A new instance of fragment EditorUiFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditorUiFragment newInstance(String param1, String param2) {
+    public static EditorUiFragment newInstance(GameEngine gameEngine) {
         EditorUiFragment fragment = new EditorUiFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.theGameEngine = gameEngine;
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }else{
+
             parentActivity = (EditorActivity) getActivity();
-        }
+
     }
 
     @Override
@@ -88,21 +84,25 @@ public class EditorUiFragment extends Fragment {
         View inspector = parentActivity.findViewById(R.id.inspector);
         View pause = parentActivity.findViewById(R.id.pause);
         View resume = parentActivity.findViewById(R.id.resume);
+        View addComponent = parentActivity.findViewById(R.id.addComponent);
+         selectComponent = parentActivity.findViewById(R.id.selectComponentToAdd);
+        addComponent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectComponent.getVisibility() == View.INVISIBLE){
+                    selectComponent.setVisibility(View.VISIBLE);
+                }else{
+                    selectComponent.setVisibility(View.INVISIBLE);
+                }
+
+            }
+        });
          objectsInScene = (RecyclerView) parentActivity.findViewById(R.id.objectsInCurrentScene);
+         componentsInObject = (RecyclerView) parentActivity.findViewById(R.id.componentsInObject);
+        objectsInScene.setLayoutManager(new LinearLayoutManager(getActivity()));
+        componentsInObject.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-        resume.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
        /* ValueAnimator animation = ObjectAnimator.ofFloat(ObjectHierarchy, "translationX", -100f);
         animation.setDuration(2000);
@@ -151,11 +151,29 @@ public class EditorUiFragment extends Fragment {
                 //animation.reverse();
             }
         });
-         theGameEngine = ((EditorGameSurfaceFragment)parentActivity.fm.getFragments().get(0)).theGameEngine;
+
+        oc = new ComponentsInObjectAdapter(theGameEngine.getObjectsInScene().get(0).components);
+
         os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene());
+
+        os.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                oc.localDataSet = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).components ;
+                theGameEngine.camera.fixedLookingPosition.x = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).position.x;
+                theGameEngine.camera.fixedLookingPosition.y = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).position.y;
+                oc.notifyDataSetChanged();
+            }
+        });
+
+
+
         objectsInScene.setAdapter(os);
 
-        objectsInScene.setLayoutManager(new LinearLayoutManager(getActivity()));
+        componentsInObject.setAdapter(oc);
+
+
 
 
 
@@ -166,7 +184,7 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int id = theGameEngine.addGameObject();
-                os.notifyItemInserted(theGameEngine.getObjectsInScene().size());
+                os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
                 Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
             }
         });
@@ -191,13 +209,15 @@ public class EditorUiFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        os.notifyDataSetChanged();
+        //theGameEngine.addGameObject();
+        //os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
+
         Toast.makeText(getContext(), "" + theGameEngine.isGameRunning,Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        os.notifyDataSetChanged();
+
     }
 }

@@ -5,18 +5,42 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
+import android.widget.Toast;
 
 public class EditorActivity extends AppCompatActivity   {
 
    public FragmentManager fm;
-   private EditorGameSurfaceFragment f1 = new EditorGameSurfaceFragment();
-    private EditorUiFragment f2 = new EditorUiFragment();
+   public GameEngine theGameEngine = new GameEngine();
+   private EditorGameSurfaceFragment f1 = EditorGameSurfaceFragment.newInstance(theGameEngine);
+    private EditorUiFragment f2 = EditorUiFragment.newInstance(theGameEngine);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor/*new EditorGameView(this)*/);
+
+        if(theGameEngine.getObjectsInScene().size() == 0){
+           // Toast.makeText(getApplicationContext(),"CReación", Toast.LENGTH_SHORT).show();
+            theGameEngine.ctx = getApplicationContext();
+            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx);
+
+            aux.addComponent("GravityComponent");
+            aux.addComponent("GroundColliderComponent");
+            theGameEngine.addGameObject(aux);
+            aux = new BasicGameObject((float)(getWidth())/2 + 100, (float)(getHeight())/2,0,theGameEngine.getTheInputManager(),theGameEngine.ctx);
+            aux.addComponent("GravityComponent");
+            aux.addComponent("GroundColliderComponent");
+            theGameEngine.addGameObject(aux);
+            aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,2,theGameEngine.getTheInputManager(),theGameEngine.ctx);
+            aux.preUpdateScale.x = 3;
+            aux.preUpdateScale.y = 3;
+            aux.addComponent("InputMovementPlatformerComponent");
+            aux.addComponent("GravityComponent");
+            aux.addComponent("GroundColliderComponent");
+            theGameEngine.addGameObject(aux);}
         //if (savedInstanceState == null) {
              fm = getSupportFragmentManager();
 
@@ -30,5 +54,20 @@ public class EditorActivity extends AppCompatActivity   {
 
 
 
+    }
+
+    private int getHeight(){
+
+        DisplayMetrics dp = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dp);
+        return dp.heightPixels;
+    }
+
+
+    private int getWidth(){
+
+        DisplayMetrics dp = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dp);
+        return dp.widthPixels;
     }
 }

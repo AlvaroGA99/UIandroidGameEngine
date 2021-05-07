@@ -1649,6 +1649,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable add_component_event_button
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -1804,6 +1805,8 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id addComponent
+id addEvent
 id addObject
 id adjust_height
 id adjust_width
@@ -1852,6 +1855,8 @@ id clip_horizontal
 id clip_vertical
 id clockwise
 id collapseActionView
+id componentName
+id componentsInObject
 id confirm_button
 id container
 id content
@@ -2083,6 +2088,7 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id selectComponentToAdd
 id select_dialog_listview
 id selected
 id selection_type
@@ -2139,6 +2145,9 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
+id textView2
+id textView3
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -2241,6 +2250,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_editor
 layout activity_main
+layout components_layout
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

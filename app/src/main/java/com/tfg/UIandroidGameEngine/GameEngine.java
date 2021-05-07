@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.widget.Toast;
 
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -13,14 +15,15 @@ public class GameEngine {
 
     public Context ctx;
 
-    public  int WIDTH;
 
-    public  int HEIGHT;
 
+    public Vector lastTouched = new Vector(0.0f,0.0f);
 
     public boolean isGameRunning = false;
 
     private HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
+
+    public Camera camera = new Camera();
 
     private SceneManager theSceneManager =  new SceneManager(ctx);
 
@@ -33,6 +36,8 @@ public class GameEngine {
     public InputManager getTheInputManager(){
         return theSceneManager.theInputManager;
     }
+
+
 
     public void addGameObject(BasicGameObject toAdd){
         toAdd.sceneHierarchyID = SceneHierarchyDescription.get(theSceneManager.currentScene).size();
@@ -60,7 +65,7 @@ public class GameEngine {
 
 
     public void drawAll(Canvas renderCanvas){
-       theSceneManager.drawCurrentScene(renderCanvas);
+       theSceneManager.drawCurrentScene(renderCanvas,camera);
     }
 
     public void addScene(String key){

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <item
+
+        >
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/buttonsEditorUI"/>
+
+
+
+            <padding android:left="1dp"
+                android:top="1dp"
+                android:right="1dp"
+                android:bottom="1dp"
+                />
+
+            <corners android:bottomRightRadius="25dp"
+                android:bottomLeftRadius="25dp"
+                android:topLeftRadius="25dp"
+                android:topRightRadius="25dp"
+                />
+        </shape>
+    </item>
+    <item
+        android:bottom="40dp"
+        android:left="140dp"
+        android:right="140dp"
+        android:top="40dp">
+        <shape
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <solid android:color="@color/black" />
+
+
+            <padding
+                android:bottom="1dp"
+                android:left="1dp"
+                android:right="1dp"
+                android:top="1dp" />
+
+            <corners
+                android:bottomLeftRadius="50dp"
+                android:bottomRightRadius="50dp"
+                android:topLeftRadius="50dp"
+                android:topRightRadius="50dp" />
+        </shape>
+    </item>
+    <item
+        android:bottom="290dp"
+        android:left="40dp"
+        android:right="40dp"
+        android:top="290dp">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <solid android:color="@color/black"/>
+
+
+
+            <padding android:left="1dp"
+                android:top="1dp"
+                android:right="1dp"
+                android:bottom="1dp"
+                />
+
+            <corners android:bottomRightRadius="50dp"
+                android:bottomLeftRadius="50dp"
+                android:topLeftRadius="50dp"
+                android:topRightRadius="50dp"
+                />
+        </shape>
+    </item>
+</layer-list>

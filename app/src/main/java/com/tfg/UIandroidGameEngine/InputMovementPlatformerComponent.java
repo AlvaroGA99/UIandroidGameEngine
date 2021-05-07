@@ -8,7 +8,7 @@ public class InputMovementPlatformerComponent extends Component {
 
 
     public InputMovementPlatformerComponent(BasicGameObject container){
-        super(container);
+        super(container,"InputMovementPlatformerComponent");
 
     }
 

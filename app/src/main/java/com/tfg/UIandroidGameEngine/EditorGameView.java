@@ -35,51 +35,52 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
         theGameEngine.getTheInputManager().setInputScreen(this.getWidth(),this.getHeight());
+        theGameEngine.camera.setCameraCenter((float)this.getWidth()/2,(float) this.getHeight()/2);
+        //theGameEngine.camera.lookAt(theGameEngine.getObjectsInScene().get(2));
 
-       if(theGameEngine.getObjectsInScene().size() == 0){
-            Toast.makeText(getContext(),"CReación", Toast.LENGTH_SHORT).show();
-            BasicGameObject aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0, theGameEngine.getTheInputManager(),theGameEngine.ctx);
-
-            aux.addComponent("GravityComponent");
-            aux.addComponent("GroundColliderComponent");
-            theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth()/2) + 100, (float)(getHeight()/2),0,theGameEngine.getTheInputManager(),theGameEngine.ctx);
-            aux.addComponent("GravityComponent");
-           aux.addComponent("GroundColliderComponent");
-            theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),2,theGameEngine.getTheInputManager(),theGameEngine.ctx);
-            aux.preUpdateScale.x = 3;
-            aux.preUpdateScale.y = 3;
-            aux.addComponent("InputMovementPlatformerComponent");
-            aux.addComponent("GravityComponent");
-           aux.addComponent("GroundColliderComponent");
-            theGameEngine.addGameObject(aux);
            this.setOnTouchListener(new View.OnTouchListener(){
 
                @Override
                public boolean onTouch(View v, MotionEvent event) {
-
+                   if(event.getAction() == MotionEvent.ACTION_DOWN){
+                       theGameEngine.lastTouched.x = event.getX();
+                       theGameEngine.lastTouched.y = event.getY();
+                   }
                    theGameEngine.getTheInputManager().processInput(event);
                    if(!theGameEngine.isGameRunning){
                        for(int i = 0 ; i < event.getPointerCount() ; i ++){
                            int topId = -1;
                            //Toast.makeText(getContext(),"" + event.getX(i) + " , " + event.getY(i) ,Toast.LENGTH_SHORT).show();
                            for(int j = 0; j < theGameEngine.getObjectsInScene().size();j++){
-                               if(event.getX(i) > theGameEngine.getObjectsInScene().get(j).position.x-25*theGameEngine.getObjectsInScene().get(j).scale.x
-                                       &&  event.getX(i) < theGameEngine.getObjectsInScene().get(j).position.x+25*theGameEngine.getObjectsInScene().get(j).scale.x
-                                       &&   event.getY(i) > theGameEngine.getObjectsInScene().get(j).position.y-25*theGameEngine.getObjectsInScene().get(j).scale.y
-                                       &&   event.getY(i) < theGameEngine.getObjectsInScene().get(j).position.y+25*theGameEngine.getObjectsInScene().get(j).scale.y) {
+                               if(event.getX(i)  > theGameEngine.getObjectsInScene().get(j).position.x + theGameEngine.camera.getScreenSpaceX() -25*theGameEngine.getObjectsInScene().get(j).scale.x
+                                       &&  event.getX(i)   < theGameEngine.getObjectsInScene().get(j).position.x + theGameEngine.camera.getScreenSpaceX() +25*theGameEngine.getObjectsInScene().get(j).scale.x
+                                       &&   event.getY(i) > theGameEngine.getObjectsInScene().get(j).position.y + theGameEngine.camera.getScreenSpaceY() -25*theGameEngine.getObjectsInScene().get(j).scale.y
+                                       &&   event.getY(i) < theGameEngine.getObjectsInScene().get(j).position.y + theGameEngine.camera.getScreenSpaceY() +25*theGameEngine.getObjectsInScene().get(j).scale.y ) {
                                    if(theGameEngine.getObjectsInScene().get(j).sceneHierarchyID > topId){
                                        topId = theGameEngine.getObjectsInScene().get(j).sceneHierarchyID;
                                    }
                                }
                            }
-                           if(topId > -1){
-                               theGameEngine.getObjectsInScene().get(topId).position.x = event.getX(i);
-                               theGameEngine.getObjectsInScene().get(topId).position.y = event.getY(i);
-                               theGameEngine.getObjectsInScene().get(topId).preUpdatePosition.x = event.getX(i);
-                               theGameEngine.getObjectsInScene().get(topId).preUpdatePosition.y = event.getY(i);
+                           if(topId > -1  ){
+                               theGameEngine.getObjectsInScene().get(topId).position.x = event.getX(i) - theGameEngine.camera.getScreenSpaceX();
+                               theGameEngine.getObjectsInScene().get(topId).position.y = event.getY(i) - theGameEngine.camera.getScreenSpaceY();
+                               theGameEngine.getObjectsInScene().get(topId).preUpdatePosition.x = event.getX(i) - theGameEngine.camera.getScreenSpaceX();
+                               theGameEngine.getObjectsInScene().get(topId).preUpdatePosition.y = event.getY(i) - theGameEngine.camera.getScreenSpaceY();
 
+                               theGameEngine.lastTouched.x = event.getX();
+                               theGameEngine.lastTouched.y = event.getY();
+
+                           }else if(event.getPointerCount() == 1 ){
+                               if(event.getAction() == MotionEvent.ACTION_DOWN){
+                                   theGameEngine.lastTouched.x = event.getX();
+                                   theGameEngine.lastTouched.y = event.getY();
+                               }
+
+                               theGameEngine.camera.fixedLookingPosition.x -= event.getX() - theGameEngine.lastTouched.x;
+                               theGameEngine.camera.fixedLookingPosition.y -= event.getY() - theGameEngine.lastTouched.y;
+
+                               theGameEngine.lastTouched.x = event.getX();
+                               theGameEngine.lastTouched.y = event.getY();
                            }
 
                        }
@@ -109,7 +110,7 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
                    return true;
                }
            });
-        }
+
 
         //testgameObject = new BasicGameObject((float)(getWidth()/2), (float)(getHeight()/2),0);
 

@@ -10,9 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAdapter.ViewHolder> {
+public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAdapter.ViewHolder> implements View.OnClickListener {
 
     private ArrayList<BasicGameObject> localDataSet;
+
+    private View.OnClickListener listener;
+
+    @Override
+    public void onClick(View v) {
+        if(listener != null){
+            listener.onClick(v);
+        }
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private final TextView objectName;
@@ -36,7 +45,11 @@ public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.objects_layout,parent,false);
+
+        view.setOnClickListener(this);
+
         return new ViewHolder(view);
+
     }
 
     @Override
@@ -48,5 +61,9 @@ public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAd
     @Override
     public int getItemCount() {
         return localDataSet.size();
+    }
+
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
     }
 }

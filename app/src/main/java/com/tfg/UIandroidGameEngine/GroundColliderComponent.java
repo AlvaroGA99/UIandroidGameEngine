@@ -3,7 +3,7 @@ package com.tfg.UIandroidGameEngine;
 public class GroundColliderComponent extends Component{
 
     public GroundColliderComponent(BasicGameObject container){
-        super(container);
+        super(container,"GroundColliderComponent");
     }
 
     @Override

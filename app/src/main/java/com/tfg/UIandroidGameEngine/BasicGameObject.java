@@ -29,7 +29,7 @@ public  class BasicGameObject  {
 
         private int spriteType;
         private Sprite sprite;
-        private ArrayList<Component> components = new ArrayList<Component>();
+        public ArrayList<Component> components = new ArrayList<Component>();
 
 
          public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager, Context ctx)  {
@@ -85,8 +85,8 @@ public  class BasicGameObject  {
              return aux.split(" ");
         }
 
-        public void draw(Canvas renderCanvas){
-           sprite.draw( position,  scale,  rotation,renderCanvas);
+        public void draw(Canvas renderCanvas,Camera camera){
+           sprite.draw( position,  scale,  rotation,renderCanvas, camera);
 
         }
 

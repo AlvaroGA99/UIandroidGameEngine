@@ -6,7 +6,7 @@ public class GravityComponent extends Component{
 
 
     public GravityComponent(BasicGameObject container) {
-        super(container);
+        super(container,"GravityComponent");
 
     }
 

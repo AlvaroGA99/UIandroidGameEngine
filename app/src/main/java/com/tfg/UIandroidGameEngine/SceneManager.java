@@ -13,6 +13,9 @@ public class SceneManager {
 
     public String currentScene;
 
+
+
+
     public InputManager theInputManager = new InputManager();
 
     private Context ctx;
@@ -26,9 +29,12 @@ public class SceneManager {
         this.currentScene = "ScaffoldScene";
         this.ctx = ctx;
     }
-    public void drawCurrentScene(Canvas renderCanvas){
+
+
+
+    public void drawCurrentScene(Canvas renderCanvas,Camera camera){
         for (int i = 0; i < objectsInCurrentScene.size(); i ++){
-            objectsInCurrentScene.get(i).draw(renderCanvas);
+            objectsInCurrentScene.get(i).draw(renderCanvas,camera);
         }
     }
 

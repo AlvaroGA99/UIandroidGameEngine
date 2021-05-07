@@ -24,9 +24,10 @@ public class Vector {
 
     }
 
-    public void add(Vector toAdd){
-           this.x += toAdd.x;
-           this.y += toAdd.y;
+    public Vector add(Vector toAdd){
+
+        return new Vector(this.x + toAdd.x,this.y + toAdd.y);
+
 
     }
 }
