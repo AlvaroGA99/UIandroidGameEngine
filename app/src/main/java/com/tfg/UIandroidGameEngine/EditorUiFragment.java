@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +33,7 @@ public class EditorUiFragment extends Fragment {
     private RecyclerView objectsInScene;
     private RecyclerView componentsInObject;
     private View selectComponent;
+    private View selectObject;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -85,12 +88,48 @@ public class EditorUiFragment extends Fragment {
         View inspector = parentActivity.findViewById(R.id.inspector);
         View pause = parentActivity.findViewById(R.id.pause);
         View resume = parentActivity.findViewById(R.id.resume);
-        View addComponent = parentActivity.findViewById(R.id.addComponent);
+        Button addComponent = (Button)parentActivity.findViewById(R.id.addComponent);
+        Button addObject = (Button) parentActivity.findViewById(R.id.addObject);
+
 
         View gravityComponent = parentActivity.findViewById(R.id.gravityComponent);
         View inputMovementPlatformerComponent = parentActivity.findViewById(R.id.inputMovementPlatformerComponent);
         View groundCollider = parentActivity.findViewById(R.id.groundColliderComponent);
-         selectComponent = parentActivity.findViewById(R.id.selectComponentToAdd);
+
+        Button addRectangle = (Button)parentActivity.findViewById(R.id.addRectangle);;
+        Button addCircle = (Button)parentActivity.findViewById(R.id.addCircle);
+        Button addSprite = (Button)parentActivity.findViewById(R.id.addSprite);
+        TextInputLayout gameObjectTextViewName = (TextInputLayout)parentActivity.findViewById(R.id.gameObjectTextView);
+
+
+        selectComponent = parentActivity.findViewById(R.id.selectComponentToAdd);
+        selectObject = parentActivity.findViewById(R.id.selectObjectToAdd);
+
+
+
+        gravityComponent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectComponent.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        inputMovementPlatformerComponent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectComponent.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
+        groundCollider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectComponent.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
 
 
         addComponent.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +143,20 @@ public class EditorUiFragment extends Fragment {
 
             }
         });
+
+
+        addObject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectObject.getVisibility() == View.INVISIBLE){
+                    selectObject.setVisibility(View.VISIBLE);
+                }else{
+                    selectObject.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+
          objectsInScene = (RecyclerView) parentActivity.findViewById(R.id.objectsInCurrentScene);
          componentsInObject = (RecyclerView) parentActivity.findViewById(R.id.componentsInObject);
         objectsInScene.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -174,7 +227,36 @@ public class EditorUiFragment extends Fragment {
             }
         });
 
+        addRectangle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectObject.setVisibility(View.INVISIBLE);
+                int id = theGameEngine.addGameObject(0);
+                os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
+                Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        addCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectObject.setVisibility(View.INVISIBLE);
+                int id = theGameEngine.addGameObject(1);
+                os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
+                Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        addSprite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectObject.setVisibility(View.INVISIBLE);
+                int id = theGameEngine.addGameObject(2);
+                os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
+                Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         objectsInScene.setAdapter(os);
 
@@ -186,15 +268,7 @@ public class EditorUiFragment extends Fragment {
 
 
 
-        Button addObject = (Button) parentActivity.findViewById(R.id.addObject);
-        addObject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int id = theGameEngine.addGameObject();
-                os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
-                Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         pause.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1733,6 +1733,7 @@ drawable roundborder_drawable
 drawable roundborder_yellow_drawable
 drawable sprite
 drawable test_custom_background
+drawable text_view_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
@@ -1805,9 +1806,12 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id addCircle
 id addComponent
 id addEvent
 id addObject
+id addRectangle
+id addSprite
 id adjust_height
 id adjust_width
 id alertTitle
@@ -1921,6 +1925,7 @@ id flip
 id floating
 id forever
 id framelayout
+id gameObjectTextView
 id ghost_view
 id ghost_view_holder
 id gone
@@ -2092,6 +2097,7 @@ id search_plate
 id search_src_text
 id search_voice_btn
 id selectComponentToAdd
+id selectObjectToAdd
 id select_dialog_listview
 id selected
 id selection_type

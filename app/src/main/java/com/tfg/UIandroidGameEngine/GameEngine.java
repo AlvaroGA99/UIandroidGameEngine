@@ -50,13 +50,13 @@ public class GameEngine {
        return theSceneManager.objectsInCurrentScene;
     }
 
-    public int addGameObject(){
+    public int addGameObject(int spriteType){
         BasicGameObject toAdd;
 
-             toAdd = new BasicGameObject(theSceneManager.theInputManager.screenWidth/2 + 100,theSceneManager.theInputManager.screenHeight/2,0,this.getTheInputManager(),ctx);
+             toAdd = new BasicGameObject(theSceneManager.theInputManager.screenWidth/2 + 100,theSceneManager.theInputManager.screenHeight/2,spriteType,this.getTheInputManager(),ctx);
 
 
-        toAdd.addComponent("GravityComponent");
+        //toAdd.addComponent("GravityComponent");
         toAdd.sceneHierarchyID = SceneHierarchyDescription.get(theSceneManager.currentScene).size();
         SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
         theSceneManager.addObjectToCurrentScene(toAdd);

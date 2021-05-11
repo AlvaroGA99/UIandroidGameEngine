@@ -192,7 +192,7 @@
                             android:gravity="center"
                             android:text="Eventos"
 
-                            android:textAlignment="gravity"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="36sp" />
 
@@ -225,7 +225,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/roundborder_drawable"
 
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -266,25 +266,76 @@
         </LinearLayout>
     </ScrollView>
 
-    <TableLayout
+    <LinearLayout
+        android:id="@+id/selectObjectToAdd"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/roundborder_drawable"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="horizontal">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/addRectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="Rectángulo"
+                android:textColor="@color/black" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/addCircle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="Círculo"
+                android:textColor="@color/black" />
 
-        <TableRow
+            <Button
+                android:id="@+id/addSprite"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="Sprite"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/gameObjectTextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/text_view_drawable"
+
+
+            android:textSize="24sp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Nuevo GameObject"
+                android:textAlignment="gravity"
+                android:textSize="24sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
 
 </RelativeLayout>
