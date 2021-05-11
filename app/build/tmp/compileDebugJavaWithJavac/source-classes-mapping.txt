@@ -21,8 +21,8 @@ com/tfg/UIandroidGameEngine/Event.java
  com.tfg.UIandroidGameEngine.Event
 com/tfg/UIandroidGameEngine/GameEngine.java
  com.tfg.UIandroidGameEngine.GameEngine
-com/tfg/UIandroidGameEngine/GravityComponent.java
- com.tfg.UIandroidGameEngine.GravityComponent
+com/tfg/UIandroidGameEngine/EditorActivity.java
+ com.tfg.UIandroidGameEngine.EditorActivity
 com/tfg/UIandroidGameEngine/Vector.java
  com.tfg.UIandroidGameEngine.Vector
 com/tfg/UIandroidGameEngine/BuildConfig.java
@@ -36,9 +36,15 @@ com/tfg/UIandroidGameEngine/CircleSprite.java
  com.tfg.UIandroidGameEngine.CircleSprite
 com/tfg/UIandroidGameEngine/GroundColliderComponent.java
  com.tfg.UIandroidGameEngine.GroundColliderComponent
-com/tfg/UIandroidGameEngine/NewProjectFragment.java
- com.tfg.UIandroidGameEngine.NewProjectFragment
- com.tfg.UIandroidGameEngine.NewProjectFragment$1
+com/tfg/UIandroidGameEngine/EditorUiFragment.java
+ com.tfg.UIandroidGameEngine.EditorUiFragment
+ com.tfg.UIandroidGameEngine.EditorUiFragment$1
+ com.tfg.UIandroidGameEngine.EditorUiFragment$2
+ com.tfg.UIandroidGameEngine.EditorUiFragment$3
+ com.tfg.UIandroidGameEngine.EditorUiFragment$4
+ com.tfg.UIandroidGameEngine.EditorUiFragment$5
+ com.tfg.UIandroidGameEngine.EditorUiFragment$6
+ com.tfg.UIandroidGameEngine.EditorUiFragment$7
 com/tfg/UIandroidGameEngine/MainMenuFragment.java
  com.tfg.UIandroidGameEngine.MainMenuFragment
  com.tfg.UIandroidGameEngine.MainMenuFragment$1
@@ -60,14 +66,8 @@ com/tfg/UIandroidGameEngine/BasicGameObject.java
  com.tfg.UIandroidGameEngine.BasicGameObject
 com/tfg/UIandroidGameEngine/UsersProjectFragment.java
  com.tfg.UIandroidGameEngine.UsersProjectFragment
-com/tfg/UIandroidGameEngine/EditorActivity.java
- com.tfg.UIandroidGameEngine.EditorActivity
-com/tfg/UIandroidGameEngine/EditorUiFragment.java
- com.tfg.UIandroidGameEngine.EditorUiFragment
- com.tfg.UIandroidGameEngine.EditorUiFragment$1
- com.tfg.UIandroidGameEngine.EditorUiFragment$2
- com.tfg.UIandroidGameEngine.EditorUiFragment$3
- com.tfg.UIandroidGameEngine.EditorUiFragment$4
- com.tfg.UIandroidGameEngine.EditorUiFragment$5
- com.tfg.UIandroidGameEngine.EditorUiFragment$6
- com.tfg.UIandroidGameEngine.EditorUiFragment$7
+com/tfg/UIandroidGameEngine/NewProjectFragment.java
+ com.tfg.UIandroidGameEngine.NewProjectFragment
+ com.tfg.UIandroidGameEngine.NewProjectFragment$1
+com/tfg/UIandroidGameEngine/GravityComponent.java
+ com.tfg.UIandroidGameEngine.GravityComponent

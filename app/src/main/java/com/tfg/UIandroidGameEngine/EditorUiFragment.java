@@ -80,12 +80,19 @@ public class EditorUiFragment extends Fragment {
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
 
+
         View ObjectHierarchy =  parentActivity.findViewById(R.id.objectHierarchy);
         View inspector = parentActivity.findViewById(R.id.inspector);
         View pause = parentActivity.findViewById(R.id.pause);
         View resume = parentActivity.findViewById(R.id.resume);
         View addComponent = parentActivity.findViewById(R.id.addComponent);
+
+        View gravityComponent = parentActivity.findViewById(R.id.gravityComponent);
+        View inputMovementPlatformerComponent = parentActivity.findViewById(R.id.inputMovementPlatformerComponent);
+        View groundCollider = parentActivity.findViewById(R.id.groundColliderComponent);
          selectComponent = parentActivity.findViewById(R.id.selectComponentToAdd);
+
+
         addComponent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

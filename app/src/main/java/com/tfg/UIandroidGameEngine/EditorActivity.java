@@ -36,7 +36,9 @@ public class EditorActivity extends AppCompatActivity   {
             theGameEngine.addGameObject(aux);
             aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,2,theGameEngine.getTheInputManager(),theGameEngine.ctx);
             aux.preUpdateScale.x = 3;
+            aux.scale.x = 3;
             aux.preUpdateScale.y = 3;
+            aux.scale.y = 3;
             aux.addComponent("InputMovementPlatformerComponent");
             aux.addComponent("GravityComponent");
             aux.addComponent("GroundColliderComponent");

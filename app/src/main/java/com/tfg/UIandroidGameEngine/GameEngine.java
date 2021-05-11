@@ -15,7 +15,7 @@ public class GameEngine {
 
     public Context ctx;
 
-
+    //public QuadTree collisionQuadTree;
 
     public Vector lastTouched = new Vector(0.0f,0.0f);
 
@@ -28,6 +28,7 @@ public class GameEngine {
     private SceneManager theSceneManager =  new SceneManager(ctx);
 
     public GameEngine(){
+        //collisionQuadTree = new QuadTree(50,50, getObjectsInScene());
         addScene(theSceneManager.currentScene);
 
 
