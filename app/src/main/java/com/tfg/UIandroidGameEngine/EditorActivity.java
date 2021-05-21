@@ -24,7 +24,7 @@ public class EditorActivity extends AppCompatActivity   {
 
         if(theGameEngine.getObjectsInScene().size() == 0){
            // Toast.makeText(getApplicationContext(),"CReación", Toast.LENGTH_SHORT).show();
-            theGameEngine.ctx = getApplicationContext();
+            theGameEngine.setContext(getApplicationContext());
             BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx);
 
             aux.addComponent("GravityComponent");

@@ -10,6 +10,7 @@ import androidx.appcompat.widget.VectorEnabledTintResources;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public  class BasicGameObject  {
 
@@ -29,7 +30,11 @@ public  class BasicGameObject  {
 
         private int spriteType;
         private Sprite sprite;
+
         public ArrayList<Component> components = new ArrayList<Component>();
+        public ArrayList<Event> events = new ArrayList<Event>();
+        public ActionHolder actionHolder
+        //referencias
 
 
          public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager, Context ctx)  {
@@ -80,7 +85,7 @@ public  class BasicGameObject  {
              String aux = "";
              aux += "" + position.x + " " + position.y + " " + scale.x + " " + scale.y + " " + rotation + " " + spriteType;
              for(int i = 0; i < components.size(); i ++){
-                 aux += " " + components.get(i).getClass().getName();
+                 aux += " " + components.get(i).name;
              }
              return aux.split(" ");
         }

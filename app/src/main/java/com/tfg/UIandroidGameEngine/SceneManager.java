@@ -2,8 +2,12 @@ package com.tfg.UIandroidGameEngine;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 public class SceneManager {
 
@@ -18,16 +22,16 @@ public class SceneManager {
 
     public InputManager theInputManager = new InputManager();
 
-    private Context ctx;
+    public Context ctx;
 
 
     public void addObjectToCurrentScene(BasicGameObject toAdd){
         objectsInCurrentScene.add(toAdd);
     }
 
-    public SceneManager(Context ctx){
+    public SceneManager(){
         this.currentScene = "ScaffoldScene";
-        this.ctx = ctx;
+
     }
 
 
@@ -48,9 +52,9 @@ public class SceneManager {
     }
 
     private BasicGameObject castDescriptionToObject(String[] objectDescription){
-        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[0]),Float.parseFloat(objectDescription[1]),Integer.parseInt(objectDescription[2]),theInputManager,ctx);
-        aux.scale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
-        aux.rotation = Float.parseFloat(objectDescription[5]);
+        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[0]),Float.parseFloat(objectDescription[1]),Integer.parseInt(objectDescription[5]),theInputManager,ctx);
+        aux.scale = new Vector(Float.parseFloat(objectDescription[2]),Float.parseFloat(objectDescription[3]));
+        aux.rotation = Float.parseFloat(objectDescription[4]);
         for (int i = 6; i < objectDescription.length; i++){
             aux.addComponent(objectDescription[i]);
         }
@@ -58,11 +62,19 @@ public class SceneManager {
     }
 
     public void loadScene(ArrayList<String[]> sceneObjects){
-       objectsInCurrentScene.clear();
+
+
+        Toast.makeText(ctx,"" + "SODLFHS" , Toast.LENGTH_SHORT).show();
+
+           objectsInCurrentScene.clear();
        for (int i = 0; i < sceneObjects.size();i++){
-            objectsInCurrentScene.add(castDescriptionToObject(sceneObjects.get(i)));
+           BasicGameObject aux = castDescriptionToObject(sceneObjects.get(i));
+           aux.sceneHierarchyID = objectsInCurrentScene.size();
+           objectsInCurrentScene.add(aux);
        }
     }
+
+
 
 
 }

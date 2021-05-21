@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = FirebaseDatabase.getInstance().getReference();
+        
         if (savedInstanceState == null) {
             FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().add(R.id.container, new MainMenuFragment(),null)/*.add(newProjectFragment,null).hide(newProjectFragment).add(usersProjectFragment,null).hide(usersProjectFragment).add(localProjectFragment,null).hide(localProjectFragment)*/.commit();

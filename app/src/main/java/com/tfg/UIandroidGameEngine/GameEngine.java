@@ -21,11 +21,13 @@ public class GameEngine {
 
     public boolean isGameRunning = false;
 
+    public boolean isInEditor = true;
+
     private HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
 
     public Camera camera = new Camera();
 
-    private SceneManager theSceneManager =  new SceneManager(ctx);
+    private SceneManager theSceneManager =  new SceneManager();
 
     public GameEngine(){
         //collisionQuadTree = new QuadTree(50,50, getObjectsInScene());
@@ -85,17 +87,35 @@ public class GameEngine {
 
     }
 
+    public void loadScene(){
+
+        theSceneManager.loadScene(SceneHierarchyDescription.get(theSceneManager.currentScene));
+    }
+
+    public void setContext(Context context){
+        this.ctx = context;
+        this.theSceneManager.ctx = context;
+    }
+
+    public void saveThisScene(){
+        SceneHierarchyDescription.get(theSceneManager.currentScene).clear();
+
+        for(int i = 0; i < getObjectsInScene().size(); i ++){
+            SceneHierarchyDescription.get(theSceneManager.currentScene).add(getObjectsInScene().get(i).castObjectToDescription());
+
+
+        }
+    }
+
     public void playGame(){
+
        isGameRunning = true;
     }
 
     public void pause_restartGame(){
-        if(isGameRunning){
             isGameRunning = false; //pause
             //change pause button for restart button
-        }else{
-            //restart : replace all gameobjects to its original position
-        }
+
     }
 
 }

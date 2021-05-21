@@ -41,6 +41,8 @@ public class EditorUiFragment extends Fragment {
     private  boolean inspectorReverse = false;
     private boolean hierarchyReverse = false;
 
+    private   BasicGameObject pointerToSelectedObject ;
+
 
 
 
@@ -107,27 +109,7 @@ public class EditorUiFragment extends Fragment {
 
 
 
-        gravityComponent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectComponent.setVisibility(View.INVISIBLE);
-            }
-        });
 
-        inputMovementPlatformerComponent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectComponent.setVisibility(View.INVISIBLE);
-            }
-        });
-
-
-        groundCollider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectComponent.setVisibility(View.INVISIBLE);
-            }
-        });
 
 
 
@@ -214,13 +196,72 @@ public class EditorUiFragment extends Fragment {
 
         oc = new ComponentsInObjectAdapter(theGameEngine.getObjectsInScene().get(0).components);
 
+        pointerToSelectedObject = theGameEngine.getObjectsInScene().get(0);
+
         os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene());
+
+
+        gravityComponent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectComponent.setVisibility(View.INVISIBLE);
+                boolean found = false;
+                for(int i = 0; i < oc.localDataSet.size(); i ++){
+                    if (oc.localDataSet.get(i).name == "GravityComponent"){
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found){
+                    oc.localDataSet.add(new GravityComponent(pointerToSelectedObject));
+                    oc.notifyItemInserted(oc.localDataSet.size() - 1);
+                }
+            }
+        });
+
+        inputMovementPlatformerComponent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectComponent.setVisibility(View.INVISIBLE);
+                boolean found = false;
+                for(int i = 0; i < oc.localDataSet.size(); i ++){
+                    if (oc.localDataSet.get(i).name == "InputMovementPlatformerComponent"){
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found){
+                    oc.localDataSet.add(new InputMovementPlatformerComponent(pointerToSelectedObject));
+                    oc.notifyItemInserted(oc.localDataSet.size() - 1);
+                }
+            }
+        });
+
+
+        groundCollider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectComponent.setVisibility(View.INVISIBLE);
+                boolean found = false;
+                for(int i = 0; i < oc.localDataSet.size(); i ++){
+                    if (oc.localDataSet.get(i).name == "GroundColliderComponent"){
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found){
+                    oc.localDataSet.add(new GroundColliderComponent(pointerToSelectedObject));
+                    oc.notifyItemInserted(oc.localDataSet.size() - 1);
+                }
+            }
+        });
 
         os.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 oc.localDataSet = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).components ;
+                pointerToSelectedObject =  theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v));
                 theGameEngine.camera.fixedLookingPosition.x = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).position.x;
                 theGameEngine.camera.fixedLookingPosition.y = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).position.y;
                 oc.notifyDataSetChanged();
@@ -264,8 +305,7 @@ public class EditorUiFragment extends Fragment {
 
 
 
-
-
+        theGameEngine.isInEditor = true;
 
 
 
@@ -273,14 +313,32 @@ public class EditorUiFragment extends Fragment {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                theGameEngine.pause_restartGame();
+                if(!theGameEngine.isInEditor){
+
+                    if(!theGameEngine.isGameRunning){
+
+                        //poner boton de reset
+
+                        theGameEngine.isInEditor = true;
+                        theGameEngine.loadScene();
+                        os.notifyDataSetChanged();
+
+                        //poner boton de pausa
+                    }
+                }
+                theGameEngine.isGameRunning = false;
             }
         });
 
         resume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                theGameEngine.playGame();
+                if(theGameEngine.isInEditor){
+                    theGameEngine.saveThisScene();
+                    theGameEngine.isInEditor = false;
+                }
+                theGameEngine.isGameRunning = true;
+
             }
         });
 

@@ -1,6 +1,6 @@
 package com.tfg.UIandroidGameEngine;
 
-public class Component  {
+public abstract class Component  {
 
     protected BasicGameObject container;
 

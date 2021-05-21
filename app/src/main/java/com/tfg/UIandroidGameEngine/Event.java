@@ -1,4 +1,8 @@
 package com.tfg.UIandroidGameEngine;
 
-public class Event {
+public interface Event {
+
+    //public void Event()
+    void dispatchEvent(BasicGameObject container);
+
 }
