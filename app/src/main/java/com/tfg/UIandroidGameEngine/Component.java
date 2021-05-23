@@ -11,8 +11,8 @@ public abstract class Component  {
         this.name = name;
     }
 
-    public void process(long elapsedTime){
+    public abstract void process(long elapsedTime);
 
-    }
+
 
 }

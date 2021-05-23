@@ -32,8 +32,8 @@ public  class BasicGameObject  {
         private Sprite sprite;
 
         public ArrayList<Component> components = new ArrayList<Component>();
-        public ArrayList<Event> events = new ArrayList<Event>();
-        public ActionHolder actionHolder
+        public ArrayList<Event> eventsReceived = new ArrayList<Event>();
+        public ActionHolder actionHolder = new ActionHolder();
         //referencias
 
 
