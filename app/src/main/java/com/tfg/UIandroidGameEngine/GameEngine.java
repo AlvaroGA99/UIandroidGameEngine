@@ -27,6 +27,8 @@ public class GameEngine {
 
     public Camera camera = new Camera();
 
+    public ArrayList<Event> eventsTriggered = new ArrayList<Event>();
+
     private SceneManager theSceneManager =  new SceneManager();
 
     public GameEngine(){
@@ -43,25 +45,62 @@ public class GameEngine {
 
 
     public void addGameObject(BasicGameObject toAdd){
-        toAdd.sceneHierarchyID = SceneHierarchyDescription.get(theSceneManager.currentScene).size();
-        SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
+        toAdd.sceneHierarchyID = getObjectsInScene().size();
         theSceneManager.addObjectToCurrentScene(toAdd);
+        for(int i = 0; i < getObjectsInScene().size(); i ++ ){
+
+            if(toAdd.sceneHierarchyID != i){
+                getObjectsInScene().get(i).actionHolder.collisionActions.add(new ArrayList<Action>());
+            }else {
+                for(int j = 0; j <= toAdd.sceneHierarchyID; j++){
+                    toAdd.actionHolder.collisionActions.add(new ArrayList<Action>());
+                }
+            }
+
+        }
+
+        //SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
+
+    }
+
+    public void removeGameObject(int id){
+
+
+        getObjectsInScene().remove(id);
+
+        for (int i = 0; i < getObjectsInScene().size();i ++){
+            getObjectsInScene().get(i).actionHolder.collisionActions.remove(id);
+            getObjectsInScene().get(i).sceneHierarchyID = i;
+        }
     }
 
     public ArrayList<BasicGameObject> getObjectsInScene(){
        return theSceneManager.objectsInCurrentScene;
     }
 
-    public int addGameObject(int spriteType){
+    public int addGameObject(int spriteType,String name){
         BasicGameObject toAdd;
 
-             toAdd = new BasicGameObject(theSceneManager.theInputManager.screenWidth/2 + 100,theSceneManager.theInputManager.screenHeight/2,spriteType,this.getTheInputManager(),ctx);
+             toAdd = new BasicGameObject(theSceneManager.theInputManager.screenWidth/2 + 100,theSceneManager.theInputManager.screenHeight/2,spriteType,this.getTheInputManager(),ctx,name);
 
 
-        //toAdd.addComponent("GravityComponent");
-        toAdd.sceneHierarchyID = SceneHierarchyDescription.get(theSceneManager.currentScene).size();
-        SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
+        //toAdd.sceneHierarchyID = SceneHierarchyDescription.get(theSceneManager.currentScene).size();
+        toAdd.sceneHierarchyID = getObjectsInScene().size();
         theSceneManager.addObjectToCurrentScene(toAdd);
+        for(int i = 0; i < getObjectsInScene().size(); i ++ ){
+
+            if(toAdd.sceneHierarchyID != i){
+                getObjectsInScene().get(i).actionHolder.collisionActions.add(new ArrayList<Action>());
+            }else {
+                for(int j = 0; j <= toAdd.sceneHierarchyID; j++){
+                    toAdd.actionHolder.collisionActions.add(new ArrayList<Action>());
+                }
+            }
+
+        }
+        Toast.makeText(ctx, "" + toAdd.actionHolder.collisionActions.size() , Toast.LENGTH_SHORT).show();
+        //SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
+
 
         return toAdd.sceneHierarchyID;
     }

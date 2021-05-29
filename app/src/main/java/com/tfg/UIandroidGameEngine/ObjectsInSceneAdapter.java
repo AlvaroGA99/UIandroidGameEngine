@@ -54,7 +54,7 @@ public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getTextView().setText("" + localDataSet.get(position).sceneHierarchyID);
+        holder.getTextView().setText("" + localDataSet.get(position).name);
     }
 
 

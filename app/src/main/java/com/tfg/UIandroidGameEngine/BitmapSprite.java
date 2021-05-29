@@ -38,6 +38,7 @@ public class BitmapSprite implements Sprite{
             public void draw(Vector position, Vector scale, float rotation,Canvas renderCanvas,Camera camera) {
                 m.reset();
                 m.postScale(50.0f/bitmap.getWidth()*scale.x, 50.0f/bitmap.getHeight()*scale.y);
+                m.postRotate(rotation);
                 m.postTranslate(position.x + camera.getScreenSpaceX()- 25*scale.x,position.y + camera.getScreenSpaceY() - 25*scale.y);
                 renderCanvas.drawBitmap(bitmap,m,null);
 

@@ -52,11 +52,20 @@ public class SceneManager {
     }
 
     private BasicGameObject castDescriptionToObject(String[] objectDescription){
-        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[0]),Float.parseFloat(objectDescription[1]),Integer.parseInt(objectDescription[5]),theInputManager,ctx);
-        aux.scale = new Vector(Float.parseFloat(objectDescription[2]),Float.parseFloat(objectDescription[3]));
-        aux.rotation = Float.parseFloat(objectDescription[4]);
-        for (int i = 6; i < objectDescription.length; i++){
-            aux.addComponent(objectDescription[i]);
+
+        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[1]),Float.parseFloat(objectDescription[2]),Integer.parseInt(objectDescription[6]),theInputManager,ctx,objectDescription[0]);
+        //BasicGameObject aux = new BasicGameObject(Float.parseFloat("1500.0") ,Float.parseFloat("1500.0"),0,theInputManager,ctx, objectDescription[0]);
+
+      // Toast.makeText(ctx,objectDescription[6] , Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ctx,objectDescription[2] , Toast.LENGTH_SHORT).show();
+
+
+        aux.scale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
+        aux.preUpdateScale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
+        aux.rotation = Float.parseFloat(objectDescription[5]);
+        aux.preUpdateRotation = Float.parseFloat(objectDescription[5]);
+        for (int i = 7; i < objectDescription.length; i++){
+            aux.addComponent(objectDescription[i]);/////HSDFSDFSDFSDF/////
         }
         return aux;
     }
@@ -64,10 +73,11 @@ public class SceneManager {
     public void loadScene(ArrayList<String[]> sceneObjects){
 
 
-        Toast.makeText(ctx,"" + "SODLFHS" , Toast.LENGTH_SHORT).show();
+
 
            objectsInCurrentScene.clear();
        for (int i = 0; i < sceneObjects.size();i++){
+
            BasicGameObject aux = castDescriptionToObject(sceneObjects.get(i));
            aux.sceneHierarchyID = objectsInCurrentScene.size();
            objectsInCurrentScene.add(aux);

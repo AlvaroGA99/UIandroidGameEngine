@@ -22,6 +22,8 @@ public  class BasicGameObject  {
         public Vector preUpdateScale;
         public float preUpdateRotation;
 
+        public String name = "";
+
         public InputManager inputManager;
 
         public float speed ;
@@ -33,11 +35,13 @@ public  class BasicGameObject  {
 
         public ArrayList<Component> components = new ArrayList<Component>();
         public ArrayList<Event> eventsReceived = new ArrayList<Event>();
+        public ArrayList<Collision> collisionsReceived = new ArrayList<Collision>();
         public ActionHolder actionHolder = new ActionHolder();
         //referencias
 
 
-         public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager, Context ctx)  {
+         public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager, Context ctx,String name)  {
+             this.name = name;
              this.inputManager = inputmanager;
              this.spriteType = spriteType;
              switch(spriteType){
@@ -83,11 +87,11 @@ public  class BasicGameObject  {
 
         public String[] castObjectToDescription(){
              String aux = "";
-             aux += "" + position.x + " " + position.y + " " + scale.x + " " + scale.y + " " + rotation + " " + spriteType;
+             aux += "" + name + "_"+ position.x + "_" + position.y + "_" + scale.x + "_" + scale.y + "_" + rotation + "_" + spriteType;
              for(int i = 0; i < components.size(); i ++){
-                 aux += " " + components.get(i).name;
+                 aux += "_" + components.get(i).name;
              }
-             return aux.split(" ");
+             return aux.split("_");
         }
 
         public void draw(Canvas renderCanvas,Camera camera){

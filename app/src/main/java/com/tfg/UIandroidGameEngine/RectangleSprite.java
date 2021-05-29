@@ -17,6 +17,13 @@ public class RectangleSprite implements  Sprite{
     public void draw(Vector position, Vector scale, float rotation,Canvas renderCanvas , Camera camera) {
         Paint aux = new Paint();
         aux.setARGB(255,255 , 0 ,0);
+        renderCanvas.save();
+        renderCanvas.rotate(rotation,position.x + camera.getScreenSpaceX(),position.y + camera.getScreenSpaceY());
         renderCanvas.drawRect( position.x + camera.getScreenSpaceX()  - 25*scale.x,position.y + camera.getScreenSpaceY() - 25*scale.y, position.x + camera.getScreenSpaceX() + 25*scale.x, position.y + camera.getScreenSpaceY()+ 25*scale.y, aux);
+
+
+
+
+        renderCanvas.restore();
     }
 }

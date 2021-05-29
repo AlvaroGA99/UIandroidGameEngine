@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 /**
@@ -101,7 +101,7 @@ public class EditorUiFragment extends Fragment {
         Button addRectangle = (Button)parentActivity.findViewById(R.id.addRectangle);;
         Button addCircle = (Button)parentActivity.findViewById(R.id.addCircle);
         Button addSprite = (Button)parentActivity.findViewById(R.id.addSprite);
-        TextInputLayout gameObjectTextViewName = (TextInputLayout)parentActivity.findViewById(R.id.gameObjectTextView);
+        TextInputEditText gameObjectTextViewName = (TextInputEditText) parentActivity.findViewById(R.id.gameObjectTextView);
 
 
         selectComponent = parentActivity.findViewById(R.id.selectComponentToAdd);
@@ -272,7 +272,7 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectObject.setVisibility(View.INVISIBLE);
-                int id = theGameEngine.addGameObject(0);
+                int id = theGameEngine.addGameObject(0,gameObjectTextViewName.getText().toString());
                 os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
                 Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
 
@@ -283,7 +283,7 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectObject.setVisibility(View.INVISIBLE);
-                int id = theGameEngine.addGameObject(1);
+                int id = theGameEngine.addGameObject(1,gameObjectTextViewName.getText().toString());
                 os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
                 Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
             }
@@ -293,7 +293,7 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectObject.setVisibility(View.INVISIBLE);
-                int id = theGameEngine.addGameObject(2);
+                int id = theGameEngine.addGameObject(2,gameObjectTextViewName.getText().toString());
                 os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
                 Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
             }
