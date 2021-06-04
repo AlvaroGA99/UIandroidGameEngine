@@ -2,6 +2,7 @@ package com.tfg.UIandroidGameEngine;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.firebase.database.ValueEventListener;
@@ -27,7 +28,8 @@ public class GameEngine {
 
     public Camera camera = new Camera();
 
-    public ArrayList<Event> eventsTriggered = new ArrayList<Event>();
+    public ArrayList<BasicGameObject> deleteQueue= new ArrayList<BasicGameObject>();
+
 
     private SceneManager theSceneManager =  new SceneManager();
 
@@ -81,7 +83,7 @@ public class GameEngine {
     public int addGameObject(int spriteType,String name){
         BasicGameObject toAdd;
 
-             toAdd = new BasicGameObject(theSceneManager.theInputManager.screenWidth/2 + 100,theSceneManager.theInputManager.screenHeight/2,spriteType,this.getTheInputManager(),ctx,name);
+             toAdd = new BasicGameObject(theSceneManager.theInputManager.screenWidth/2 + 100,theSceneManager.theInputManager.screenHeight/2,spriteType,this.getTheInputManager(),ctx,name,false);
 
 
         //toAdd.sceneHierarchyID = SceneHierarchyDescription.get(theSceneManager.currentScene).size();
@@ -106,6 +108,22 @@ public class GameEngine {
     }
 
 
+    private void deleteObjectsInQueue(){
+        for (int i = 0; i < deleteQueue.size(); i++){
+            removeGameObject(deleteQueue.get(i).sceneHierarchyID);
+
+        }
+        deleteQueue.clear();
+    }
+
+    public void addObjectToDeleteQueue(BasicGameObject toDelete){
+        for (int i = 0; i < getObjectsInScene().size(); i++){
+            if(toDelete.sceneHierarchyID == getObjectsInScene().get(i).sceneHierarchyID){
+                return;
+            }
+            deleteQueue.add(toDelete);
+        }
+    }
     public void drawAll(Canvas renderCanvas){
        theSceneManager.drawCurrentScene(renderCanvas,camera);
     }
@@ -118,6 +136,7 @@ public class GameEngine {
 
     public void updateAll(long elapsedTime){
         theSceneManager.updateCurrentScene(elapsedTime);
+        deleteObjectsInQueue();
     }
 
     public void loadScene(String key){
@@ -127,8 +146,9 @@ public class GameEngine {
     }
 
     public void loadScene(){
-
+        camera.lookingAt = null;
         theSceneManager.loadScene(SceneHierarchyDescription.get(theSceneManager.currentScene));
+
     }
 
     public void setContext(Context context){

@@ -18,7 +18,7 @@ public class QuadTree {
         this.objectsInQuad = objectsInScene;
     }
 
-    public void checkCollisions(){
+    public void checkCollisionsInQuad(){
 
     }
 

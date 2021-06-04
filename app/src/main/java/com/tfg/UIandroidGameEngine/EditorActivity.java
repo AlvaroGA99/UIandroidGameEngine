@@ -25,18 +25,19 @@ public class EditorActivity extends AppCompatActivity   {
         if(theGameEngine.getObjectsInScene().size() == 0){
            // Toast.makeText(getApplicationContext(),"CReación", Toast.LENGTH_SHORT).show();
             theGameEngine.setContext(getApplicationContext());
-            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"uwuwuwu");
+            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"uwuwuwu",false);
 
             aux.addComponent("GravityComponent");
             aux.addComponent("GroundColliderComponent");
             aux.preUpdateRotation = 45.0f;
             aux.rotation = 45.0f;
             theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth())/2 + 100, (float)(getHeight())/2,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"wiwiwiw");
+            aux = new BasicGameObject((float)(getWidth())/2 + 100, (float)(getHeight())/2,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"wiwiwiw",false);
             aux.addComponent("GravityComponent");
             aux.addComponent("GroundColliderComponent");
             theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,2,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Player");
+            aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,2,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Player",true);
+            aux.actionHolder.onClickActions.add(new DebugAction(aux,theGameEngine));
             aux.preUpdateScale.x = 3;
             aux.scale.x = 3;
             aux.preUpdateScale.y = 3;
@@ -46,7 +47,10 @@ public class EditorActivity extends AppCompatActivity   {
             aux.addComponent("GroundColliderComponent");
             aux.preUpdateRotation = 45.0f;
             aux.rotation = 45.0f;
-            theGameEngine.addGameObject(aux);}
+            theGameEngine.addGameObject(aux);
+
+
+        }
         //if (savedInstanceState == null) {
              fm = getSupportFragmentManager();
 
@@ -62,7 +66,7 @@ public class EditorActivity extends AppCompatActivity   {
 
     }
 
-    private int getHeight(){
+    public int getHeight(){
 
         DisplayMetrics dp = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dp);
@@ -70,7 +74,7 @@ public class EditorActivity extends AppCompatActivity   {
     }
 
 
-    private int getWidth(){
+    public  int getWidth(){
 
         DisplayMetrics dp = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dp);

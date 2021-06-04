@@ -1,6 +1,7 @@
 package com.tfg.UIandroidGameEngine;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,11 +19,13 @@ public class SceneManager {
     public String currentScene;
 
 
-
+    public ArrayList<Event> eventsTriggered = new ArrayList<Event>();
 
     public InputManager theInputManager = new InputManager();
 
     public Context ctx;
+
+
 
 
     public void addObjectToCurrentScene(BasicGameObject toAdd){
@@ -31,7 +34,6 @@ public class SceneManager {
 
     public SceneManager(){
         this.currentScene = "ScaffoldScene";
-
     }
 
 
@@ -43,17 +45,28 @@ public class SceneManager {
     }
 
     public void updateCurrentScene(long elapsedTime){
+
+
+        // añadir eventos a eventsTriggered
+
+
         for (int i = 0; i < objectsInCurrentScene.size(); i++){
-            objectsInCurrentScene.get(i).update(elapsedTime);
+            // añadir a este objeto las collisiones : TODA LA LOGICA DEL QuadTree
+            //añadir a este objeto los inputEvents
+            objectsInCurrentScene.get(i).update(elapsedTime,eventsTriggered);
         }
+
         for (int i = 0; i < objectsInCurrentScene.size(); i++){
             objectsInCurrentScene.get(i).postUpdate();
         }
+
+        eventsTriggered.clear();
+
     }
 
     private BasicGameObject castDescriptionToObject(String[] objectDescription){
 
-        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[1]),Float.parseFloat(objectDescription[2]),Integer.parseInt(objectDescription[6]),theInputManager,ctx,objectDescription[0]);
+        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[1]),Float.parseFloat(objectDescription[2]),Integer.parseInt(objectDescription[6]),theInputManager,ctx,objectDescription[0],Boolean.parseBoolean(objectDescription[7]));
         //BasicGameObject aux = new BasicGameObject(Float.parseFloat("1500.0") ,Float.parseFloat("1500.0"),0,theInputManager,ctx, objectDescription[0]);
 
       // Toast.makeText(ctx,objectDescription[6] , Toast.LENGTH_SHORT).show();
@@ -64,7 +77,7 @@ public class SceneManager {
         aux.preUpdateScale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
         aux.rotation = Float.parseFloat(objectDescription[5]);
         aux.preUpdateRotation = Float.parseFloat(objectDescription[5]);
-        for (int i = 7; i < objectDescription.length; i++){
+        for (int i = 8; i < objectDescription.length; i++){
             aux.addComponent(objectDescription[i]);/////HSDFSDFSDFSDF/////
         }
         return aux;

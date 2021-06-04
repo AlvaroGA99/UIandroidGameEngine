@@ -18,6 +18,8 @@ public  class BasicGameObject  {
         public Vector scale;
         public float rotation;
 
+        public boolean isFocusedByCamera ;
+
         public Vector preUpdatePosition;
         public Vector preUpdateScale;
         public float preUpdateRotation;
@@ -34,13 +36,13 @@ public  class BasicGameObject  {
         private Sprite sprite;
 
         public ArrayList<Component> components = new ArrayList<Component>();
-        public ArrayList<Event> eventsReceived = new ArrayList<Event>();
+        public ArrayList<Event> inputEventsReceived = new ArrayList<Event>();
         public ArrayList<Collision> collisionsReceived = new ArrayList<Collision>();
         public ActionHolder actionHolder = new ActionHolder();
         //referencias
 
 
-         public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager, Context ctx,String name)  {
+         public BasicGameObject(float posX, float posY, int spriteType, InputManager inputmanager, Context ctx,String name,boolean isFocusedByCamera)  {
              this.name = name;
              this.inputManager = inputmanager;
              this.spriteType = spriteType;
@@ -57,7 +59,7 @@ public  class BasicGameObject  {
 
              }
             speed = 0;
-
+            this.isFocusedByCamera = isFocusedByCamera;
            position = new Vector(posX,posY);
             scale = new Vector(1,1);
             rotation = 0;
@@ -87,7 +89,7 @@ public  class BasicGameObject  {
 
         public String[] castObjectToDescription(){
              String aux = "";
-             aux += "" + name + "_"+ position.x + "_" + position.y + "_" + scale.x + "_" + scale.y + "_" + rotation + "_" + spriteType;
+             aux += "" + name + "_"+ position.x + "_" + position.y + "_" + scale.x + "_" + scale.y + "_" + rotation + "_" + spriteType + "_" + isFocusedByCamera;
              for(int i = 0; i < components.size(); i ++){
                  aux += "_" + components.get(i).name;
              }
@@ -99,10 +101,28 @@ public  class BasicGameObject  {
 
         }
 
-        public void update(long elapsedTime){
+        public void update(long elapsedTime,ArrayList<Event> eventsTriggered){
              for (int i = 0; i < components.size(); i++){
                  components.get(i).process(elapsedTime);
+
              }
+
+            for (int j = 0; j < eventsTriggered.size(); j ++){
+                eventsTriggered.get(j).dispatchEvent(this);
+            }
+
+            for (int k = 0; k < inputEventsReceived.size(); k ++){
+                inputEventsReceived.get(k).dispatchEvent(this);
+            }
+
+            inputEventsReceived.clear();
+
+            for (int l = 0; l < collisionsReceived.size(); l++){
+               collisionsReceived.get(l).dispatchEvent(this);
+            }
+
+            collisionsReceived.clear();
+
         }
 
         public void postUpdate(){

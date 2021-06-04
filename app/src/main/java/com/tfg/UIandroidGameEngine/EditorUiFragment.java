@@ -7,9 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,6 +38,11 @@ public class EditorUiFragment extends Fragment {
     private RecyclerView componentsInObject;
     private View selectComponent;
     private View selectObject;
+    private Switch focusedByCamera;
+    private int previousSelectedId;
+     private TextView scaleX;
+     private TextView scaleY;
+     private TextView rotation;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -104,6 +113,8 @@ public class EditorUiFragment extends Fragment {
         TextInputEditText gameObjectTextViewName = (TextInputEditText) parentActivity.findViewById(R.id.gameObjectTextView);
 
 
+
+
         selectComponent = parentActivity.findViewById(R.id.selectComponentToAdd);
         selectObject = parentActivity.findViewById(R.id.selectObjectToAdd);
 
@@ -154,8 +165,8 @@ public class EditorUiFragment extends Fragment {
 
 
 
-        ObjectHierarchy.setTranslationX(-1000f);
-        inspector.setTranslationX(1000f);
+        ObjectHierarchy.setTranslationX(-1*(parentActivity.getWidth()/2  - 100));
+        inspector.setTranslationX((parentActivity.getWidth()/2  - 100));
 
 
         inspector.setOnClickListener(new View.OnClickListener(){
@@ -168,7 +179,7 @@ public class EditorUiFragment extends Fragment {
                     v.animate().translationX(-45);
 
                 }else{
-                    v.animate().translationX(1000);
+                    v.animate().translationX(parentActivity.getWidth()/2  - 100);
                 }
                 inspectorReverse = !inspectorReverse;
 
@@ -186,7 +197,7 @@ public class EditorUiFragment extends Fragment {
                     v.animate().translationX(45);
 
                 }else{
-                    v.animate().translationX(-1000);
+                    v.animate().translationX(-1*(parentActivity.getWidth()/2  - 100));
                 }
                 hierarchyReverse = !hierarchyReverse;
 
@@ -197,7 +208,105 @@ public class EditorUiFragment extends Fragment {
         oc = new ComponentsInObjectAdapter(theGameEngine.getObjectsInScene().get(0).components);
 
         pointerToSelectedObject = theGameEngine.getObjectsInScene().get(0);
+        focusedByCamera = (Switch) parentActivity.findViewById(R.id.isFocusedByCamera);
+        focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
 
+        scaleX = (TextView) parentActivity.findViewById(R.id.textoEscalaX);
+        scaleY = (TextView) parentActivity.findViewById(R.id.textoEscalaY);
+        rotation = (TextView) parentActivity.findViewById(R.id.textoRotacion);
+
+        scaleX.setText("X : " + pointerToSelectedObject.scale.x);
+        scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
+        rotation.setText("" + pointerToSelectedObject.rotation);
+
+        View moreScaleX = parentActivity.findViewById(R.id.aumentarEscalaX);
+            moreScaleX.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    pointerToSelectedObject.scale.x += 0.1;
+                    pointerToSelectedObject.preUpdateScale.x += 0.1;
+                    scaleX.setText("X : " + pointerToSelectedObject.scale.x);
+                    return false;
+                }
+            });
+        View moreScaleY  = parentActivity.findViewById(R.id.aumentarEscalaY);
+            moreScaleY.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    pointerToSelectedObject.scale.y += 0.1 ;
+                    pointerToSelectedObject.preUpdateScale.y += 0.1;
+                    scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
+                    return false;
+                }
+            });
+        View moreRotation = parentActivity.findViewById(R.id.aumentarRotacion);
+            moreRotation.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    pointerToSelectedObject.rotation += 0.1;
+                    pointerToSelectedObject.preUpdateRotation += 0.1;
+                    rotation.setText("" + pointerToSelectedObject.rotation);
+                    return false;
+                }
+            });
+
+        View lessScaleX = parentActivity.findViewById(R.id.disminuirEscalaX);
+            lessScaleX.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    pointerToSelectedObject.scale.x -= 0.1;
+                    pointerToSelectedObject.preUpdateScale.x -= 0.1;
+                    scaleX.setText("X : " + pointerToSelectedObject.scale.x);
+                    return false;
+                }
+            });
+        View lessScaleY = parentActivity.findViewById(R.id.disminuirEscalaY);
+            lessScaleY.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    pointerToSelectedObject.scale.y -= 0.1;
+                    pointerToSelectedObject.preUpdateScale.y -= 0.1;
+                    scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
+                    return false;
+                }
+            });
+        View lessRotation = parentActivity.findViewById(R.id.disminuirRotacion);
+            lessRotation.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    pointerToSelectedObject.rotation -= 0.1;
+                    pointerToSelectedObject.preUpdateRotation -= 0.1;
+                    rotation.setText("" + pointerToSelectedObject.rotation);
+                    return false;
+                }
+            });
+
+
+        focusedByCamera.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!buttonView.isPressed()) {
+                    Toast.makeText(getContext(),"NO HE PULSADO",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!isChecked){
+                    pointerToSelectedObject.isFocusedByCamera = false;
+                }else{
+                    int auxID = pointerToSelectedObject.sceneHierarchyID;
+                    for(int i = 0; i < theGameEngine.getObjectsInScene().size(); i ++){
+                        if (i != auxID){
+                            theGameEngine.getObjectsInScene().get(i).isFocusedByCamera = false;
+                        }else{
+                            pointerToSelectedObject.isFocusedByCamera = true;
+                        }
+                    }
+                }
+
+                Toast.makeText(getContext(),"" + pointerToSelectedObject.isFocusedByCamera,Toast.LENGTH_SHORT).show();
+
+            }
+        });
         os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene());
 
 
@@ -262,6 +371,11 @@ public class EditorUiFragment extends Fragment {
             public void onClick(View v) {
                 oc.localDataSet = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).components ;
                 pointerToSelectedObject =  theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v));
+                scaleX.setText("X : " + pointerToSelectedObject.scale.x);
+                scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
+                rotation.setText("" + pointerToSelectedObject.rotation);
+
+                focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
                 theGameEngine.camera.fixedLookingPosition.x = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).position.x;
                 theGameEngine.camera.fixedLookingPosition.y = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).position.y;
                 oc.notifyDataSetChanged();
@@ -321,6 +435,18 @@ public class EditorUiFragment extends Fragment {
 
                         theGameEngine.isInEditor = true;
                         theGameEngine.loadScene();
+                        inspector.setVisibility(View.VISIBLE);
+                        ObjectHierarchy.setVisibility(View.VISIBLE);
+
+                        pointerToSelectedObject = theGameEngine.getObjectsInScene().get(previousSelectedId);
+                        oc.localDataSet = pointerToSelectedObject.components;
+                        oc.notifyDataSetChanged();
+
+                        focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
+                        scaleX.setText("X : " + pointerToSelectedObject.scale.x);
+                        scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
+                        rotation.setText("" + pointerToSelectedObject.rotation);
+
                         os.notifyDataSetChanged();
 
                         //poner boton de pausa
@@ -334,8 +460,18 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(theGameEngine.isInEditor){
+                    previousSelectedId = pointerToSelectedObject.sceneHierarchyID;
                     theGameEngine.saveThisScene();
+                    inspector.setVisibility(View.INVISIBLE);
+                    ObjectHierarchy.setVisibility(View.INVISIBLE);
+
                     theGameEngine.isInEditor = false;
+                    for(int i = 0; i < theGameEngine.getObjectsInScene().size();i++){
+                        if(theGameEngine.getObjectsInScene().get(i).isFocusedByCamera == true){
+                            theGameEngine.camera.lookingAt = theGameEngine.getObjectsInScene().get(i);
+                            break;
+                        }
+                    }
                 }
                 theGameEngine.isGameRunning = true;
 

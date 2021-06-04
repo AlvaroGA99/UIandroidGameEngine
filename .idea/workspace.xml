@@ -56,8 +56,8 @@
       <list>
         <option value="resourceFile" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -71,8 +71,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="d9889d5" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-26T19:19:11.644Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="30040add89b73100" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-05-31T09:20:32.991Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android-custom-viewC:/androidSDK/sources/android-30/android/view/View.java_SELECTED" value="View" />
@@ -85,15 +85,15 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.tfg.UIandroidGameEngine" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\raw" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\sprite" />
+      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\drawable" />
     </key>
     <key name="android.template.541800380">
       <recent name="com.tfg.UIandroidGameEngine" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\sprite" />
-      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\drawable" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\raw" />
     </key>
   </component>
   <component name="RunManager">
@@ -196,15 +196,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="742" y="238" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616345661088" />
-    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1622163963238">
+    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1622685337669">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622163963238" />
+    <state x="576" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622685337669" />
     <state x="2496" y="233" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1618276812659" />
-    <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1619473326247">
+    <state x="688" y="363" width="441" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1622685080702">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="688" y="363" width="436" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619473326247" />
+    <state x="688" y="363" width="441" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622685080702" />
     <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1619602531144">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -221,22 +221,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="540" y="274" key="AndroidCreateResourceFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622248427775" />
-    <state width="1540" height="20" key="GridCell.Tab.0.bottom" timestamp="1622138281207">
+    <state width="938" height="279" key="GridCell.Tab.0.bottom" timestamp="1622459870586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1540" height="20" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622138281207" />
-    <state width="1540" height="20" key="GridCell.Tab.0.center" timestamp="1622138281207">
+    <state width="938" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622459870586" />
+    <state width="938" height="279" key="GridCell.Tab.0.center" timestamp="1622459870586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1540" height="20" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622138281207" />
-    <state width="1540" height="20" key="GridCell.Tab.0.left" timestamp="1622138281206">
+    <state width="938" height="279" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622459870586" />
+    <state width="938" height="279" key="GridCell.Tab.0.left" timestamp="1622459870586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1540" height="20" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622138281206" />
-    <state width="1540" height="20" key="GridCell.Tab.0.right" timestamp="1622138281207">
+    <state width="938" height="279" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622459870586" />
+    <state width="938" height="279" key="GridCell.Tab.0.right" timestamp="1622459870586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1540" height="20" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622138281207" />
+    <state width="938" height="279" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622459870586" />
     <state x="351" y="197" key="SettingsEditor" timestamp="1619454240846">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -249,9 +249,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="580" y="413" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1621903213119" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1622138789823">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1622483367616">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622138789823" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1622483367616" />
   </component>
 </project>
