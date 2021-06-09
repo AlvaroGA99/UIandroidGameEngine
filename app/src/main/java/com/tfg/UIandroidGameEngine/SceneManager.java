@@ -48,10 +48,10 @@ public class SceneManager {
 
 
         // añadir eventos a eventsTriggered
+        // añadir a cada objeto  las collisiones : TODA LA LOGICA DEL QuadTree
 
 
         for (int i = 0; i < objectsInCurrentScene.size(); i++){
-            // añadir a este objeto las collisiones : TODA LA LOGICA DEL QuadTree
             //añadir a este objeto los inputEvents
             objectsInCurrentScene.get(i).update(elapsedTime,eventsTriggered);
         }

@@ -3,9 +3,9 @@ package com.tfg.UIandroidGameEngine;
 public class Collision  implements Event{
 
 
-    private int eventTrigger;
+    public int eventTrigger;
 
-    public void Collision(int eventTrigger){
+    public  Collision(int eventTrigger){
         this.eventTrigger = eventTrigger;
     }
 

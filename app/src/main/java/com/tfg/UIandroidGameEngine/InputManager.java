@@ -14,6 +14,8 @@ public class InputManager {
 
     public boolean isLeftPressed = false;
 
+
+
     public int screenWidth = 0;
 
     public int screenHeight = 0;

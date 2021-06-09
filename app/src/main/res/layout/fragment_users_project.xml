@@ -4,18 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="80dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/backbutton_up"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/usersProjects"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/roundborder_drawable"
-        android:layout_weight="33"
-        android:text="Atrás" />
-
-
-
+        android:layout_height="match_parent" />
 </LinearLayout>

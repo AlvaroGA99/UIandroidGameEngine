@@ -6,8 +6,10 @@ public abstract class Action {
 
     protected GameEngine theGameEngine;
 
-    public Action(BasicGameObject executor, GameEngine theGameEngine){
+    public String name;
 
+    public Action(BasicGameObject executor, GameEngine theGameEngine, String name){
+    this.name = name;
         this.executor = executor;
         this.theGameEngine = theGameEngine;
 

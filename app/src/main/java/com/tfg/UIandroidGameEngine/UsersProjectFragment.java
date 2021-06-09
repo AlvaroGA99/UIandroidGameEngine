@@ -1,13 +1,29 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.content.Intent;
+import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.service.autofill.Dataset;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +36,8 @@ public class UsersProjectFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private DatabaseReference   db = FirebaseDatabase.getInstance().getReference();
+    private RecyclerView usersProject;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -54,6 +72,7 @@ public class UsersProjectFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
         Toast.makeText(getActivity().getApplicationContext(), "CREATE", Toast.LENGTH_SHORT).show();
     }
 
@@ -66,6 +85,66 @@ public class UsersProjectFragment extends Fragment {
 
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
-        Toast.makeText(getActivity().getApplicationContext(), "CREATE", Toast.LENGTH_SHORT);
+         usersProject = getActivity().findViewById(R.id.usersProjects);
+        ArrayList<Project> projectsDataset = new ArrayList<Project>();
+        HashMap<String, ArrayList<String[]>> aux = new HashMap<String, ArrayList<String[]>>();
+        aux.put("ScaffoldScene", new ArrayList<String[]>());
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+
+
+        PublishedProjectsAdapter  adapter = new PublishedProjectsAdapter(projectsDataset,getActivity());
+        usersProject.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        usersProject.setAdapter(adapter);
+
+
+
+        /*db.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Toast.makeText(getContext(), "JGJHGJHGJH" + db.child("admin12378") , Toast.LENGTH_SHORT).show();
+                String user ;
+                String key;
+                ArrayList<Project> projectsDataset = new ArrayList<Project>();
+                for(DataSnapshot e : snapshot.getChildren()){
+                    user = e.getKey();
+                    for(DataSnapshot f : e.getChildren()){
+                        if(f.child("published").getValue(Boolean.class)){
+                            key = f.getKey();
+                            ProjectData pd = f.getValue(ProjectData.class);
+                            Project p = new Project(key,user,pd);
+                            projectsDataset.add(p);
+                        }
+
+                    }
+                }
+                adapter.localDataSet = projectsDataset;
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
+
+*/
+
+
+
+
+
+
+
     }
 }

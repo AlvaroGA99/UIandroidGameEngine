@@ -3,11 +3,17 @@ package com.tfg.UIandroidGameEngine;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import java.lang.reflect.GenericArrayType;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +26,8 @@ public class LocalProjectsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private RecyclerView myPublishedProjects;
+    private RecyclerView myNotPublishedProjects;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,6 +73,46 @@ public class LocalProjectsFragment extends Fragment {
     }
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
+
+        ArrayList<Project> dataPublished = new ArrayList<>();
+
+        HashMap<String, ArrayList<String[]>> aux = new HashMap<String, ArrayList<String[]>>();
+        aux.put("ScaffoldScene", new ArrayList<String[]>());
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+
+        ArrayList<Project> dataNotPublished = new ArrayList<>();
+
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+
+        myPublishedProjects =  (RecyclerView) getActivity().findViewById(R.id.publishedProjects);
+
+        PublishedProjectsAdapter publishedAdapter = new PublishedProjectsAdapter(dataPublished,getActivity());
+
+        NotPublishedProjectsAdapter notPublishedAdapter = new NotPublishedProjectsAdapter(dataNotPublished, getActivity());
+
+        myNotPublishedProjects = (RecyclerView) getActivity().findViewById(R.id.myProjects);
+
+        myPublishedProjects.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myNotPublishedProjects.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        myNotPublishedProjects.setAdapter(notPublishedAdapter);
+        myPublishedProjects.setAdapter(publishedAdapter);
 
     }
 }

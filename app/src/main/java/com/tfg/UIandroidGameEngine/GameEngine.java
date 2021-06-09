@@ -24,7 +24,7 @@ public class GameEngine {
 
     public boolean isInEditor = true;
 
-    private HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
+    public HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
 
     public Camera camera = new Camera();
 
@@ -176,5 +176,7 @@ public class GameEngine {
             //change pause button for restart button
 
     }
+
+
 
 }

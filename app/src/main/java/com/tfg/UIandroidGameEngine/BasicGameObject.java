@@ -111,11 +111,13 @@ public  class BasicGameObject  {
                 eventsTriggered.get(j).dispatchEvent(this);
             }
 
-            for (int k = 0; k < inputEventsReceived.size(); k ++){
-                inputEventsReceived.get(k).dispatchEvent(this);
+            int auxSize = inputEventsReceived.size();
+            for (int k = 0; k < auxSize; k ++){
+                //Execute and remove fiorst element to avoid arraayList dinamic size conflicts
+                inputEventsReceived.get(0).dispatchEvent(this);
+                inputEventsReceived.remove(0);
             }
 
-            inputEventsReceived.clear();
 
             for (int l = 0; l < collisionsReceived.size(); l++){
                collisionsReceived.get(l).dispatchEvent(this);

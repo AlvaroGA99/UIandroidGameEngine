@@ -47,9 +47,9 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
                        theGameEngine.lastTouched.y = event.getY();
                    }
                    theGameEngine.getTheInputManager().processInput(event);
-                       for(int i = 0 ; i < event.getPointerCount() ; i ++){
+                   if(theGameEngine.isInEditor) {
 
-                           if(theGameEngine.isInEditor) {
+                       for(int i = 0 ; i < event.getPointerCount() ; i ++) {
 
 
                                int topId = -1;
@@ -87,28 +87,41 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
                                    theGameEngine.lastTouched.x = event.getX();
                                    theGameEngine.lastTouched.y = event.getY();
                                }
-                           }else if(theGameEngine.isGameRunning){
-
-
-                                   for (int j = 0; j < theGameEngine.getObjectsInScene().size(); j++) {
-
-
-                                       if (event.getX(i) > theGameEngine.getObjectsInScene().get(j).position.x + theGameEngine.camera.getScreenSpaceX() - 25 * theGameEngine.getObjectsInScene().get(j).scale.x
-                                               && event.getX(i) < theGameEngine.getObjectsInScene().get(j).position.x + theGameEngine.camera.getScreenSpaceX() + 25 * theGameEngine.getObjectsInScene().get(j).scale.x
-                                               && event.getY(i) > theGameEngine.getObjectsInScene().get(j).position.y + theGameEngine.camera.getScreenSpaceY() - 25 * theGameEngine.getObjectsInScene().get(j).scale.y
-                                               && event.getY(i) < theGameEngine.getObjectsInScene().get(j).position.y + theGameEngine.camera.getScreenSpaceY() + 25 * theGameEngine.getObjectsInScene().get(j).scale.y) {
-
-
-                                           //theGameEngine.getObjectsInScene().get(j).eventsReceived.add(new OnClickEvent());
-
-                                            Toast.makeText(getContext(),"PULSADOOOOOOOOO",Toast.LENGTH_SHORT).show();
-
-                                       }
-                                   }
-
-
                            }
                        }
+
+
+                       else if(theGameEngine.isGameRunning){
+
+                        int auxIndex = -1;
+
+
+
+                        if(event.getActionMasked() == MotionEvent.ACTION_POINTER_UP || event.getActionMasked() == MotionEvent.ACTION_UP){
+
+                            auxIndex = event.getActionIndex();
+
+                            for (int j = 0; j < theGameEngine.getObjectsInScene().size(); j++) {
+
+                                if (event.getX(auxIndex) > theGameEngine.getObjectsInScene().get(j).position.x + theGameEngine.camera.getScreenSpaceX() - 25 * theGameEngine.getObjectsInScene().get(j).scale.x
+                                        && event.getX(auxIndex) < theGameEngine.getObjectsInScene().get(j).position.x + theGameEngine.camera.getScreenSpaceX() + 25 * theGameEngine.getObjectsInScene().get(j).scale.x
+                                        && event.getY(auxIndex) > theGameEngine.getObjectsInScene().get(j).position.y + theGameEngine.camera.getScreenSpaceY() - 25 * theGameEngine.getObjectsInScene().get(j).scale.y
+                                        && event.getY(auxIndex) < theGameEngine.getObjectsInScene().get(j).position.y + theGameEngine.camera.getScreenSpaceY() + 25 * theGameEngine.getObjectsInScene().get(j).scale.y) {
+
+
+                                    //theGameEngine.getObjectsInScene().get(j).eventsReceived.add(new OnClickEvent());
+                                    //Toast.makeText(getContext(),"EQWEQWEQWEQW" + auxIndex,Toast.LENGTH_SHORT).show();
+                                    theGameEngine.getObjectsInScene().get(j).inputEventsReceived.add(new OnClickEvent());
+                                    Toast.makeText(getContext(),"" +  theGameEngine.getObjectsInScene().get(j).actionHolder.onClickActions.size() ,Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        }
+
+
+
+
+                   }
 
 
                    //pasar datos al InputManager

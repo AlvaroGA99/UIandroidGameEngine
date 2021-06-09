@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DatabaseReference db;
+
 
 
     @Override
@@ -22,12 +22,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = FirebaseDatabase.getInstance().getReference();
+
         
         if (savedInstanceState == null) {
             FragmentManager fm = getSupportFragmentManager();
+            Toast.makeText(this, "SOY UN ASDXFASDASSDASD ", Toast.LENGTH_SHORT).show();
             fm.beginTransaction().add(R.id.container, new MainMenuFragment(),null)/*.add(newProjectFragment,null).hide(newProjectFragment).add(usersProjectFragment,null).hide(usersProjectFragment).add(localProjectFragment,null).hide(localProjectFragment)*/.commit();
         }
+
+
+
 
               }
 }
