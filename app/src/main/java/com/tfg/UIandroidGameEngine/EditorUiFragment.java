@@ -166,13 +166,15 @@ public class EditorUiFragment extends Fragment {
         eventsInObject.setLayoutManager(new LinearLayoutManager(getActivity()));
         scenes.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
 
+
+
         sa = new SceneListAdapter(theGameEngine.SceneHierarchyDescription);
 
-        //scenes.setAdapter(sa);
+        scenes.setAdapter(sa);
 
 
 
-        //theGameEngine.loadScene(sa.localDataSet.get(0));
+
 
         pointerToSelectedObject = theGameEngine.getObjectsInScene().get(0);
 
@@ -331,14 +333,35 @@ public class EditorUiFragment extends Fragment {
         });
         os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene());
 
-        /*sa.setOnClickListener(new View.OnClickListener(){
+        sa.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
+                theGameEngine.saveThisScene();
                 theGameEngine.loadScene(sa.localDataSet.get(scenes.getChildAdapterPosition(v)));
                 os.notifyDataSetChanged();
+
+
+                if(theGameEngine.getObjectsInScene().size() != 0){
+                    oc.localDataSet = theGameEngine.getObjectsInScene().get(0).components ;
+                    oe.updateLocalDataSet(theGameEngine.getObjectsInScene().get(0).actionHolder);
+                    pointerToSelectedObject =  theGameEngine.getObjectsInScene().get(0);
+                    scaleX.setText("X : " + pointerToSelectedObject.scale.x);
+                    scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
+                    rotation.setText("" + pointerToSelectedObject.rotation);
+
+                    focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
+                    theGameEngine.camera.fixedLookingPosition.x = theGameEngine.getObjectsInScene().get(0).position.x;
+                    theGameEngine.camera.fixedLookingPosition.y = theGameEngine.getObjectsInScene().get(0).position.y;
+                    oe.notifyDataSetChanged();
+                    oc.notifyDataSetChanged();
+                }
+
+
+
+
             }
-        });*/
+        });
 
         gravityComponent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -524,6 +547,10 @@ public class EditorUiFragment extends Fragment {
 
             }
         });
+        theGameEngine.saveThisScene();
+        theGameEngine.loadScene(sa.localDataSet.get(1));
+
+
 
         if(theGameEngine.mode == 0){
             parentActivity.findViewById(R.id.UI_CONTAINER).setVisibility(View.INVISIBLE);

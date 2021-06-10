@@ -38,7 +38,7 @@ public class GameEngine {
     public GameEngine(){
         //collisionQuadTree = new QuadTree(50,50, getObjectsInScene());
         addScene(theSceneManager.currentScene);
-
+        addScene("ScaffoldScene2");
 
     }
 
@@ -144,7 +144,7 @@ public class GameEngine {
     public void loadScene(String key){
 
             theSceneManager.loadScene(SceneHierarchyDescription.get(key));
-
+            theSceneManager.currentScene = key;
     }
 
     public void loadScene(){

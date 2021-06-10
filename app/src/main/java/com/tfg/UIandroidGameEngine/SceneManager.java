@@ -95,6 +95,7 @@ public class SceneManager {
            aux.sceneHierarchyID = objectsInCurrentScene.size();
            objectsInCurrentScene.add(aux);
        }
+
     }
 
 
