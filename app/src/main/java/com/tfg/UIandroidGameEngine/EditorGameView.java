@@ -47,7 +47,7 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
                        theGameEngine.lastTouched.y = event.getY();
                    }
                    theGameEngine.getTheInputManager().processInput(event);
-                   if(theGameEngine.isInEditor) {
+                   if(theGameEngine.isInEditor && theGameEngine.mode == 1) {
 
                        for(int i = 0 ; i < event.getPointerCount() ; i ++) {
 

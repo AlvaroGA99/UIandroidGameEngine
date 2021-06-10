@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,9 +36,11 @@ public class EditorUiFragment extends Fragment {
     private ObjectsInSceneAdapter os;
     private ComponentsInObjectAdapter oc;
     private EventsInObjectAdapter oe;
+    private SceneListAdapter sa ;
     private RecyclerView objectsInScene;
     private RecyclerView componentsInObject;
     private RecyclerView eventsInObject;
+    private RecyclerView scenes;
     private View selectComponent;
     private View selectObject;
     private Switch focusedByCamera;
@@ -104,7 +107,8 @@ public class EditorUiFragment extends Fragment {
         View resume = parentActivity.findViewById(R.id.resume);
         Button addComponent = (Button)parentActivity.findViewById(R.id.addComponent);
         Button addObject = (Button) parentActivity.findViewById(R.id.addObject);
-
+        Button publishInProject = (Button) parentActivity.findViewById(R.id.publishInEditor);
+        Button saveInEditor = (Button) parentActivity.findViewById(R.id.saveInEditor);
 
         View gravityComponent = parentActivity.findViewById(R.id.gravityComponent);
         View inputMovementPlatformerComponent = parentActivity.findViewById(R.id.inputMovementPlatformerComponent);
@@ -156,10 +160,21 @@ public class EditorUiFragment extends Fragment {
          objectsInScene = (RecyclerView) parentActivity.findViewById(R.id.objectsInCurrentScene);
          componentsInObject = (RecyclerView) parentActivity.findViewById(R.id.componentsInObject);
          eventsInObject = (RecyclerView) parentActivity.findViewById(R.id.eventsInObject);
+         scenes = (RecyclerView) parentActivity.findViewById(R.id.scenes);
         objectsInScene.setLayoutManager(new LinearLayoutManager(getActivity()));
         componentsInObject.setLayoutManager(new LinearLayoutManager(getActivity()));
         eventsInObject.setLayoutManager(new LinearLayoutManager(getActivity()));
+        scenes.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
 
+        sa = new SceneListAdapter(theGameEngine.SceneHierarchyDescription);
+
+        //scenes.setAdapter(sa);
+
+
+
+        //theGameEngine.loadScene(sa.localDataSet.get(0));
+
+        pointerToSelectedObject = theGameEngine.getObjectsInScene().get(0);
 
 
        /* ValueAnimator animation = ObjectAnimator.ofFloat(ObjectHierarchy, "translationX", -100f);
@@ -182,6 +197,7 @@ public class EditorUiFragment extends Fragment {
 
                 if(!inspectorReverse){
                     v.animate().translationX(-45);
+
 
                 }else{
                     v.animate().translationX(parentActivity.getWidth()/2  - 100);
@@ -213,7 +229,7 @@ public class EditorUiFragment extends Fragment {
         oc = new ComponentsInObjectAdapter(theGameEngine.getObjectsInScene().get(0).components);
         oe = new EventsInObjectAdapter(theGameEngine.getObjectsInScene().get(0).actionHolder,theGameEngine.getObjectsInScene());
 
-        pointerToSelectedObject = theGameEngine.getObjectsInScene().get(0);
+
         focusedByCamera = (Switch) parentActivity.findViewById(R.id.isFocusedByCamera);
         focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
 
@@ -315,6 +331,14 @@ public class EditorUiFragment extends Fragment {
         });
         os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene());
 
+        /*sa.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                theGameEngine.loadScene(sa.localDataSet.get(scenes.getChildAdapterPosition(v)));
+                os.notifyDataSetChanged();
+            }
+        });*/
 
         gravityComponent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -444,21 +468,29 @@ public class EditorUiFragment extends Fragment {
 
                         theGameEngine.isInEditor = true;
                         theGameEngine.loadScene();
-                        inspector.setVisibility(View.VISIBLE);
-                        ObjectHierarchy.setVisibility(View.VISIBLE);
 
-                        pointerToSelectedObject = theGameEngine.getObjectsInScene().get(previousSelectedId);
-                        oc.localDataSet = pointerToSelectedObject.components;
-                        oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
-                        oc.notifyDataSetChanged();
-                        oe.notifyDataSetChanged();
+                        if(theGameEngine.mode == 1){
+                            inspector.setVisibility(View.VISIBLE);
+                            ObjectHierarchy.setVisibility(View.VISIBLE);
+                            saveInEditor.setVisibility(View.VISIBLE);
+                            publishInProject.setVisibility(View.VISIBLE);
+                        }
 
-                        focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
-                        scaleX.setText("X : " + pointerToSelectedObject.scale.x);
-                        scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
-                        rotation.setText("" + pointerToSelectedObject.rotation);
 
-                        os.notifyDataSetChanged();
+                            //pointerToSelectedObject = theGameEngine.getObjectsInScene().get(previousSelectedId);
+                            oc.localDataSet = pointerToSelectedObject.components;
+                            oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+                            oc.notifyDataSetChanged();
+                            oe.notifyDataSetChanged();
+
+                            focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
+                            scaleX.setText("X : " + pointerToSelectedObject.scale.x);
+                            scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
+                            rotation.setText("" + pointerToSelectedObject.rotation);
+
+                            os.notifyDataSetChanged();
+
+
 
                         //poner boton de pausa
                     }
@@ -470,11 +502,14 @@ public class EditorUiFragment extends Fragment {
         resume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(theGameEngine.isInEditor){
-                    previousSelectedId = pointerToSelectedObject.sceneHierarchyID;
+                    //previousSelectedId = pointerToSelectedObject.sceneHierarchyID;
                     theGameEngine.saveThisScene();
                     inspector.setVisibility(View.INVISIBLE);
                     ObjectHierarchy.setVisibility(View.INVISIBLE);
+                    saveInEditor.setVisibility(View.INVISIBLE);
+                    publishInProject.setVisibility(View.INVISIBLE);
 
                     theGameEngine.isInEditor = false;
 
@@ -490,15 +525,18 @@ public class EditorUiFragment extends Fragment {
             }
         });
 
+        if(theGameEngine.mode == 0){
+            parentActivity.findViewById(R.id.UI_CONTAINER).setVisibility(View.INVISIBLE);
+            saveInEditor.setVisibility(View.INVISIBLE);
+            publishInProject.setVisibility(View.INVISIBLE);
+
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if(parentActivity.mode == 0){
-            parentActivity.findViewById(R.id.UI_CONTAINER).setVisibility(View.INVISIBLE);
-            theGameEngine.isInEditor = false;
-        }
+
         //theGameEngine.addGameObject();
         //os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
 

@@ -38,14 +38,14 @@ public class EditorActivity extends AppCompatActivity   {
         if(theGameEngine.getObjectsInScene().size() == 0){
            // Toast.makeText(getApplicationContext(),"CReación", Toast.LENGTH_SHORT).show();
             theGameEngine.setContext(getApplicationContext());
-            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"uwuwuwu",false);
+            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Objeto1",false);
 
             aux.addComponent("GravityComponent");
             aux.addComponent("GroundColliderComponent");
             aux.preUpdateRotation = 45.0f;
             aux.rotation = 45.0f;
             theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth())/2 + 100, (float)(getHeight())/2,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"wiwiwiw",false);
+            aux = new BasicGameObject((float)(getWidth())/2 + 100, (float)(getHeight())/2,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Objeto2",false);
             aux.addComponent("GravityComponent");
             aux.addComponent("GroundColliderComponent");
             theGameEngine.addGameObject(aux);
@@ -65,7 +65,12 @@ public class EditorActivity extends AppCompatActivity   {
 
 
         }
-        saveProject();
+        if (mode == 0){
+
+            theGameEngine.mode = mode;
+
+        }
+        //saveProject();
         //if (savedInstanceState == null) {
              fm = getSupportFragmentManager();
 
@@ -74,10 +79,7 @@ public class EditorActivity extends AppCompatActivity   {
         //}
 
 
-        //if (mode == 0){
 
-
-        //}
         // View decorview = getWindow().getDecorView();
          //decorview.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 

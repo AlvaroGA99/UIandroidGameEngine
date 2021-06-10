@@ -24,6 +24,8 @@ public class GameEngine {
 
     public boolean isInEditor = true;
 
+    public int mode = 1;
+
     public HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
 
     public Camera camera = new Camera();

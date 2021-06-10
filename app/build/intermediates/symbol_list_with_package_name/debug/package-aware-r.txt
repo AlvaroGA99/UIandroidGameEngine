@@ -1729,6 +1729,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable pausebutton_drawable
 drawable playbutton_drawable
+drawable roundborder_black_drawable
 drawable roundborder_drawable
 drawable roundborder_yellow_drawable
 drawable sprite
@@ -2077,6 +2078,7 @@ id progress_circular
 id progress_horizontal
 id projectDescription
 id projectName
+id publishInEditor
 id publishedProjects
 id radio
 id ratio
@@ -2089,6 +2091,7 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
+id saveInEditor
 id saveOrPublishButton
 id save_non_transition_alpha
 id save_overlay_view
@@ -2209,8 +2212,6 @@ id up
 id useLogo
 id usersProjects
 id usersprojects
-id view2
-id view3
 id view_offset_helper
 id visible
 id wide
