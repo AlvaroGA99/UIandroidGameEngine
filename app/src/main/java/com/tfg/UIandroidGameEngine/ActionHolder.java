@@ -10,7 +10,9 @@ public class ActionHolder {
 
     public ArrayList<ArrayList<Action>>  collisionActions = new ArrayList<ArrayList<Action>>();
 
+    public ArrayList<Action> startSceneActions = new ArrayList<Action>();
 
+    public ArrayList<Action> updateActions = new ArrayList<Action>();
 
     public ActionHolder(){
 

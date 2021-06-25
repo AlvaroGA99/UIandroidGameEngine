@@ -83,8 +83,8 @@ public class NotPublishedProjectsAdapter extends RecyclerView.Adapter<NotPublish
                 mainActivity.startActivity(intent);
             }
         });
-        holder.getProjectDescription().setText("Usuario : " + localDataSet.get(position).getUser() + "                              Tipo de proyecto : "+ localDataSet.get(position).getProject().getProjectType());
-        holder.getProjectName().setText("" + localDataSet.get(position).getProject().getTitle());
+        holder.getProjectDescription().setText("Usuario : " + localDataSet.get(position).getUser() + "                              Tipo de proyecto : "+ localDataSet.get(position).getType());
+        holder.getProjectName().setText("" + localDataSet.get(position).getName());
         holder.getSaveOrPublishButton().setText("Publicar");
         holder.getSaveOrPublishButton().setOnClickListener(new View.OnClickListener() {
             @Override

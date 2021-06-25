@@ -1,20 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="80dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/backbutton_np"
+    <LinearLayout
+        android:id="@+id/plantillas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/roundborder_drawable"
-        android:layout_weight="33"
-        android:text="Atrás" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/roundborder_black_drawable"
+            android:gravity="center"
+            android:text="ELIGE UNA PLANTILLA PARA TU PROYECTO"
+            android:textAlignment="gravity"
+            android:textSize="30sp"
+            android:textStyle="bold|italic"
+            tools:layout_weight="1" />
+
+        <Button
+            android:id="@+id/plantillaPlataformas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/roundborder_drawable"
+            android:text="Plantilla de Plataformas"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/backbutton_np2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/roundborder_drawable"
+            android:text="Plantilla de Matamarcianos"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/backbutton_np3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_weight="2"
+            android:background="@drawable/roundborder_drawable"
+            android:text="PLANTILLA DE ..."
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/crearProyecto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/tipoProyecto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundborder_drawable"
+            android:gravity="center"
+            android:text="Tipo de proyecto :"
+            android:textSize="36sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonCrear"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="Crear"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:layout_weight="3"
+                android:background="@drawable/text_view_drawable">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextProyectName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:hint="Nuevo Proyecto"
+                    android:textAlignment="gravity"
+                    android:textSize="30sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

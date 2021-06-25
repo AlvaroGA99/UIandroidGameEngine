@@ -3,6 +3,7 @@ package com.tfg.UIandroidGameEngine;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,13 @@ public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAd
 
     private ArrayList<BasicGameObject> localDataSet;
 
+    private GameEngine theGameEngine ;
+
     private View.OnClickListener listener;
+
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -23,8 +30,11 @@ public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAd
         }
     }
 
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private final TextView objectName;
+
 
         public ViewHolder(View view){
             super(view);
@@ -35,10 +45,12 @@ public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAd
         public TextView getTextView(){
             return objectName;
         }
+
     }
 
-    public ObjectsInSceneAdapter(ArrayList<BasicGameObject> dataSet){
+    public ObjectsInSceneAdapter(ArrayList<BasicGameObject> dataSet,GameEngine theGameEngine){
         this.localDataSet = dataSet;
+        this.theGameEngine = theGameEngine;
     }
 
     @NonNull
@@ -55,6 +67,8 @@ public class ObjectsInSceneAdapter extends RecyclerView.Adapter<ObjectsInSceneAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getTextView().setText("" + localDataSet.get(position).name);
+
+
     }
 
 

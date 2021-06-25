@@ -11,7 +11,7 @@
         android:padding="12dp"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:background="@drawable/roundborder_yellow_drawable"
+        android:background="@drawable/elements_drawable"
 
         android:textColor="@color/black"
         />

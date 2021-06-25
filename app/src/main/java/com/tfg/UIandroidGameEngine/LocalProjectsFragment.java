@@ -2,6 +2,7 @@ package com.tfg.UIandroidGameEngine;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
@@ -28,6 +38,8 @@ public class LocalProjectsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView myPublishedProjects;
     private RecyclerView myNotPublishedProjects;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    public DatabaseReference myRef = database.getReference("users/admin123");
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,33 +90,45 @@ public class LocalProjectsFragment extends Fragment {
 
         HashMap<String, ArrayList<String[]>> aux = new HashMap<String, ArrayList<String[]>>();
         aux.put("ScaffoldScene", new ArrayList<String[]>());
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        dataPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+
 
         ArrayList<Project> dataNotPublished = new ArrayList<>();
 
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
-        dataNotPublished.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",false, aux)));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
 
         myPublishedProjects =  (RecyclerView) getActivity().findViewById(R.id.publishedProjects);
 
         PublishedProjectsAdapter publishedAdapter = new PublishedProjectsAdapter(dataPublished,getActivity());
 
         NotPublishedProjectsAdapter notPublishedAdapter = new NotPublishedProjectsAdapter(dataNotPublished, getActivity());
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         myNotPublishedProjects = (RecyclerView) getActivity().findViewById(R.id.myProjects);
 
@@ -113,6 +137,33 @@ public class LocalProjectsFragment extends Fragment {
 
         myNotPublishedProjects.setAdapter(notPublishedAdapter);
         myPublishedProjects.setAdapter(publishedAdapter);
+
+
+        String[] data = {"Publicados", "No Publicados"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),R.layout.spinner_published_layout ,data );
+
+        Spinner spinner = (Spinner) getActivity().findViewById(R.id.spinner);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(0);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position  == 0){
+                    myPublishedProjects.setVisibility(View.VISIBLE);
+                    myNotPublishedProjects.setVisibility(View.INVISIBLE);
+                }else{
+                    myPublishedProjects.setVisibility(View.INVISIBLE);
+                    myNotPublishedProjects.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
     }
 }

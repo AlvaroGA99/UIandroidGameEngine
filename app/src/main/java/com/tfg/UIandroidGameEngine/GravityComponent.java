@@ -14,7 +14,7 @@ public class GravityComponent extends Component{
     public void process(long elapsedTime){
 
         container.speed += elapsedTime;
-        container.preUpdatePosition.y += container.speed*elapsedTime*0.001;
+        container.preUpdatePosition.y += container.speed*elapsedTime*0.001*container.invertMovementY;
 
 
     }

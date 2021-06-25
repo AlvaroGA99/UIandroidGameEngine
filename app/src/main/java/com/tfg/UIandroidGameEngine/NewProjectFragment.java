@@ -10,7 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,10 @@ public class NewProjectFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    public DatabaseReference myRef = database.getReference("users/admin123");
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -69,18 +82,55 @@ public class NewProjectFragment extends Fragment {
 
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
-        Button button = (Button) getActivity().findViewById(R.id.backbutton_np);
-        button.setOnClickListener(new View.OnClickListener(){
+        MainActivity ma = (MainActivity) getActivity();
+        LinearLayout crearProyecto = (LinearLayout) ma.findViewById(R.id.crearProyecto);
+        LinearLayout plantillas = (LinearLayout) ma.findViewById(R.id.plantillas) ;
+        TextView tipoProyecto = (TextView) ma.findViewById(R.id.tipoProyecto);
+        TextInputEditText ti = (TextInputEditText) ma.findViewById(R.id.editTextProyectName);
+        ma.crearProyecto =  crearProyecto;
+        ma.plantillas = plantillas;
+        Button crear = (Button) getActivity().findViewById(R.id.buttonCrear);
+        crear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), EditorActivity.class);
+                DatabaseReference a = myRef.push();
+                String key = a.getKey();
+                a.child("project_type").setValue("Plataformas");
+                a.child("published").setValue(false);
+                a.child("title").setValue(ti.getText().toString());
+
+                intent.putExtra("KEY" , key );
                 startActivity(intent);
 
             }
 
 
         });
+
+
+
+
+
+
+
+
+
+
+
+        Button plantillaPlataformas = (Button) ma.findViewById(R.id.plantillaPlataformas);
+        plantillaPlataformas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tipoProyecto.setText("Tipo de Proyecto : Plataformas");
+                crearProyecto.setVisibility(View.VISIBLE);
+                plantillas.setVisibility(View.INVISIBLE);
+
+            }
+        });
     }
+
+
 
 
 }

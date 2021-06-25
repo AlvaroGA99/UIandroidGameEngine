@@ -50,6 +50,7 @@ public class SceneListAdapter extends  RecyclerView.Adapter<SceneListAdapter.Vie
         for(String key : dataSet.keySet()){
             localDataSet.add(key);
         }
+        notifyDataSetChanged();
     }
 
     @NonNull

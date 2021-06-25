@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
@@ -88,8 +88,8 @@ public class PublishedProjectsAdapter extends  RecyclerView.Adapter<PublishedPro
                 mainActivity.startActivity(intent);
             }
         });
-        holder.getProjectDescription().setText("Usuario : " + localDataSet.get(position).getUser() + "                              Tipo de proyecto : "+ localDataSet.get(position).getProject().getProjectType());
-        holder.getProjectName().setText("" + localDataSet.get(position).getProject().getTitle());
+        holder.getProjectDescription().setText("Usuario : " + localDataSet.get(position).getUser() + "                              Tipo de proyecto : "+ localDataSet.get(position).getType());
+        holder.getProjectName().setText("" + localDataSet.get(position).getName());
         holder.getSaveOrPublishButton().setText("Guardar en mis proyectos");
         holder.getSaveOrPublishButton().setOnClickListener(new View.OnClickListener() {
             @Override

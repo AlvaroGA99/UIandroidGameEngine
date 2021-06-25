@@ -14,7 +14,7 @@ public class ProjectData {
 
     }
 
-    public ProjectData (String title, String projectType, boolean published, HashMap<String,ArrayList<String[]>> scenes){
+    public ProjectData (String title, String projectType, boolean published){
         this.title = title;
         this.projectType = projectType;
         this.published = published;

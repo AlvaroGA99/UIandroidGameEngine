@@ -1,10 +1,12 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.VectorEnabledTintResources;
 
@@ -18,6 +20,10 @@ public  class BasicGameObject  {
         public Vector scale;
         public float rotation;
 
+        public Vector startPosition;
+        int invertMovementX;
+        short invertMovementY;
+
         public boolean isFocusedByCamera ;
 
         public Vector preUpdatePosition;
@@ -29,6 +35,7 @@ public  class BasicGameObject  {
         public InputManager inputManager;
 
         public float speed ;
+        public float speedx;
 
         public int sceneHierarchyID;
 
@@ -58,6 +65,9 @@ public  class BasicGameObject  {
                      break;
 
              }
+             invertMovementX = 1;
+             invertMovementY = 1;
+             startPosition = new Vector(0.0f,0.0f);
             speed = 0;
             this.isFocusedByCamera = isFocusedByCamera;
            position = new Vector(posX,posY);
@@ -84,19 +94,85 @@ public  class BasicGameObject  {
                  case "GroundColliderComponent" :
                      components.add(new GroundColliderComponent(this));
                      break;
+                 case "JumpComponent":
+                     components.add(new JumpComponent(this));
+                     break;
              }
         }
 
         public String[] castObjectToDescription(){
              String aux = "";
              aux += "" + name + "_"+ position.x + "_" + position.y + "_" + scale.x + "_" + scale.y + "_" + rotation + "_" + spriteType + "_" + isFocusedByCamera;
+                aux += "_" + actionHolder.collisionActions.size();
              for(int i = 0; i < components.size(); i ++){
                  aux += "_" + components.get(i).name;
              }
+
+             //ACCIONES ONCLICK
+             for(int i = 0;i < actionHolder.onClickActions.size(); i ++){
+
+                 aux += "_OnClickEvent/" + actionHolder.onClickActions.get(i).name;
+
+             }
+             //A
+
+            for(int i = 0;i < actionHolder.startSceneActions.size(); i ++){
+
+                aux += "_OnStartSceneEvent/" + actionHolder.startSceneActions.get(i).name;
+
+            }
+
+            for(int i = 0;i < actionHolder.updateActions.size(); i ++){
+
+                aux += "_OnEachSecondEvent/" + actionHolder.updateActions.get(i).name;
+
+            }
+
+
+            for(int i = 0;i < actionHolder.collisionActions.size(); i ++){
+                for(int j = 0; j < actionHolder.collisionActions.get(i).size(); i ++){
+
+                    aux += "_OnCollisionEvent/" + i + "/" + actionHolder.collisionActions.get(i).get(j).name;
+
+                }
+
+
+            }
+
              return aux.split("_");
         }
 
-        public void draw(Canvas renderCanvas,Camera camera){
+    public void addActionHolderFromDescription(String[] objectDescription, GameEngine theGameEngine){
+
+             String[] auxSplit;
+
+             for (int i = 8 + components.size() - 1; i < objectDescription.length; i ++){
+                 auxSplit = objectDescription[i].split("/");
+                 switch(auxSplit[0]){
+                     case "OnClickEvent" : actionHolder.onClickActions.add(castNameToAction(auxSplit[1],theGameEngine));
+                     break;
+                     case "OnCollisionEvent" : actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(castNameToAction(auxSplit[2],theGameEngine));
+                 }
+             }
+
+    }
+
+    public Action castNameToAction(String name,GameEngine theGameEngine){
+
+        switch(name){
+
+
+            case "DebugAction": return new DebugAction(this, theGameEngine);
+
+
+        }
+
+        return new DebugAction(this,theGameEngine);
+
+    }
+
+
+    public void draw(Canvas renderCanvas,Camera camera){
            sprite.draw( position,  scale,  rotation,renderCanvas, camera);
 
         }
@@ -114,6 +190,8 @@ public  class BasicGameObject  {
             int auxSize = inputEventsReceived.size();
             for (int k = 0; k < auxSize; k ++){
                 //Execute and remove fiorst element to avoid arraayList dinamic size conflicts
+
+                //System.exit(-1);
                 inputEventsReceived.get(0).dispatchEvent(this);
                 inputEventsReceived.remove(0);
             }
@@ -122,6 +200,9 @@ public  class BasicGameObject  {
             for (int l = 0; l < collisionsReceived.size(); l++){
                collisionsReceived.get(l).dispatchEvent(this);
             }
+
+
+
 
             collisionsReceived.clear();
 

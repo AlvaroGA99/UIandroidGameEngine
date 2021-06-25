@@ -1,0 +1,4 @@
+#Mon Jun 21 16:26:01 CEST 2021
+base.0=D\:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

@@ -89,15 +89,15 @@ public class UsersProjectFragment extends Fragment {
         ArrayList<Project> projectsDataset = new ArrayList<Project>();
         HashMap<String, ArrayList<String[]>> aux = new HashMap<String, ArrayList<String[]>>();
         aux.put("ScaffoldScene", new ArrayList<String[]>());
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
-        projectsDataset.add(new Project("p1","user1",new ProjectData("Proyecto de Prueba","Plataformas",true, aux)));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        projectsDataset.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
 
 
         PublishedProjectsAdapter  adapter = new PublishedProjectsAdapter(projectsDataset,getActivity());

@@ -13,7 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,20 +108,39 @@
                     android:layout_marginBottom="20dp"
                     android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/scenes"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
-                    </androidx.recyclerview.widget.RecyclerView>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/scenes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="horizontal"
+                            tools:layout_marginRight="25dp">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                        <Button
+                            android:id="@+id/addScene"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/roundborder_yellow_drawable"
+                            android:text="Añadir Escena"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/objectsInCurrentScene"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="11"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
                         android:visibility="visible">
 
                     </androidx.recyclerview.widget.RecyclerView>
@@ -129,7 +149,7 @@
                     <Button
                         android:id="@+id/addObject"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="100dp"
                         android:layout_marginRight="100dp"
                         android:layout_marginBottom="10dp"
@@ -173,6 +193,32 @@
                         android:layout_marginTop="20dp"
                         android:orientation="vertical">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/nameOfObjectInInspector"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="18dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="TextView"
+                                android:textAlignment="gravity"
+                                android:textSize="36sp"
+                                android:textStyle="bold|italic" />
+
+                            <Button
+                                android:id="@+id/deleteSelectedObject"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/roundborder_red_drawable"
+                                android:text="Eliminar este objeto" />
+                        </LinearLayout>
+
                         <TextView
                             android:id="@+id/Componentes"
                             android:layout_width="match_parent"
@@ -191,7 +237,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/componentsInObject"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="40dp">
 
                         </androidx.recyclerview.widget.RecyclerView>
@@ -203,7 +249,7 @@
                             android:layout_marginLeft="100dp"
                             android:layout_marginRight="100dp"
                             android:layout_marginBottom="40dp"
-                            android:background="@drawable/add_component_event_button"
+                            android:background="@drawable/roundborder_yellow_drawable"
                             android:text="Añadir componente"
                             android:textColor="@color/black" />
 
@@ -226,7 +272,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/eventsInObject"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="40dp">
 
                         </androidx.recyclerview.widget.RecyclerView>
@@ -238,7 +284,7 @@
                             android:layout_marginLeft="100dp"
                             android:layout_marginRight="100dp"
                             android:layout_marginBottom="40dp"
-                            android:background="@drawable/add_component_event_button"
+                            android:background="@drawable/roundborder_yellow_drawable"
                             android:text="Añadir evento"
                             android:textColor="@color/black" />
 
@@ -350,7 +396,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/Rotacion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
@@ -455,6 +501,64 @@
                 android:textAlignment="center"
 
                 android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/jumpComponent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="\n\nJumpComponent\n\n"
+                android:textAlignment="center"
+
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/colliderComponent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="\n\nColliderComponent\n\n"
+                android:textAlignment="center"
+
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/xAutoMovementComponent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="\n\nXAutoMoventComponent\n\n"
+                android:textAlignment="center"
+
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/yAutoMovementComponent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="\n\nYAutoMoventComponent\n\n"
+                android:textAlignment="center"
+
+                android:textColor="@color/black" />
+
+
+            <TextView
+                android:id="@+id/dragableComponent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="\n\nDragableComponent\n\n"
+                android:textAlignment="center"
+
+                android:textColor="@color/black" />
+
+
         </LinearLayout>
     </ScrollView>
 
@@ -529,5 +633,143 @@
 
 
     </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/selectEventToAdd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/roundborder_drawable"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/OnClickEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/add_component_event_button"
+                android:gravity="center"
+                android:text="@string/english_OnClickEvent"
+                android:textAlignment="gravity"
+                android:textColor="@color/black" />
+
+
+            <TextView
+                android:id="@+id/OnStartSceneEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/add_component_event_button"
+                android:gravity="center"
+                android:text="OnStartSceneEvent"
+                android:textAlignment="gravity"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/OnEachSecondEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/add_component_event_button"
+                android:gravity="center"
+                android:text="OnEachSecondEvent"
+                android:textAlignment="gravity"
+                android:textColor="@color/black" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/collisionsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/selectVisual"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/previousVisual"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="Anterior"
+                android:textColor="@color/black"
+                android:textSize="36sp" />
+
+            <View
+                android:id="@+id/selectorColor"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="50dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/nextColor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="100dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:text="Siguiente"
+                android:textColor="@color/black"
+                android:textSize="36sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/aceptarVisual"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="2"
+            android:background="@drawable/roundborder_yellow_drawable"
+            android:text="Aceptar"
+            android:textColor="@color/black"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/selectActionToAdd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/roundborder_drawable"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/DebugAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundborder_yellow_drawable"
+                android:gravity="center"
+                android:text="\n\nDebugAction\n\n"
+                android:textAlignment="gravity"
+                android:textColor="@color/black" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

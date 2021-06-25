@@ -28,9 +28,17 @@ public class EventsInObjectAdapter extends RecyclerView.Adapter<EventsInObjectAd
             localDataSet.add("OnClick Event | " + actionHolder.onClickActions.get(i).name);
         }
 
+        for(int i = 0; i < actionHolder.updateActions.size(); i++){
+            localDataSet.add("OnEachSecond Event | " + actionHolder.updateActions.get(i).name);
+        }
+
+        for(int i = 0; i < actionHolder.startSceneActions.size(); i++){
+            localDataSet.add("OnStartScene Event | " + actionHolder.startSceneActions.get(i).name);
+        }
+
         for(int i = 0  ; i < actionHolder.collisionActions.size(); i++){
             for (int j = 0; j < actionHolder.collisionActions.get(i).size(); j++){
-                localDataSet.add("Collision with " + objectsInScene.get(i).name +  " (ID : " + i + ") | " + actionHolder.collisionActions.get(i).get(j));
+                localDataSet.add("Collision with " + objectsInScene.get(i).name +  " (ID : " + i + ") | " + actionHolder.collisionActions.get(i).get(j).name);
             }
 
         }
@@ -49,12 +57,21 @@ public class EventsInObjectAdapter extends RecyclerView.Adapter<EventsInObjectAd
             localDataSet.add("OnClick Event | " + actionHolder.onClickActions.get(i).name);
         }
 
+        for(int i = 0; i < actionHolder.updateActions.size(); i++){
+            localDataSet.add("OnEachSecond Event | " + actionHolder.updateActions.get(i).name);
+        }
+
+        for(int i = 0; i < actionHolder.startSceneActions.size(); i++){
+            localDataSet.add("OnStartScene Event | " + actionHolder.startSceneActions.get(i).name);
+        }
+
         for(int i = 0  ; i < actionHolder.collisionActions.size(); i++){
             for (int j = 0; j < actionHolder.collisionActions.get(i).size(); j++){
                 localDataSet.add("Collision with " + objectsInScene.get(i).name +  " (ID : " + i + ") | " + actionHolder.collisionActions.get(i).get(j));
             }
 
         }
+        notifyDataSetChanged();;
     }
 
 

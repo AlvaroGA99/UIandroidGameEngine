@@ -1,69 +1,109 @@
 package com.tfg.UIandroidGameEngine;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Set;
 
 public class EditorActivity extends AppCompatActivity   {
 
    public FragmentManager fm;
-   public DatabaseReference db ;
    public GameEngine theGameEngine = new GameEngine();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    public DatabaseReference myRef = database.getReference("users/admin123");
    private EditorGameSurfaceFragment f1 = EditorGameSurfaceFragment.newInstance(theGameEngine);
     private EditorUiFragment f2 = EditorUiFragment.newInstance(theGameEngine);
     public int mode ;
+    public String key;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor/*new EditorGameView(this)*/);
-        db = FirebaseDatabase.getInstance().getReference();
+
+
         mode = getIntent().getIntExtra("MODE",1);
+        key = getIntent().getStringExtra("KEY");
         if(theGameEngine.getObjectsInScene().size() == 0){
            // Toast.makeText(getApplicationContext(),"CReación", Toast.LENGTH_SHORT).show();
             theGameEngine.setContext(getApplicationContext());
-            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Objeto1",false);
+            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Meta",false);
 
-            aux.addComponent("GravityComponent");
-            aux.addComponent("GroundColliderComponent");
+            //aux.addComponent("GravityComponent");
+            //aux.addComponent("InputMovementPlatformerComponent");
+            //aux.addComponent("GroundColliderComponent");
             aux.preUpdateRotation = 45.0f;
             aux.rotation = 45.0f;
             theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth())/2 + 100, (float)(getHeight())/2,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Objeto2",false);
-            aux.addComponent("GravityComponent");
-            aux.addComponent("GroundColliderComponent");
+            aux = new BasicGameObject((float)(getWidth())/2 + 100, (float)(getHeight())/2,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Plataforma1",false);
+            aux.scale.x = 10;
+            aux.preUpdateScale.x = 10;
+            aux.scale.y = 5;
+            aux.preUpdateScale.y = 5;
+            //aux.addComponent("GravityComponent");
+           // aux.addComponent("GroundColliderComponent");
+            aux.addComponent(new ColliderComponent(aux, theGameEngine));
             theGameEngine.addGameObject(aux);
-            aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,2,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Player",true);
+            aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2 + 100,2,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Player",true);
             aux.actionHolder.onClickActions.add(new DebugAction(aux,theGameEngine));
 
+            //Toast.makeText(getApplicationContext(),"Acciones par el 1 : " + aux.actionHolder.collisionActions.size(),Toast.LENGTH_SHORT).show();
             aux.preUpdateScale.x = 3;
             aux.scale.x = 3;
             aux.preUpdateScale.y = 3;
             aux.scale.y = 3;
             aux.addComponent("InputMovementPlatformerComponent");
-            aux.addComponent("GravityComponent");
-            aux.addComponent("GroundColliderComponent");
+           aux.addComponent("GravityComponent");
+            //aux.addComponent("GroundColliderComponent");
+             aux.addComponent("JumpComponent");
+
             aux.preUpdateRotation = 45.0f;
             aux.rotation = 45.0f;
             theGameEngine.addGameObject(aux);
+            aux.actionHolder.collisionActions.get(0).add(new DebugAction(aux,theGameEngine));
 
 
+
+            aux = new BasicGameObject((float)(getWidth())/2 + 300, (float)(getHeight())/2 + 10,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Plataforma2",false);
+            aux.scale.x = 10;
+            aux.preUpdateScale.x = 10;
+            aux.scale.y = 5;
+            aux.preUpdateScale.y = 5;
+            //aux.addComponent("GravityComponent");
+            // aux.addComponent("GroundColliderComponent");
+            aux.addComponent(new ColliderComponent(aux, theGameEngine));
+            theGameEngine.addGameObject(aux);
+
+
+            aux = new BasicGameObject((float)(getWidth())/2 + 800, (float)(getHeight())/2 + 40 ,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Plataforma3",false);
+            aux.scale.x = 10;
+            aux.preUpdateScale.x = 10;
+            aux.scale.y = 5;
+            aux.preUpdateScale.y = 5;
+            //aux.addComponent("GravityComponent");
+            // aux.addComponent("GroundColliderComponent");
+            aux.addComponent(new ColliderComponent(aux, theGameEngine));
+            theGameEngine.addGameObject(aux);
+
+
+            aux = new BasicGameObject((float)(getWidth())/2 + 1200, (float)(getHeight())/2 + 60,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Plataforma4",false);
+            aux.scale.x = 10;
+            aux.preUpdateScale.x = 10;
+            aux.scale.y = 5;
+            aux.preUpdateScale.y = 5;
+            //aux.addComponent("GravityComponent");
+            // aux.addComponent("GroundColliderComponent");
+            aux.addComponent(new ColliderComponent(aux, theGameEngine));
+            theGameEngine.addGameObject(aux);
         }
         if (mode == 0){
 
@@ -103,11 +143,21 @@ public class EditorActivity extends AppCompatActivity   {
         return dp.widthPixels;
     }
 
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
+
+
+    }
+
     public void saveProject(){
+
             //Button save = (Button) findViewById();
            // save.setClickable(false);
             //findViewById() ponemos a false
-            db.child("users/admin123/idofproject1").child("scenes").setValue(theGameEngine.SceneHierarchyDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+            myRef.child("users/admin123/idofproject1").child("scenes").setValue(theGameEngine.SceneHierarchyDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     //save.setClickable(true);
@@ -125,7 +175,7 @@ public class EditorActivity extends AppCompatActivity   {
     public void publishProject(){
         //Button publish = (Button) findViewById();
         //publish.setClickable(false);
-        db.child("published").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+        myRef.child("published").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                // publish.setClickable(true);

@@ -1044,6 +1044,8 @@ color dim_foreground_disabled_material_dark
 color dim_foreground_disabled_material_light
 color dim_foreground_material_dark
 color dim_foreground_material_light
+color elements2UI
+color elementsUI
 color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
@@ -1652,6 +1654,7 @@ drawable abc_vector_test
 drawable add_component_event_button
 drawable avd_hide_password
 drawable avd_show_password
+drawable background1
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -1685,6 +1688,8 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable elements2_drawable
+drawable elements_drawable
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_clock_black_24dp
@@ -1731,6 +1736,7 @@ drawable pausebutton_drawable
 drawable playbutton_drawable
 drawable roundborder_black_drawable
 drawable roundborder_drawable
+drawable roundborder_red_drawable
 drawable roundborder_yellow_drawable
 drawable sprite
 drawable test_custom_background
@@ -1742,10 +1748,15 @@ id BOTTOM_END
 id BOTTOM_START
 id CTRL
 id Componentes
+id DebugAction
 id Escala
 id FUNCTION
 id META
 id NO_DEBUG
+id OnClickEvent
+id OnEachSecondEvent
+id OnStartSceneEvent
+id Rotacion
 id SHIFT
 id SHOW_ALL
 id SHOW_PATH
@@ -1788,6 +1799,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id aceptarVisual
 id action0
 id action_bar
 id action_bar_activity_content
@@ -1814,6 +1826,7 @@ id addComponent
 id addEvent
 id addObject
 id addRectangle
+id addScene
 id addSprite
 id adjust_height
 id adjust_width
@@ -1832,7 +1845,8 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
-id backbutton_np
+id backbutton_np2
+id backbutton_np3
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -1840,6 +1854,7 @@ id beginning
 id blocking
 id bottom
 id bounce
+id buttonCrear
 id buttonPanel
 id cache_measures
 id cancel_action
@@ -1863,6 +1878,8 @@ id clip_horizontal
 id clip_vertical
 id clockwise
 id collapseActionView
+id colliderComponent
+id collisionsList
 id componentName
 id componentsInObject
 id confirm_button
@@ -1873,6 +1890,7 @@ id contiguous
 id coordinator
 id cos
 id counterclockwise
+id crearProyecto
 id custom
 id customPanel
 id cut
@@ -1882,6 +1900,7 @@ id decelerate
 id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
+id deleteSelectedObject
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -1905,10 +1924,12 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
+id dragableComponent
 id dropdown_menu
 id easeIn
 id easeInOut
 id easeOut
+id editTextProyectName
 id edit_query
 id editorContainer
 id elastic
@@ -1968,6 +1989,7 @@ id inward
 id isFocusedByCamera
 id italic
 id item_touch_helper_previous_elevation
+id jumpComponent
 id jumpToEnd
 id jumpToStart
 id labelGroup
@@ -2040,9 +2062,11 @@ id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
 id myProjects
+id nameOfObjectInInspector
 id navigation_header_container
 id never
 id newproject
+id nextColor
 id noScroll
 id none
 id normal
@@ -2052,6 +2076,7 @@ id notification_main_column_container
 id objectHierarchy
 id objectHierarchyStructure
 id objectId
+id objectIdForCollision
 id objectProperties
 id objectsInCurrentScene
 id off
@@ -2071,9 +2096,12 @@ id pause
 id peekHeight
 id percent
 id pin
+id plantillaPlataformas
+id plantillas
 id playOrOpenButton
 id position
 id postLayout
+id previousVisual
 id progress_circular
 id progress_horizontal
 id projectDescription
@@ -2115,11 +2143,15 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id selectActionToAdd
 id selectComponentToAdd
+id selectEventToAdd
 id selectObjectToAdd
+id selectVisual
 id select_dialog_listview
 id selected
 id selection_type
+id selectorColor
 id shortcut
 id showCustom
 id showHome
@@ -2133,6 +2165,7 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
+id spinner
 id spline
 id split_action_bar
 id spread
@@ -2170,13 +2203,11 @@ id text
 id text2
 id textContainer
 id textEnd
-id textNotPublished
-id textPublished
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
-id textView3
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -2190,6 +2221,7 @@ id textoEscalaX
 id textoEscalaY
 id textoRotacion
 id time
+id tipoProyecto
 id title
 id titleDividerNoCustom
 id title_template
@@ -2219,6 +2251,8 @@ id withText
 id withinBounds
 id wrap
 id wrap_content
+id xAutoMovementComponent
+id yAutoMovementComponent
 id zero_corner_chip
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
@@ -2283,6 +2317,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_editor
 layout activity_main
+layout collisions_layout
 layout components_layout
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -2370,6 +2405,7 @@ layout scenes_layout
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout spinner_published_layout
 layout support_simple_spinner_dropdown_item
 layout test_action_chip
 layout test_chip_zero_corner_radius
@@ -2443,6 +2479,7 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string default_web_client_id
+string english_OnClickEvent
 string english_gravity_component
 string english_ground_collider_component
 string english_input_movement_platformer_componentes
@@ -2450,6 +2487,7 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id

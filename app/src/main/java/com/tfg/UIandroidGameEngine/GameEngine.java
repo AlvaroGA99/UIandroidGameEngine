@@ -102,7 +102,7 @@ public class GameEngine {
             }
 
         }
-        Toast.makeText(ctx, "" + toAdd.actionHolder.collisionActions.size() , Toast.LENGTH_SHORT).show();
+       // Toast.makeText(ctx, "" + toAdd.actionHolder.collisionActions.size() , Toast.LENGTH_SHORT).show();
         //SceneHierarchyDescription.get(theSceneManager.currentScene).add(toAdd.castObjectToDescription());
 
 
@@ -143,14 +143,351 @@ public class GameEngine {
 
     public void loadScene(String key){
 
-            theSceneManager.loadScene(SceneHierarchyDescription.get(key));
+        camera.lookingAt = null;
+        ArrayList<String[]> aux = SceneHierarchyDescription.get(key);
+        theSceneManager.loadScene(aux);
+        String[] auxSplit ;
+        for (int i = 0; i < getObjectsInScene().size();i++){
+
+            for (int j = 9; j < aux.get(i).length; j++){
+                auxSplit = aux.get(i)[j].split("/");
+                switch(auxSplit[0]){
+                    case "InputMovementPlatformerComponent" :
+                        getObjectsInScene().get(i).addComponent(new InputMovementPlatformerComponent(getObjectsInScene().get(i)));
+                        break;
+                    case "GravityComponent" :
+                        getObjectsInScene().get(i).addComponent(new GravityComponent(getObjectsInScene().get(i)));
+                        break;
+                    case "GroundColliderComponent" :
+                        getObjectsInScene().get(i).addComponent(new GroundColliderComponent(getObjectsInScene().get(i)));
+                        break;
+                    case "JumpComponent":
+                        getObjectsInScene().get(i).addComponent(new JumpComponent(getObjectsInScene().get(i)));
+                        break;
+                    case "ColliderComponent" :
+                        getObjectsInScene().get(i).addComponent(new ColliderComponent(getObjectsInScene().get(i),this));
+                        break;
+                    case "XAutoMovementComponent":
+                        break;
+
+                    case "YAutoMovementComponent" :
+                        break;
+                    case "DragableComponent":
+                        break;
+                    case "OnClickEvent" :
+                        switch (auxSplit[1]){
+                            case "DebugAction":
+                                getObjectsInScene().get(i).actionHolder.onClickActions.add(new DebugAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementXAction" :
+                                getObjectsInScene().get(i).actionHolder.onClickActions.add(new InvertMovementXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementYAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new InvertMovementYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "NextSceneAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new NextSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicLoopAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new PlayMusicLoopAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicOnceAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new PlayMusicOnceAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PreviousSceneAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new PreviousSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetXAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new ResetXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetYAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new ResetYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeXAction": getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetAutoMoveNegativeXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeYAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetAutoMoveNegativeYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveXAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetAutoMoveXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveYAction": getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetAutoMoveYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetFollowCameraAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetFollowCameraAction(getObjectsInScene().get(i),this));
+                                break;
+
+                        }
+                        break;
+                    case "OnCollisionEvent" :
+                        switch(auxSplit[2]){
+                            case "DebugAction":
+                                getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new DebugAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementXAction" :
+                                getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new InvertMovementXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementYAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new InvertMovementYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "NextSceneAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new NextSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicLoopAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new PlayMusicLoopAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicOnceAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new PlayMusicOnceAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PreviousSceneAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new PreviousSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetXAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new ResetXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetYAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new ResetYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeXAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetAutoMoveNegativeXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeYAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetAutoMoveNegativeYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveXAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetAutoMoveXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveYAction": getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetAutoMoveYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetFollowCameraAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetFollowCameraAction(getObjectsInScene().get(i),this));
+                                break;
+                        }
+                        break;
+                    case "OnEachSecondEvent":
+                        //
+                        switch (auxSplit[1]){
+                            case "DebugAction":
+                                getObjectsInScene().get(i).actionHolder.updateActions.add(new DebugAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementXAction" :
+                                getObjectsInScene().get(i).actionHolder.updateActions.add(new InvertMovementXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementYAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new InvertMovementYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "NextSceneAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new NextSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicLoopAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new PlayMusicLoopAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicOnceAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new PlayMusicOnceAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PreviousSceneAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new PreviousSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetXAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new ResetXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetYAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new ResetYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeXAction": getObjectsInScene().get(i).actionHolder.updateActions.add(new SetAutoMoveNegativeXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeYAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new SetAutoMoveNegativeYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveXAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new SetAutoMoveXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveYAction": getObjectsInScene().get(i).actionHolder.updateActions.add(new SetAutoMoveYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetFollowCameraAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new SetFollowCameraAction(getObjectsInScene().get(i),this));
+                                break;
+                        }
+                        break;
+                    case "OnStartSceneAction" :
+                        //
+                        switch (auxSplit[1]){
+                            case "DebugAction":
+                                getObjectsInScene().get(i).actionHolder.startSceneActions.add(new DebugAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementXAction" :
+                                getObjectsInScene().get(i).actionHolder.startSceneActions.add(new InvertMovementXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementYAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new InvertMovementYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "NextSceneAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new NextSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicLoopAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new PlayMusicLoopAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicOnceAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new PlayMusicOnceAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PreviousSceneAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new PreviousSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetXAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new ResetXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetYAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new ResetYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeXAction": getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetAutoMoveNegativeXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeYAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetAutoMoveNegativeYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveXAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetAutoMoveXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveYAction": getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetAutoMoveYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetFollowCameraAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetFollowCameraAction(getObjectsInScene().get(i),this));
+                                break;
+
+                        }
+                        break;
+                }
+            }
+        }
             theSceneManager.currentScene = key;
     }
 
     public void loadScene(){
         camera.lookingAt = null;
-        theSceneManager.loadScene(SceneHierarchyDescription.get(theSceneManager.currentScene));
+        ArrayList<String[]> aux = SceneHierarchyDescription.get(theSceneManager.currentScene);
+        theSceneManager.loadScene(aux);
+        String[] auxSplit ;
+        for (int i = 0; i < getObjectsInScene().size();i++){
 
+            for (int j = 9; j < aux.get(i).length; j++){
+                auxSplit = aux.get(i)[j].split("/");
+               switch(auxSplit[0]){
+                    case "InputMovementPlatformerComponent" :
+                        getObjectsInScene().get(i).addComponent(new InputMovementPlatformerComponent(getObjectsInScene().get(i)));
+                        break;
+                    case "GravityComponent" :
+                        getObjectsInScene().get(i).addComponent(new GravityComponent(getObjectsInScene().get(i)));
+                        break;
+                    case "GroundColliderComponent" :
+                        getObjectsInScene().get(i).addComponent(new GroundColliderComponent(getObjectsInScene().get(i)));
+                        break;
+                    case "JumpComponent":
+                        getObjectsInScene().get(i).addComponent(new JumpComponent(getObjectsInScene().get(i)));
+                        break;
+                    case "ColliderComponent" :
+                        getObjectsInScene().get(i).addComponent(new ColliderComponent(getObjectsInScene().get(i),this));
+                        break;
+                    case "OnClickEvent" :
+                        switch (auxSplit[1]){
+                            case "DebugAction":
+                                getObjectsInScene().get(i).actionHolder.onClickActions.add(new DebugAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementXAction" :
+                                getObjectsInScene().get(i).actionHolder.onClickActions.add(new InvertMovementXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "InvertMovementYAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new InvertMovementYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "NextSceneAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new NextSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicLoopAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new PlayMusicLoopAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PlayMusicOnceAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new PlayMusicOnceAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "PreviousSceneAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new PreviousSceneAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetXAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new ResetXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "ResetYAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new ResetYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeXAction": getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetAutoMoveNegativeXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveNegativeYAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetAutoMoveNegativeYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveXAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetAutoMoveXAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetAutoMoveYAction": getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetAutoMoveYAction(getObjectsInScene().get(i),this));
+                                break;
+                            case "SetFollowCameraAction":  getObjectsInScene().get(i).actionHolder.onClickActions.add(new SetFollowCameraAction(getObjectsInScene().get(i),this));
+                                break;
+
+                        }
+                       break;
+                   case "OnCollisionEvent" :
+                       switch(auxSplit[2]){
+                           case "DebugAction":
+                               getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new DebugAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "InvertMovementXAction" :
+                               getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new InvertMovementXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "InvertMovementYAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new InvertMovementYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "NextSceneAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new NextSceneAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PlayMusicLoopAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new PlayMusicLoopAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PlayMusicOnceAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new PlayMusicOnceAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PreviousSceneAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new PreviousSceneAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "ResetXAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new ResetXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "ResetYAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new ResetYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveNegativeXAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetAutoMoveNegativeXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveNegativeYAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetAutoMoveNegativeYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveXAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetAutoMoveXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveYAction": getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetAutoMoveYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetFollowCameraAction":  getObjectsInScene().get(i).actionHolder.collisionActions.get(Integer.parseInt(auxSplit[1])).add(new SetFollowCameraAction(getObjectsInScene().get(i),this));
+                               break;
+                       }
+                       break;
+                   case "OnEachSecondEvent":
+                       //
+                       switch (auxSplit[1]){
+                           case "DebugAction":
+                               getObjectsInScene().get(i).actionHolder.updateActions.add(new DebugAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "InvertMovementXAction" :
+                               getObjectsInScene().get(i).actionHolder.updateActions.add(new InvertMovementXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "InvertMovementYAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new InvertMovementYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "NextSceneAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new NextSceneAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PlayMusicLoopAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new PlayMusicLoopAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PlayMusicOnceAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new PlayMusicOnceAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PreviousSceneAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new PreviousSceneAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "ResetXAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new ResetXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "ResetYAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new ResetYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveNegativeXAction": getObjectsInScene().get(i).actionHolder.updateActions.add(new SetAutoMoveNegativeXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveNegativeYAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new SetAutoMoveNegativeYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveXAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new SetAutoMoveXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveYAction": getObjectsInScene().get(i).actionHolder.updateActions.add(new SetAutoMoveYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetFollowCameraAction":  getObjectsInScene().get(i).actionHolder.updateActions.add(new SetFollowCameraAction(getObjectsInScene().get(i),this));
+                               break;
+                       }
+                       break;
+                   case "OnStartSceneAction" :
+                       //
+                       switch (auxSplit[1]){
+                           case "DebugAction":
+                               getObjectsInScene().get(i).actionHolder.startSceneActions.add(new DebugAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "InvertMovementXAction" :
+                               getObjectsInScene().get(i).actionHolder.startSceneActions.add(new InvertMovementXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "InvertMovementYAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new InvertMovementYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "NextSceneAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new NextSceneAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PlayMusicLoopAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new PlayMusicLoopAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PlayMusicOnceAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new PlayMusicOnceAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "PreviousSceneAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new PreviousSceneAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "ResetXAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new ResetXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "ResetYAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new ResetYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveNegativeXAction": getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetAutoMoveNegativeXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveNegativeYAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetAutoMoveNegativeYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveXAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetAutoMoveXAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetAutoMoveYAction": getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetAutoMoveYAction(getObjectsInScene().get(i),this));
+                               break;
+                           case "SetFollowCameraAction":  getObjectsInScene().get(i).actionHolder.startSceneActions.add(new SetFollowCameraAction(getObjectsInScene().get(i),this));
+                               break;
+
+                       }
+                       break;
+                }
+            }
+        }
     }
 
     public void setContext(Context context){

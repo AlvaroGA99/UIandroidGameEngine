@@ -1,9 +1,13 @@
 package com.tfg.UIandroidGameEngine;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -19,7 +23,9 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
     private SurfaceHolder holder;
     private Canvas canvas;
     public GameEngine theGameEngine;
-
+    private Matrix m;
+    private Bitmap bitmap;
+    private Rect rect;
 
     private BasicGameObject testgameObject;
 
@@ -29,6 +35,13 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
         this.theGameEngine = theGameEngine;
         drawThread = new Thread(this);
         updateThread = new UpdateThread(this.theGameEngine);
+
+        //spriteDrawable = ctx.getResources();
+        bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.background1);
+        //Toast.makeText(ctx,""+    bitmap.getHeight(),Toast.LENGTH_SHORT).show();
+//bitmap.getHeight();
+
+        m =  new Matrix();
     }
 
 
@@ -180,7 +193,10 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
         while(true){
             canvas = holder.lockCanvas();
             if (canvas != null){
-                canvas.drawARGB(255,0,0,0);
+
+               // canvas.drawARGB(255,0,0,0);
+                m.setScale((float)getWidth()/bitmap.getWidth(),(float)getHeight()/bitmap.getHeight());
+                canvas.drawBitmap(bitmap,m,null);
                 theGameEngine.drawAll(canvas);
                 //testgameObject.draw(canvas);
                 holder.unlockCanvasAndPost(canvas);
