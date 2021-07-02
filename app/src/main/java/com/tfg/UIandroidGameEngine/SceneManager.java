@@ -130,11 +130,12 @@ public class SceneManager {
 
             eventsTriggered.clear();
            objectsInCurrentScene.clear();
+            eventsTriggered.add(new StartSceneEvent());
        for (int i = 0; i < sceneObjects.size();i++){
 
            BasicGameObject aux = castDescriptionToObject(sceneObjects.get(i));
            aux.sceneHierarchyID = objectsInCurrentScene.size();
-           eventsTriggered.add(new StartSceneEvent());
+
            objectsInCurrentScene.add(aux);
 
        }

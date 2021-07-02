@@ -92,11 +92,19 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.tfg.UIandroidGameEngine" />
+    </key>
+    <key name="android.template.745051811">
+      <recent name="com.tfg.UIandroidGameEngine" />
+    </key>
     <key name="android.template.-1023625233">
       <recent name="com.tfg.UIandroidGameEngine" />
     </key>
-    <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="com.tfg.UIandroidGameEngine" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\drawable-v24" />
+      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\sprite" />
+      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\drawable" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app" />
@@ -106,11 +114,6 @@
     </key>
     <key name="android.template.541800380">
       <recent name="com.tfg.UIandroidGameEngine" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\drawable-v24" />
-      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\sprite" />
-      <recent name="D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -254,10 +257,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="688" y="363" width="450" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1624437897716" />
-    <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1619602531144">
+    <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1624835238765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619602531144" />
+    <state x="664" y="484" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1624835238765" />
     <state x="176" y="158" width="1349" height="789" key="AVDManager" timestamp="1617376722322">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
