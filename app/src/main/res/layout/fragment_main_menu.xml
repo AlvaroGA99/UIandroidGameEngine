@@ -1,39 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="50dp"
+    android:columnCount="2"
     android:orientation="vertical"
+    android:rowCount="2"
     tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_margin="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="gravity" />
+
+        <Button
+            android:id="@+id/cerrar_sesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cerrar Sesión" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/localprojects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_margin="20dp"
+        android:background="@drawable/roundborder_drawable"
+        android:text="Mis Proyectosssssssss" />
 
     <Button
         android:id="@+id/newproject"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_weight="33"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_margin="20dp"
         android:background="@drawable/roundborder_drawable"
         android:text="Nuevo Proyecto" />
 
     <Button
-        android:id="@+id/localprojects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_weight="33"
-        android:background="@drawable/roundborder_drawable"
-        android:text="Mis Proyectos" />
-
-    <Button
         android:id="@+id/usersprojects"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="33"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_margin="20dp"
         android:background="@drawable/roundborder_drawable"
         android:text="Explorar" />
 
-</LinearLayout>
+</GridLayout>

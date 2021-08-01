@@ -6,8 +6,8 @@ com/tfg/UIandroidGameEngine/EventsInObjectAdapter.java
  com.tfg.UIandroidGameEngine.EventsInObjectAdapter$ViewHolder
 com/tfg/UIandroidGameEngine/InputManager.java
  com.tfg.UIandroidGameEngine.InputManager
-com/tfg/UIandroidGameEngine/Action.java
- com.tfg.UIandroidGameEngine.Action
+com/tfg/UIandroidGameEngine/LoginActivity.java
+ com.tfg.UIandroidGameEngine.LoginActivity
 com/tfg/UIandroidGameEngine/DragableComponent.java
  com.tfg.UIandroidGameEngine.DragableComponent
 com/tfg/UIandroidGameEngine/Event.java
@@ -53,8 +53,8 @@ com/tfg/UIandroidGameEngine/Component.java
  com.tfg.UIandroidGameEngine.Component
 com/tfg/UIandroidGameEngine/PreviousSceneAction.java
  com.tfg.UIandroidGameEngine.PreviousSceneAction
-com/tfg/UIandroidGameEngine/StartSceneEvent.java
- com.tfg.UIandroidGameEngine.StartSceneEvent
+com/tfg/UIandroidGameEngine/SceneManager.java
+ com.tfg.UIandroidGameEngine.SceneManager
 com/tfg/UIandroidGameEngine/MainActivity.java
  com.tfg.UIandroidGameEngine.MainActivity
 com/tfg/UIandroidGameEngine/Collision.java
@@ -110,8 +110,8 @@ com/tfg/UIandroidGameEngine/ResetYAction.java
  com.tfg.UIandroidGameEngine.ResetYAction
 com/tfg/UIandroidGameEngine/SetFollowCameraAction.java
  com.tfg.UIandroidGameEngine.SetFollowCameraAction
-com/tfg/UIandroidGameEngine/LoginActivity.java
- com.tfg.UIandroidGameEngine.LoginActivity
+com/tfg/UIandroidGameEngine/GameEngine.java
+ com.tfg.UIandroidGameEngine.GameEngine
 com/tfg/UIandroidGameEngine/Project.java
  com.tfg.UIandroidGameEngine.Project
 com/tfg/UIandroidGameEngine/EachSecondEvent.java
@@ -176,7 +176,7 @@ com/tfg/UIandroidGameEngine/NotPublishedProjectsAdapter.java
  com.tfg.UIandroidGameEngine.NotPublishedProjectsAdapter$1
  com.tfg.UIandroidGameEngine.NotPublishedProjectsAdapter$2
  com.tfg.UIandroidGameEngine.NotPublishedProjectsAdapter$ViewHolder
-com/tfg/UIandroidGameEngine/GameEngine.java
- com.tfg.UIandroidGameEngine.GameEngine
-com/tfg/UIandroidGameEngine/SceneManager.java
- com.tfg.UIandroidGameEngine.SceneManager
+com/tfg/UIandroidGameEngine/StartSceneEvent.java
+ com.tfg.UIandroidGameEngine.StartSceneEvent
+com/tfg/UIandroidGameEngine/Action.java
+ com.tfg.UIandroidGameEngine.Action

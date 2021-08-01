@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -73,8 +74,23 @@ public class MainMenuFragment extends Fragment  {
     public void onViewCreated( View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
         Button newProject = (Button) view.findViewById(R.id.newproject);
-        Button localProjects = (Button) view.findViewById(R.id.localprojects);;
+        Button localProjects = (Button) view.findViewById(R.id.localprojects);
         Button usersProject = (Button) view.findViewById(R.id.usersprojects);
+        TextView users = (TextView) view.findViewById(R.id.usuario);
+        Button closeSesion = (Button) view.findViewById(R.id.cerrar_sesion);
+
+        closeSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+        users.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         newProject.setOnClickListener(new View.OnClickListener() {
 
