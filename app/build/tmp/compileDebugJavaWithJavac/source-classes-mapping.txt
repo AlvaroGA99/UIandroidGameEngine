@@ -165,6 +165,8 @@ com/tfg/UIandroidGameEngine/MainMenuFragment.java
  com.tfg.UIandroidGameEngine.MainMenuFragment$1
  com.tfg.UIandroidGameEngine.MainMenuFragment$2
  com.tfg.UIandroidGameEngine.MainMenuFragment$3
+ com.tfg.UIandroidGameEngine.MainMenuFragment$4
+ com.tfg.UIandroidGameEngine.MainMenuFragment$5
 com/tfg/UIandroidGameEngine/UsersProjectFragment.java
  com.tfg.UIandroidGameEngine.UsersProjectFragment
 com/tfg/UIandroidGameEngine/NewProjectFragment.java

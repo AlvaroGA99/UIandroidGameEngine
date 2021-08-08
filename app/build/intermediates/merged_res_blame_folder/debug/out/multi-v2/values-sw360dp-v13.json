@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Zona de trabajo\\Carpeta_Proyecto_Android_TFG\\UIandroidGameEngine\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+            "outputFile": "D:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw360dp-v13\\values-sw360dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\alvar\\.gradle\\caches\\transforms-2\\files-2.1\\6f0068b062f7052c99673b14fe32c16f\\jetified-firebase-ui-auth-6.4.0\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+                    "source": "C:\\Users\\Álvaro\\.gradle\\caches\\transforms-2\\files-2.1\\6f0068b062f7052c99673b14fe32c16f\\jetified-firebase-ui-auth-6.4.0\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
