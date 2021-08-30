@@ -870,18 +870,67 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String[] aux = selectedEvent.split("_");
+                boolean found = false;
                 switch(aux[0]){
                     case "OnCollision":
-                        pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new DebugAction(pointerToSelectedObject,theGameEngine));
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).equals("DebugAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new DebugAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
                         break;
                     case "OnStartScene":
-                        pointerToSelectedObject.actionHolder.startSceneActions.add(new DebugAction(pointerToSelectedObject,theGameEngine));
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).equals("DebugAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new DebugAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
                         break;
+
+
+
                     case "OnClickEvent":
-                        pointerToSelectedObject.actionHolder.onClickActions.add(new DebugAction(pointerToSelectedObject,theGameEngine));
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).equals("DebugAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new DebugAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
                         break;
                     case "OnEachSecondEvent":
-                        pointerToSelectedObject.actionHolder.updateActions.add(new DebugAction(pointerToSelectedObject,theGameEngine));
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).equals("DebugAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new DebugAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
                         break;
                 }
                 selectAction.setVisibility(View.INVISIBLE);

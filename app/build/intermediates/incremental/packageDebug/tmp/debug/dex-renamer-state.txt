@@ -1,13 +1,7 @@
-#Sun Aug 08 14:32:33 CEST 2021
-path.3=classes.dex
-path.2=classes.dex
+#Sun Aug 22 01:43:07 CEST 2021
+base.0=D\:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 path.1=classes.dex
-path.0=classes.dex
-renamed.3=classes4.dex
-renamed.2=classes3.dex
 renamed.1=classes2.dex
+path.0=classes.dex
 renamed.0=classes.dex
-base.3=D\:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
-base.2=D\:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=D\:\\Zona de trabajo\\Carpeta_Proyecto_Android_TFG\\UIandroidGameEngine\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
-base.0=D\:\\Zona de trabajo\\Carpeta_Proyecto_Android_TFG\\UIandroidGameEngine\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=D\:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex

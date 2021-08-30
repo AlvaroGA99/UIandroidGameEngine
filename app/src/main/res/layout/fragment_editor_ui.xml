@@ -651,7 +651,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/add_component_event_button"
+                android:background="@drawable/roundborder_yellow_drawable"
                 android:gravity="center"
                 android:text="@string/english_OnClickEvent"
                 android:textAlignment="gravity"
@@ -663,9 +663,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/add_component_event_button"
+                android:background="@drawable/roundborder_yellow_drawable"
                 android:gravity="center"
-                android:text="OnStartSceneEvent"
+                android:text="\n\nOnStartSceneEvent\n\n"
                 android:textAlignment="gravity"
                 android:textColor="@color/black" />
 
@@ -674,9 +674,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/add_component_event_button"
+                android:background="@drawable/roundborder_yellow_drawable"
                 android:gravity="center"
-                android:text="OnEachSecondEvent"
+                android:text="\n\nOnEachSecondEvent\n\n"
                 android:textAlignment="gravity"
                 android:textColor="@color/black" />
 

@@ -88,8 +88,8 @@ public class LocalProjectsFragment extends Fragment {
 
         ArrayList<Project> dataPublished = new ArrayList<>();
 
-        HashMap<String, ArrayList<String[]>> aux = new HashMap<String, ArrayList<String[]>>();
-        aux.put("ScaffoldScene", new ArrayList<String[]>());
+        //HashMap<String, ArrayList<String[]>> aux = new HashMap<String, ArrayList<String[]>>();
+        //aux.put("ScaffoldScene", new ArrayList<String[]>());
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
@@ -118,15 +118,23 @@ public class LocalProjectsFragment extends Fragment {
 
         NotPublishedProjectsAdapter notPublishedAdapter = new NotPublishedProjectsAdapter(dataNotPublished, getActivity());
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataPublished.clear();
+                dataNotPublished.clear();
+                Iterable<DataSnapshot> capture =  snapshot.getChildren();
+                for (DataSnapshot project : capture){
+                    dataPublished.add(new Project(project.getKey(),"user1",project.child("title").getValue(String.class), project.child("project_type").getValue(String.class) ));
 
+                }
+               notPublishedAdapter.notifyDataSetChanged();
+                publishedAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(getActivity(),"Error al recuperar los proyectos de la base de datos, inténtelo de nuevo",Toast.LENGTH_SHORT).show();
             }
         });
 
