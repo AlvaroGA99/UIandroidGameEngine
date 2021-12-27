@@ -24,9 +24,13 @@ public class GameEngine {
 
     public boolean isInEditor = true;
 
+    public int originEditorScene = 0;
+
     public int mode = 1;
 
     public HashMap<String,ArrayList<String []>> SceneHierarchyDescription = new HashMap<String, ArrayList<String[]>>();
+
+    public ArrayList<String> SceneList = new ArrayList<>();
 
     public Camera camera = new Camera();
 
@@ -37,8 +41,9 @@ public class GameEngine {
 
     public GameEngine(){
         //collisionQuadTree = new QuadTree(50,50, getObjectsInScene());
-        addScene(theSceneManager.currentScene);
-        addScene("ScaffoldScene2");
+
+        addScene("Scene 1");
+        //addScene("ScaffoldScene2");
 
     }
 
@@ -133,6 +138,7 @@ public class GameEngine {
     public void addScene(String key){
         if(!SceneHierarchyDescription.containsKey(key)){
             SceneHierarchyDescription.put(key, new ArrayList<String[]>());
+            SceneList.add(key);
         }
     }
 
@@ -141,10 +147,10 @@ public class GameEngine {
         deleteObjectsInQueue();
     }
 
-    public void loadScene(String key){
-
+    public void loadScene(int key){
+        deleteQueue.clear();
         camera.lookingAt = null;
-        ArrayList<String[]> aux = SceneHierarchyDescription.get(key);
+        ArrayList<String[]> aux = SceneHierarchyDescription.get(SceneList.get(key));
         theSceneManager.loadScene(aux);
         String[] auxSplit ;
         for (int i = 0; i < getObjectsInScene().size();i++){
@@ -164,15 +170,15 @@ public class GameEngine {
                     case "JumpComponent":
                         getObjectsInScene().get(i).addComponent(new JumpComponent(getObjectsInScene().get(i)));
                         break;
-                    case "ColliderComponent" :
-                        getObjectsInScene().get(i).addComponent(new ColliderComponent(getObjectsInScene().get(i),this));
-                        break;
                     case "XAutoMovementComponent":
+                        getObjectsInScene().get(i).addComponent(new XAutoMovementComponent(getObjectsInScene().get(i)));
                         break;
 
                     case "YAutoMovementComponent" :
+                        getObjectsInScene().get(i).addComponent(new YAutoMovementComponent(getObjectsInScene().get(i)));
                         break;
                     case "DragableComponent":
+                        getObjectsInScene().get(i).addComponent(new DragableComponent(getObjectsInScene().get(i),this));
                         break;
                     case "OnClickEvent" :
                         switch (auxSplit[1]){
@@ -320,9 +326,12 @@ public class GameEngine {
             theSceneManager.currentScene = key;
     }
 
+
+
     public void loadScene(){
+        deleteQueue.clear();
         camera.lookingAt = null;
-        ArrayList<String[]> aux = SceneHierarchyDescription.get(theSceneManager.currentScene);
+        ArrayList<String[]> aux = SceneHierarchyDescription.get(SceneList.get(originEditorScene));
         theSceneManager.loadScene(aux);
         String[] auxSplit ;
         for (int i = 0; i < getObjectsInScene().size();i++){
@@ -345,6 +354,16 @@ public class GameEngine {
                     case "ColliderComponent" :
                         getObjectsInScene().get(i).addComponent(new ColliderComponent(getObjectsInScene().get(i),this));
                         break;
+                   case "XAutoMovementComponent":
+                       getObjectsInScene().get(i).addComponent(new XAutoMovementComponent(getObjectsInScene().get(i)));
+                       break;
+
+                   case "YAutoMovementComponent" :
+                       getObjectsInScene().get(i).addComponent(new YAutoMovementComponent(getObjectsInScene().get(i)));
+                       break;
+                   case "DragableComponent":
+                       getObjectsInScene().get(i).addComponent(new DragableComponent(getObjectsInScene().get(i),this));
+                       break;
                     case "OnClickEvent" :
                         switch (auxSplit[1]){
                             case "DebugAction":
@@ -449,7 +468,7 @@ public class GameEngine {
                                break;
                        }
                        break;
-                   case "OnStartSceneAction" :
+                   case "OnStartSceneEvent" :
                        //
                        switch (auxSplit[1]){
                            case "DebugAction":
@@ -488,6 +507,7 @@ public class GameEngine {
                 }
             }
         }
+        theSceneManager.currentScene = originEditorScene;
     }
 
     public void setContext(Context context){
@@ -496,13 +516,23 @@ public class GameEngine {
     }
 
     public void saveThisScene(){
-        SceneHierarchyDescription.get(theSceneManager.currentScene).clear();
+        SceneHierarchyDescription.get(SceneList.get(theSceneManager.currentScene)).clear();
 
         for(int i = 0; i < getObjectsInScene().size(); i ++){
-            SceneHierarchyDescription.get(theSceneManager.currentScene).add(getObjectsInScene().get(i).castObjectToDescription());
+            SceneHierarchyDescription.get(SceneList.get(theSceneManager.currentScene)).add(getObjectsInScene().get(i).castObjectToDescription());
 
 
         }
+    }
+
+    public void saveThatScene(String key, ArrayList<String[]> value){
+        if(SceneHierarchyDescription.containsKey(key)){
+            SceneHierarchyDescription.put(key,value);
+        }
+    }
+
+    public int getCurrentScene(){
+        return theSceneManager.currentScene;
     }
 
     public void playGame(){

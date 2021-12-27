@@ -12,13 +12,18 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.util.ui.TextHelper;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
@@ -48,29 +53,40 @@ public class EditorUiFragment extends Fragment {
     private ObjectsInSceneAdapter os;
     private ComponentsInObjectAdapter oc;
     private EventsInObjectAdapter oe;
-    private SceneListAdapter sa ;
+    private ArrayAdapter<String> sa ;
     private CollisionListAdapter ca;
     private RecyclerView objectsInScene;
     private RecyclerView componentsInObject;
     private RecyclerView eventsInObject;
-    private RecyclerView scenes;
+    private Spinner scenes;
     private RecyclerView collisionList;
     private View selectComponent;
     private View selectObject;
     private View selectEvent;
     private View selectAction;
+    private View configureSceneLayout;
     private Switch focusedByCamera;
     private  Button deleteSelectedObject;
     private TextView objectNameInInspector;
-    private Button addComponent ;
-    private Button addEvent ;
+    private ImageView addComponent ;
+    private ImageView addEvent ;
+    private ImageView nextSprite ;
+    private ImageView previousSprite ;
+    private ImageView spritePreview ;
+    private ImageView hideRight;
+    private ImageView hideLeft;
 
+    private boolean passedBySelection = true;
     private String selectedEvent;
+    int[] backgrounds = {R.drawable.background1};
 
+
+    int bgIndex;
+    int spriteIndex;
     private int previousSelectedId;
      private TextView scaleX;
      private TextView scaleY;
-     private TextView rotation;
+
 
      private String eventSelected = "";
     // TODO: Rename and change types of parameters
@@ -87,6 +103,8 @@ public class EditorUiFragment extends Fragment {
 
 
     public EditorUiFragment() {
+
+
         // Required empty public constructor
 
     }
@@ -128,28 +146,38 @@ public class EditorUiFragment extends Fragment {
 
         View ObjectHierarchy =  parentActivity.findViewById(R.id.objectHierarchy);
         View inspector = parentActivity.findViewById(R.id.inspector);
-        View pause = parentActivity.findViewById(R.id.pause);
+        ImageView pause = (ImageView)parentActivity.findViewById(R.id.pause);
         View resume = parentActivity.findViewById(R.id.resume);
-         addComponent = (Button)parentActivity.findViewById(R.id.addComponent);
-         addEvent = (Button) parentActivity.findViewById(R.id.addEvent);
-        Button addObject = (Button) parentActivity.findViewById(R.id.addObject);
+         addComponent = (ImageView)parentActivity.findViewById(R.id.addComponent);
+         addEvent = (ImageView) parentActivity.findViewById(R.id.addEvent);
+        ImageView addObject = (ImageView) parentActivity.findViewById(R.id.addObject);
         Button publishInProject = (Button) parentActivity.findViewById(R.id.publishInEditor);
         Button saveInEditor = (Button) parentActivity.findViewById(R.id.saveInEditor);
-        Button addScene = (Button) parentActivity.findViewById(R.id.addScene);
+        ImageView addScene = (ImageView) parentActivity.findViewById(R.id.addScene);
+        ImageView deleteScene = (ImageView) parentActivity.findViewById(R.id.deleteScene);
+        ImageView configureScene = (ImageView) parentActivity.findViewById(R.id.configureScene);
+
+        hideRight = parentActivity.findViewById(R.id.hideRight);
+        hideLeft = parentActivity.findViewById(R.id.hideLeft);
+
+        nextSprite = (ImageView) parentActivity.findViewById(R.id.nextSprite);
+         previousSprite = (ImageView) parentActivity.findViewById(R.id.previousSprite);
+       spritePreview = (ImageView) parentActivity.findViewById(R.id.spritePreview);
+
+        nextSprite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
-        int[] backgrounds = {R.drawable.background1};
-        int[] sprites = {R.drawable.sprite};
-        int[] colors = {R.drawable.roundborder_yellow_drawable,R.drawable.roundborder_black_drawable,R.drawable.roundborder_red_drawable,R.drawable.roundborder_drawable};
-
-        int bgIndex;
-        int spriteIndex;
 
         View onClickEvent ;
 
-        Button addRectangle = (Button)parentActivity.findViewById(R.id.addRectangle);;
-        Button addCircle = (Button)parentActivity.findViewById(R.id.addCircle);
-        Button addSprite = (Button)parentActivity.findViewById(R.id.addSprite);
+        ImageView addRectangle = (ImageView) parentActivity.findViewById(R.id.addRectangle);;
+        ImageView addCircle = (ImageView) parentActivity.findViewById(R.id.addCircle);
+        Button addSprite = (Button) parentActivity.findViewById(R.id.addSprite);
         TextInputEditText gameObjectTextViewName = (TextInputEditText) parentActivity.findViewById(R.id.gameObjectTextView);
 
          objectNameInInspector = (TextView) parentActivity.findViewById(R.id.nameOfObjectInInspector);
@@ -158,20 +186,21 @@ public class EditorUiFragment extends Fragment {
         selectComponent = parentActivity.findViewById(R.id.selectComponentToAdd);
         selectObject = parentActivity.findViewById(R.id.selectObjectToAdd);
         selectEvent = parentActivity.findViewById(R.id.selectEventToAdd);
+        configureSceneLayout = parentActivity.findViewById(R.id.configureSceneLayout);
+
 
         saveInEditor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 theGameEngine.saveThisScene();
-                EditorActivity a = (EditorActivity) getActivity();
-                a.myRef.child(a.key).child("project_type").setValue("Platformero");
-                a.myRef.child(a.key).child("title").setValue("testProject");
-                a.myRef.child(a.key).child("scenes").removeValue();
+               EditorActivity a = (EditorActivity) getActivity();
+                
+                a.myRef.child("scenes").removeValue();
                 //HashMap aux = new HashMap<String, ArrayList<ArrayList<String>>>();
                 ArrayList<String> auxlist = new ArrayList<>();
 
 
-                for(String key : theGameEngine.SceneHierarchyDescription.keySet()){
+                for(String key : theGameEngine.SceneList){
                     auxlist.clear();
                     for(String[] objectDescription : theGameEngine.SceneHierarchyDescription.get(key)){
                         String aux = "";
@@ -181,7 +210,7 @@ public class EditorUiFragment extends Fragment {
                         auxlist.add(aux);
 
                     }
-                    a.myRef.child(a.key).child("scenes").child(key).setValue(auxlist);
+                    a.myRef.child("scenes").child(key).setValue(auxlist);
 
                     auxlist.clear();
                 }
@@ -229,30 +258,141 @@ public class EditorUiFragment extends Fragment {
         collisionList = (RecyclerView) parentActivity.findViewById(R.id.collisionsList);
          componentsInObject = (RecyclerView) parentActivity.findViewById(R.id.componentsInObject);
          eventsInObject = (RecyclerView) parentActivity.findViewById(R.id.eventsInObject);
-         scenes = (RecyclerView) parentActivity.findViewById(R.id.scenes);
+         scenes = (Spinner) parentActivity.findViewById(R.id.scenes);
         objectsInScene.setLayoutManager(new LinearLayoutManager(getActivity()));
         componentsInObject.setLayoutManager(new LinearLayoutManager(getActivity()));
         eventsInObject.setLayoutManager(new LinearLayoutManager(getActivity()));
-        scenes.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
+        //scenes.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
         collisionList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        sa = new SceneListAdapter(theGameEngine.SceneHierarchyDescription);
+        ArrayList<String> a = new ArrayList<>();
+        for(int i = 0; i < theGameEngine.SceneList.size();i++){
+            a.add(theGameEngine.SceneList.get(0));
+        }
+
+
+        sa = new ArrayAdapter<String>(getContext(),R.layout.spinner_published_layout, a);
 
         scenes.setAdapter(sa);
 
+        //sa.setNotifyOnChange(true);
         addScene.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                theGameEngine.SceneHierarchyDescription.put("Escena" + theGameEngine.SceneHierarchyDescription.keySet().size(),new ArrayList<String[]>());
-                sa.updateDataSet(theGameEngine.SceneHierarchyDescription);
+                int b =  theGameEngine.SceneList.size();
+                String s =  "NuevaEscena(" + b + ")";
+                while(theGameEngine.SceneHierarchyDescription.containsKey(s)){
+                    b++;
+                    s =   "NuevaEscena(" + b + ")";
+                }
+
+                theGameEngine.SceneHierarchyDescription.put(s,new ArrayList<String[]>());
+                theGameEngine.SceneList.add(s);
+                sa.add(s);
+
+                //sa.notifyDataSetChanged();
+                //sa.add("NuevaEscena(" + (theGameEngine.SceneList.size() - 1) + ")");
+
+
+
+                //sa.updateDataSet(theGameEngine.SceneHierarchyDescription);
+            }
+        });
+
+        scenes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(passedBySelection){
+                    theGameEngine.saveThisScene();
+                }
+                pointerToSelectedObject = null;
+                hideInspectorElements();
+                Toast.makeText(getActivity().getApplicationContext(),"Nombre : "+ theGameEngine.SceneList.get(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(),"ÍNDICE : "+ position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext()," / tamaño : "+ theGameEngine.SceneList.size(), Toast.LENGTH_SHORT).show();
+               //theGameEngine.saveThisScene();
+                //theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(theGameEngine.getCurrentScene())).clear();
+
+                //for(int i = 0; i < theGameEngine.getObjectsInScene().size(); i ++){
+                  //  theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(theGameEngine.getCurrentScene())).add(theGameEngine.getObjectsInScene().get(i).castObjectToDescription());
+
+
+                //}
+                theGameEngine.loadScene(position);
+
+                //Toast.makeText(getActivity().getApplicationContext(),"ÍNDICE : "+ position, Toast.LENGTH_SHORT).show();
+                passedBySelection = true;
+                os.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+       // scenes.setSelection(0);
+
+        deleteScene.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int previousScene = theGameEngine.getCurrentScene();
+                passedBySelection = false;
+                if(theGameEngine.SceneList.size() > 1) {
+
+                    //theGameEngine.SceneHierarchyDescription.remove(theGameEngine.SceneList.get(previousScene ));
+                    String s = sa.getItem(previousScene);
+                    sa.remove(s);
+
+                    theGameEngine.SceneList.remove(s);
+                    theGameEngine.SceneHierarchyDescription.remove(s);
+                    //sa.clear();
+                    //for(int i = 0; i < theGameEngine.SceneList.size();i++){
+                      //  sa.add(theGameEngine.SceneList.get(i));
+                    //}
+                    
+
+
+                    //scenes.setSelection(0);
+                    //}catch (Exception e){
+                    //sa.clear();
+                    //scenes.setAdapter(new ArrayAdapter<String>(getContext(),R.layout.spinner_published_layout,theGameEngine.SceneList));
+
+
+
+                    //try {
+
+
+                    //}
+
+
+
+
+
+
+
+                }
+
+            }
+        });
+
+        configureScene.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                configureSceneLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        parentActivity.findViewById(R.id.applyChanges).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                configureSceneLayout.setVisibility(View.INVISIBLE);
             }
         });
 
 
 
-        pointerToSelectedObject = theGameEngine.getObjectsInScene().get(0);
-        objectNameInInspector.setText(pointerToSelectedObject.name);
          deleteSelectedObject = (Button) parentActivity.findViewById(R.id.deleteSelectedObject);
         deleteSelectedObject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,20 +415,24 @@ public class EditorUiFragment extends Fragment {
 
         ObjectHierarchy.setTranslationX(-1*(parentActivity.getWidth()/2  - 100));
         inspector.setTranslationX((parentActivity.getWidth()/2  - 100));
+        hideRight.setRotation(0);
+        hideLeft.setRotation(180);
 
-
-        inspector.setOnClickListener(new View.OnClickListener(){
+        hideRight.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 
                 //if(canAnimateInspector){
 
-                if(!inspectorReverse){
-                    v.animate().translationX(-45);
 
+                if(!inspectorReverse){
+                    inspector.animate().translationX(0);
+                    v.animate().rotation(180);
 
                 }else{
-                    v.animate().translationX(parentActivity.getWidth()/2  - 100);
+
+                    inspector.animate().translationX(parentActivity.getWidth()/2  - 100);
+                    v.animate().rotation(0);
                 }
                 inspectorReverse = !inspectorReverse;
 
@@ -298,15 +442,19 @@ public class EditorUiFragment extends Fragment {
             }
         });
 
-        ObjectHierarchy.setOnClickListener(new View.OnClickListener(){
+        hideLeft.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
+
                 //if(canAnimateHierarchy){
                 if(!hierarchyReverse){
-                    v.animate().translationX(45);
+                    ObjectHierarchy.animate().translationX(0);
+                    v.animate().rotation(0);
 
                 }else{
-                    v.animate().translationX(-1*(parentActivity.getWidth()/2  - 100));
+                    ObjectHierarchy.animate().translationX(-1*(parentActivity.getWidth()/2  - 100));
+                    v.animate().rotation(180);
                 }
                 hierarchyReverse = !hierarchyReverse;
 
@@ -314,10 +462,10 @@ public class EditorUiFragment extends Fragment {
             }
         });
 
-        oc = new ComponentsInObjectAdapter(theGameEngine.getObjectsInScene().get(0).components);
-        oe = new EventsInObjectAdapter(theGameEngine.getObjectsInScene().get(0).actionHolder,theGameEngine.getObjectsInScene());
+        oc = new ComponentsInObjectAdapter(new ArrayList<Component>());
+        oe = new EventsInObjectAdapter(new ActionHolder(),theGameEngine.getObjectsInScene());
 
-        ca = new CollisionListAdapter(theGameEngine.getObjectsInScene(),pointerToSelectedObject.sceneHierarchyID);
+        ca = new CollisionListAdapter(theGameEngine.getObjectsInScene(),-1);
         collisionList.setAdapter(ca);
 
         ca.setOnClickListener(new View.OnClickListener() {
@@ -328,19 +476,32 @@ public class EditorUiFragment extends Fragment {
                 oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
                 selectedEvent = "OnCollision_"+ ca.localDataSet.get(collisionList.getChildAdapterPosition(v)).sceneHierarchyID;
                 selectEvent.setVisibility(View.INVISIBLE);
+                selectAction.setVisibility(View.VISIBLE);
             }
         });
 
         focusedByCamera = (Switch) parentActivity.findViewById(R.id.isFocusedByCamera);
-        focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
+//        focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
 
         scaleX = (TextView) parentActivity.findViewById(R.id.textoEscalaX);
         scaleY = (TextView) parentActivity.findViewById(R.id.textoEscalaY);
-        rotation = (TextView) parentActivity.findViewById(R.id.textoRotacion);
 
-        scaleX.setText("X : " + pointerToSelectedObject.scale.x);
-        scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
-        rotation.setText("" + pointerToSelectedObject.rotation);
+        nextSprite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        previousSprite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+     //   scaleX.setText("X : " + pointerToSelectedObject.scale.x);
+       // scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
+        //rotation.setText("" + pointerToSelectedObject.rotation);
 
         View moreScaleX = parentActivity.findViewById(R.id.aumentarEscalaX);
             moreScaleX.setOnTouchListener(new View.OnTouchListener() {
@@ -362,16 +523,7 @@ public class EditorUiFragment extends Fragment {
                     return false;
                 }
             });
-        View moreRotation = parentActivity.findViewById(R.id.aumentarRotacion);
-            moreRotation.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    pointerToSelectedObject.rotation += 0.1;
-                    pointerToSelectedObject.preUpdateRotation += 0.1;
-                    rotation.setText("" + pointerToSelectedObject.rotation);
-                    return false;
-                }
-            });
+
 
         View lessScaleX = parentActivity.findViewById(R.id.disminuirEscalaX);
             lessScaleX.setOnTouchListener(new View.OnTouchListener() {
@@ -393,16 +545,7 @@ public class EditorUiFragment extends Fragment {
                     return false;
                 }
             });
-        View lessRotation = parentActivity.findViewById(R.id.disminuirRotacion);
-            lessRotation.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    pointerToSelectedObject.rotation -= 0.1;
-                    pointerToSelectedObject.preUpdateRotation -= 0.1;
-                    rotation.setText("" + pointerToSelectedObject.rotation);
-                    return false;
-                }
-            });
+
 
 
         focusedByCamera.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
@@ -432,12 +575,13 @@ public class EditorUiFragment extends Fragment {
         });
         os = new ObjectsInSceneAdapter(theGameEngine.getObjectsInScene(),theGameEngine);
 
-        sa.setOnClickListener(new View.OnClickListener(){
+        /*sa.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 theGameEngine.saveThisScene();
-                theGameEngine.loadScene(sa.localDataSet.get(scenes.getChildAdapterPosition(v)));
+                //theGameEngine.loadScene(sa.localDataSet.get(scenes.getChildAdapterPosition(v)));
+                theGameEngine.loadScene(scenes.getChildAdapterPosition(v));
                 os.notifyDataSetChanged();
 
 
@@ -460,7 +604,7 @@ public class EditorUiFragment extends Fragment {
 
 
             }
-        });
+        });*/
 
        setupComponentButtons();
        setupEventsButtons();
@@ -476,13 +620,25 @@ public class EditorUiFragment extends Fragment {
                 objectNameInInspector.setText(pointerToSelectedObject.name);
                 scaleX.setText("X : " + pointerToSelectedObject.scale.x);
                 scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
-                rotation.setText("" + pointerToSelectedObject.rotation);
+                switch(pointerToSelectedObject.spriteType){
+                    case 0:
+                        spritePreview.setImageResource(R.drawable.rectangle_shape_drawable);
+                        break;
+                    case 1:
+                        spritePreview.setImageResource(R.drawable.circle_shape_drawable);
+                        break;
+                    case 2:
+                        spritePreview.setImageResource(R.drawable.sprite);
+                        break;
+                }
+
 
                 focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
                 theGameEngine.camera.fixedLookingPosition.x = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).position.x;
                 theGameEngine.camera.fixedLookingPosition.y = theGameEngine.getObjectsInScene().get(objectsInScene.getChildAdapterPosition(v)).position.y;
                 oe.notifyDataSetChanged();
                 oc.notifyDataSetChanged();
+                ca.updateDataSet(theGameEngine.getObjectsInScene(),pointerToSelectedObject.sceneHierarchyID);
                 showInspectorElements();
             }
         });
@@ -535,7 +691,7 @@ public class EditorUiFragment extends Fragment {
                 if(!theGameEngine.isInEditor){
 
                     if(!theGameEngine.isGameRunning){
-
+                        pause.setImageResource(R.drawable.pausebutton_drawable);
                         //poner boton de reset
 
                         theGameEngine.isInEditor = true;
@@ -545,10 +701,11 @@ public class EditorUiFragment extends Fragment {
                             inspector.setVisibility(View.VISIBLE);
                             ObjectHierarchy.setVisibility(View.VISIBLE);
                             saveInEditor.setVisibility(View.VISIBLE);
-                            publishInProject.setVisibility(View.VISIBLE);
+
                         }
 
-                        if(theGameEngine.getObjectsInScene().size() != 0){
+                        if(pointerToSelectedObject != null){
+
                             pointerToSelectedObject = theGameEngine.getObjectsInScene().get(pointerToSelectedObject.sceneHierarchyID);
 
                             oc.localDataSet = pointerToSelectedObject.components ;
@@ -556,7 +713,7 @@ public class EditorUiFragment extends Fragment {
                             objectNameInInspector.setText(pointerToSelectedObject.name);
                             scaleX.setText("X : " + pointerToSelectedObject.scale.x);
                             scaleY.setText("Y : " + pointerToSelectedObject.scale.y);
-                            rotation.setText("" + pointerToSelectedObject.rotation);
+
 
                             focusedByCamera.setChecked(pointerToSelectedObject.isFocusedByCamera);
                             theGameEngine.camera.fixedLookingPosition.x = pointerToSelectedObject.position.x;
@@ -564,11 +721,15 @@ public class EditorUiFragment extends Fragment {
                             oe.notifyDataSetChanged();
                             oc.notifyDataSetChanged();
 
+                        }else{
+                            hideInspectorElements();
                         }
 
 
 
                         //poner boton de pausa
+                    }else{
+                        pause.setImageResource(R.drawable.rectangle_shape_drawable);
                     }
                 }
                 theGameEngine.isGameRunning = false;
@@ -580,15 +741,18 @@ public class EditorUiFragment extends Fragment {
             public void onClick(View v) {
 
                 if(theGameEngine.isInEditor){
+                    theGameEngine.originEditorScene = theGameEngine.getCurrentScene();
                     //previousSelectedId = pointerToSelectedObject.sceneHierarchyID;
                     theGameEngine.saveThisScene();
                     inspector.setVisibility(View.INVISIBLE);
                     ObjectHierarchy.setVisibility(View.INVISIBLE);
                     saveInEditor.setVisibility(View.INVISIBLE);
-                    publishInProject.setVisibility(View.INVISIBLE);
+
 
                     theGameEngine.isInEditor = false;
 
+                }else{
+                    pause.setImageResource(R.drawable.pausebutton_drawable);
                 }
                 for(int i = 0; i < theGameEngine.getObjectsInScene().size();i++){
                     if(theGameEngine.getObjectsInScene().get(i).isFocusedByCamera == true){
@@ -603,7 +767,13 @@ public class EditorUiFragment extends Fragment {
         //theGameEngine.saveThisScene();
         //theGameEngine.loadScene(sa.localDataSet.get(1));
 
-
+        if(theGameEngine.getObjectsInScene().size() != 0){
+            pointerToSelectedObject = theGameEngine.getObjectsInScene().get(0);
+            objectNameInInspector.setText(pointerToSelectedObject.name);
+        }else{
+            pointerToSelectedObject = null;
+            hideInspectorElements();
+        }
 
         if(theGameEngine.mode == 0){
             parentActivity.findViewById(R.id.UI_CONTAINER).setVisibility(View.INVISIBLE);
@@ -620,13 +790,17 @@ public class EditorUiFragment extends Fragment {
         addComponent.setVisibility(View.INVISIBLE);
         addEvent.setVisibility(View.INVISIBLE);
         focusedByCamera.setVisibility(View.INVISIBLE);
+        spritePreview.setVisibility(View.INVISIBLE);
+        nextSprite.setVisibility(View.INVISIBLE);
+        previousSprite.setVisibility(View.INVISIBLE);
 
-        rotation.setVisibility(View.INVISIBLE);
+
+
+
         scaleX.setVisibility(View.INVISIBLE);
         scaleY.setVisibility(View.INVISIBLE);
 
-        parentActivity.findViewById(R.id.aumentarRotacion).setVisibility(View.INVISIBLE);
-        parentActivity.findViewById(R.id.disminuirRotacion).setVisibility(View.INVISIBLE);
+
         parentActivity.findViewById(R.id.aumentarEscalaY).setVisibility(View.INVISIBLE);
         parentActivity.findViewById(R.id.disminuirEscalaY).setVisibility(View.INVISIBLE);
         parentActivity.findViewById(R.id.aumentarEscalaX).setVisibility(View.INVISIBLE);
@@ -635,7 +809,9 @@ public class EditorUiFragment extends Fragment {
         parentActivity.findViewById(R.id.Componentes).setVisibility(View.INVISIBLE);
         parentActivity.findViewById(R.id.eventos).setVisibility(View.INVISIBLE);
         parentActivity.findViewById(R.id.Escala).setVisibility(View.INVISIBLE);
-        parentActivity.findViewById(R.id.Rotacion).setVisibility(View.INVISIBLE);
+
+        parentActivity.findViewById(R.id.Sprite).setVisibility(View.INVISIBLE);
+
     }
 
     private void showInspectorElements(){
@@ -646,13 +822,15 @@ public class EditorUiFragment extends Fragment {
         addComponent.setVisibility(View.VISIBLE);
         addEvent.setVisibility(View.VISIBLE);
         focusedByCamera.setVisibility(View.VISIBLE);
+        spritePreview.setVisibility(View.VISIBLE);
+        nextSprite.setVisibility(View.VISIBLE);
+        previousSprite.setVisibility(View.VISIBLE);
 
-        rotation.setVisibility(View.VISIBLE);
+
         scaleX.setVisibility(View.VISIBLE);
         scaleY.setVisibility(View.VISIBLE);
 
-        parentActivity.findViewById(R.id.aumentarRotacion).setVisibility(View.VISIBLE);
-        parentActivity.findViewById(R.id.disminuirRotacion).setVisibility(View.VISIBLE);
+
         parentActivity.findViewById(R.id.aumentarEscalaY).setVisibility(View.VISIBLE);
         parentActivity.findViewById(R.id.disminuirEscalaY).setVisibility(View.VISIBLE);
         parentActivity.findViewById(R.id.aumentarEscalaX).setVisibility(View.VISIBLE);
@@ -661,7 +839,7 @@ public class EditorUiFragment extends Fragment {
         parentActivity.findViewById(R.id.Componentes).setVisibility(View.VISIBLE);
         parentActivity.findViewById(R.id.eventos).setVisibility(View.VISIBLE);
         parentActivity.findViewById(R.id.Escala).setVisibility(View.VISIBLE);
-        parentActivity.findViewById(R.id.Rotacion).setVisibility(View.VISIBLE);
+        parentActivity.findViewById(R.id.Sprite).setVisibility(View.VISIBLE);
     }
 
     private void setupComponentButtons(){
@@ -761,7 +939,7 @@ public class EditorUiFragment extends Fragment {
                     }
                 }
                 if (!found){
-                    oc.localDataSet.add(new DragableComponent(pointerToSelectedObject));
+                    oc.localDataSet.add(new DragableComponent(pointerToSelectedObject,theGameEngine));
                     oc.notifyItemInserted(oc.localDataSet.size() - 1);
                 }
             }
@@ -866,6 +1044,9 @@ public class EditorUiFragment extends Fragment {
     private void setupActionButtons(){
 
         View debugAction = parentActivity.findViewById(R.id.DebugAction);
+
+
+
         debugAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -874,7 +1055,7 @@ public class EditorUiFragment extends Fragment {
                 switch(aux[0]){
                     case "OnCollision":
                         for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
-                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).equals("DebugAction")){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("DebugAction")){
 
                                 found = true;
                                 break;
@@ -889,7 +1070,7 @@ public class EditorUiFragment extends Fragment {
                         break;
                     case "OnStartScene":
                         for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
-                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).equals("DebugAction")){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("DebugAction")){
 
                                 found = true;
                                 break;
@@ -906,7 +1087,7 @@ public class EditorUiFragment extends Fragment {
 
                     case "OnClickEvent":
                         for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
-                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).equals("DebugAction")){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("DebugAction")){
 
                                 found = true;
                                 break;
@@ -920,7 +1101,7 @@ public class EditorUiFragment extends Fragment {
                         break;
                     case "OnEachSecondEvent":
                         for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
-                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).equals("DebugAction")){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("DebugAction")){
 
                                 found = true;
                                 break;
@@ -937,6 +1118,821 @@ public class EditorUiFragment extends Fragment {
                 oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
             }
         });
+
+        View invertXmov = parentActivity.findViewById(R.id.invertXmov);
+
+        invertXmov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("InvertMovementXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new InvertMovementXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("InvertMovementXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new InvertMovementXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("InvertMovementXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new InvertMovementXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("InvertMovementXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new InvertMovementXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View invertYmov= parentActivity.findViewById(R.id.invertYmov);
+
+        invertYmov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("InvertMovementYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new InvertMovementYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("InvertMovementYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new InvertMovementYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("InvertMovementYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new InvertMovementYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("InvertMovementYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new InvertMovementYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View nextScene = parentActivity.findViewById(R.id.nextScene);
+
+        nextScene.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("NextSceneAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new NextSceneAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("NextSceneAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new NextSceneAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("NextSceneAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new NextSceneAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("NextSceneAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new NextSceneAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View previousScene = parentActivity.findViewById(R.id.previousScene);
+
+        previousScene.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("PreviousSceneAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new PreviousSceneAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("PreviousSceneAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new PreviousSceneAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("PreviousSceneAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new PreviousSceneAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("PreviousSceneAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new PreviousSceneAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View resetX = parentActivity.findViewById(R.id.resetX);
+
+        resetX.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("ResetXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new ResetXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("ResetXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new ResetXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("ResetXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new ResetXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("ResetXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new ResetXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View resetY = parentActivity.findViewById(R.id.resetY);
+
+        resetY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("ResetYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new ResetYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("ResetYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new ResetYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("ResetYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new ResetYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("ResetYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new ResetYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View automovenegativeX = parentActivity.findViewById(R.id.automovenegativeX);
+
+        automovenegativeX.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("SetAutoMoveNegativeXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new SetAutoMoveNegativeXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("SetAutoMoveNegativeXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new SetAutoMoveNegativeXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("SetAutoMoveNegativeXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new SetAutoMoveNegativeXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("SetAutoMoveNegativeXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new SetAutoMoveNegativeXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View setautomovenegativeY = parentActivity.findViewById(R.id.automovenegativeY);
+
+        setautomovenegativeY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("SetAutoMoveNegativeYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new SetAutoMoveNegativeYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("SetAutoMoveNegativeYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new SetAutoMoveNegativeYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("SetAutoMoveNegativeYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new SetAutoMoveNegativeYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("SetAutoMoveNegativeYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new SetAutoMoveNegativeYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View setautomoveX = parentActivity.findViewById(R.id.automoveX);
+
+        setautomoveX.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("SetAutoMoveXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new SetAutoMoveXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("SetAutoMoveXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new SetAutoMoveXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("SetAutoMoveXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new SetAutoMoveXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("SetAutoMoveXAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new SetAutoMoveXAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View setautomoveY = parentActivity.findViewById(R.id.automoveY);
+
+        setautomoveY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("SetAutoMoveYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new SetAutoMoveYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("SetAutoMoveYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new SetAutoMoveYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("SetAutoMoveYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new SetAutoMoveYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("SetAutoMoveYAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new SetAutoMoveYAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
+        View setFollowCamera = parentActivity.findViewById(R.id.setCamerafollow);
+
+        setFollowCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] aux = selectedEvent.split("_");
+                boolean found = false;
+                switch(aux[0]){
+                    case "OnCollision":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).size();i ++){
+                            if(pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).get(i).name.equals("SetFollowCameraAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.collisionActions.get(Integer.parseInt(aux[1])).add(new SetFollowCameraAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+
+                        break;
+                    case "OnStartScene":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.startSceneActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.startSceneActions.get(i).name.equals("SetFollowCameraAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.startSceneActions.add(new SetFollowCameraAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+
+
+
+                    case "OnClickEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.onClickActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.onClickActions.get(i).name.equals("SetFollowCameraAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.onClickActions.add(new SetFollowCameraAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                    case "OnEachSecondEvent":
+                        for (int i = 0; i <pointerToSelectedObject.actionHolder.updateActions.size();i ++){
+                            if(pointerToSelectedObject.actionHolder.updateActions.get(i).name.equals("SetFollowCameraAction")){
+
+                                found = true;
+                                break;
+
+                            }
+                        }
+                        if(!found){
+                            pointerToSelectedObject.actionHolder.updateActions.add(new SetFollowCameraAction(pointerToSelectedObject,theGameEngine));
+                        }
+                        found = false;
+                        break;
+                }
+                selectAction.setVisibility(View.INVISIBLE);
+                oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
+            }
+        });
+
     }
     @Override
     public void onStart() {

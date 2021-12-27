@@ -1,70 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gridLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="2"
     android:orientation="vertical"
-    android:rowCount="2"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        android:layout_margin="20dp"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/usuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="TextView"
-            android:textAlignment="gravity" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <Button
-            android:id="@+id/cerrar_sesion"
+            android:id="@+id/newproject"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundborder_drawable"
+            android:fontFamily="@font/dubai_light"
+            android:text="Nuevo Proyecto"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
+
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1.4" />
+
+        <Button
+            android:id="@+id/localprojects"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:text="Cerrar Sesión" />
+            android:background="@drawable/roundborder_drawable"
+            android:fontFamily="@font/dubai_light"
+            android:text="Mis Proyectos"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/usersprojects"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundborder_drawable"
+            android:fontFamily="@font/dubai_light"
+            android:text="Explorar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/localprojects"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        android:layout_margin="20dp"
-        android:background="@drawable/roundborder_drawable"
-        android:text="Mis Proyectosssssssss" />
+    <LinearLayout
+        android:id="@+id/configSlider1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/text_view_drawable"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-    <Button
-        android:id="@+id/newproject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        android:layout_margin="20dp"
-        android:background="@drawable/roundborder_drawable"
-        android:text="Nuevo Proyecto" />
+        <TextView
+            android:id="@+id/textUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/dubai_light"
+            android:text="Usuario"
+            android:textSize="36sp" />
 
-    <Button
-        android:id="@+id/usersprojects"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        android:layout_margin="20dp"
-        android:background="@drawable/roundborder_drawable"
-        android:text="Explorar" />
+        <TextView
+            android:id="@+id/textPublishedGames"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/dubai_light"
+            android:text="Juegos publicados"
+            android:textSize="23sp" />
 
-</GridLayout>
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/dubai_light"
+            android:text="Visitas totales"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/dubai_light"
+            android:text="Tipo de Juego más usado"
+            android:textSize="23sp" />
+
+        <Button
+            android:id="@+id/helpButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundborder_drawable"
+            android:fontFamily="@font/dubai_light"
+            android:text="Ayuda"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/logOutButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundborder_drawable"
+            android:fontFamily="@font/dubai_light"
+            android:text="Cerrar Sesión"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</RelativeLayout>

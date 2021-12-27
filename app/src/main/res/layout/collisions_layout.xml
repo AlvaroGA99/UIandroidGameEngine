@@ -8,15 +8,16 @@
 
     <TextView
         android:id="@+id/objectIdForCollision"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
 
-        android:background="@drawable/roundborder_yellow_drawable"
+        android:background="@drawable/roundborder_drawable"
 
+        android:fontFamily="@font/dubai_light"
         android:gravity="center"
         android:padding="12dp"
         android:textAlignment="gravity"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

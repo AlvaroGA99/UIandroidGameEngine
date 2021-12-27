@@ -2,6 +2,7 @@ package com.tfg.UIandroidGameEngine;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -24,6 +29,7 @@ public class PublishedProjectsAdapter extends  RecyclerView.Adapter<PublishedPro
 
     private Activity mainActivity;
 
+    public DatabaseReference myRef ;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private final TextView projectName;
@@ -58,9 +64,10 @@ public class PublishedProjectsAdapter extends  RecyclerView.Adapter<PublishedPro
         }
     }
 
-    public PublishedProjectsAdapter(ArrayList<Project> dataSet, Activity mainActivity){
+    public PublishedProjectsAdapter(ArrayList<Project> dataSet, Activity mainActivity, DatabaseReference myRef){
         this.localDataSet = dataSet;
         this.mainActivity = mainActivity;
+        this.myRef = myRef;
     }
 
     @NonNull
@@ -95,6 +102,24 @@ public class PublishedProjectsAdapter extends  RecyclerView.Adapter<PublishedPro
             @Override
             public void onClick(View v) {
 
+                DatabaseReference a = myRef.child("admin123").push();
+
+                a.child("published").setValue(false);
+                a.child("title").setValue(localDataSet.get(position).getName());
+                a.child("project_type").setValue(localDataSet.get(position).getType());
+                myRef.child(localDataSet.get(position).getKey()).child("Scenes").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot Scene : snapshot.getChildren()){
+                            a.child("Scenes").child(Scene.getKey()).setValue(Scene.getValue(ArrayList.class));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }

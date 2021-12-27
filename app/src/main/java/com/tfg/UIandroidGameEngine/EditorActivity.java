@@ -1,7 +1,10 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -10,15 +13,22 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class EditorActivity extends AppCompatActivity   {
-
+    private int currentApiVersion;
    public FragmentManager fm;
    public GameEngine theGameEngine = new GameEngine();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    public DatabaseReference myRef = database.getReference("users/admin123");
+    public DatabaseReference myRef ;
    private EditorGameSurfaceFragment f1 = EditorGameSurfaceFragment.newInstance(theGameEngine);
     private EditorUiFragment f2 = EditorUiFragment.newInstance(theGameEngine);
     public int mode ;
@@ -27,17 +37,100 @@ public class EditorActivity extends AppCompatActivity   {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor/*new EditorGameView(this)*/);
-
-
-        mode = getIntent().getIntExtra("MODE",1);
         key = getIntent().getStringExtra("KEY");
-        if(theGameEngine.getObjectsInScene().size() == 0){
-           // Toast.makeText(getApplicationContext(),"CReación", Toast.LENGTH_SHORT).show();
-            theGameEngine.setContext(getApplicationContext());
-            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Meta",false);
+        myRef = database.getReference("users/"+ FirebaseAuth.getInstance().getCurrentUser().getUid()+"/projects/" + key/*getIntent().getStringExtra("KEY")*/);
+        mode = getIntent().getIntExtra("MODE",1);
 
+        if(theGameEngine.getObjectsInScene().size() == 0){
+
+            if (mode == 0){
+
+
+                theGameEngine.mode = mode;
+                ArrayList<String> SceneList = new ArrayList<>();
+                ArrayList<String> auxObjectDescriptionList = new ArrayList<>();
+
+
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        for(DataSnapshot a : snapshot.child("scenes").getChildren()){
+
+                            SceneList.add(a.getKey());
+                            theGameEngine.addScene(a.getKey());
+                            auxObjectDescriptionList.clear();
+
+                            for(DataSnapshot c : a.getChildren()){
+                                auxObjectDescriptionList.add(c.getValue(String.class));
+                            }
+
+                            for(int i = 0; i < auxObjectDescriptionList.size(); i ++){
+                                //auxObjectList.add(auxObjectDescriptionList.get(i).split("_"));
+                                theGameEngine.SceneHierarchyDescription.get(a.getKey()).add(auxObjectDescriptionList.get(i).split("_"));
+                            }
+
+                            // theGameEngine.SceneHierarchyDescription.put(a.getKey(), auxObjectList);*/
+                        }
+
+
+                       // if(SceneList.size() > 0){theGameEngine.loadScene(0);}
+                        Toast.makeText(EditorActivity.this, "" + SceneList.size() , Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                        Toast.makeText(EditorActivity.this, "ERROR AL REALIZAR LA CONSULTAAAA" , Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            }else{
+
+
+/*
+
+
+           // Toast.makeText(getApplicationContext(),"CReación", Toast.LENGTH_SHORT).show();*/
+            theGameEngine.setContext(getApplicationContext());
+
+
+            switch (mode){
+                case 1:
+                    BasicGameObject aux = new BasicGameObject(-300,250,2, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Jugador",false);
+                    aux.addComponent("GravityComponent");
+                    aux.addComponent("InputMovementPlatformerComponent");
+                    aux.addComponent("JumpComponent");
+                    theGameEngine.addGameObject(aux);
+                     aux = new BasicGameObject(-300,300,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Plataforma 1",false);
+                    aux.scale.x = 5;
+                    aux.preUpdateScale.x = 5;
+                    aux.addComponent(new ColliderComponent(aux,theGameEngine));
+                    theGameEngine.addGameObject(aux);
+                     aux = new BasicGameObject(350, 100,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Plataforma 2",false);
+                    aux.scale.x = 5;
+                    aux.preUpdateScale.x = 5;
+                    aux.addComponent(new ColliderComponent(aux,theGameEngine));
+                     theGameEngine.addGameObject(aux);
+
+                     aux = new BasicGameObject(300,14,1, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Meta",false);
+
+                    theGameEngine.addGameObject(aux);
+                    break;
+                case 2:
+                    break;
+            }
+
+            /*
+
+            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Meta",false);
             //aux.addComponent("GravityComponent");
             //aux.addComponent("InputMovementPlatformerComponent");
             //aux.addComponent("GroundColliderComponent");
@@ -93,9 +186,9 @@ public class EditorActivity extends AppCompatActivity   {
             // aux.addComponent("GroundColliderComponent");
             aux.addComponent(new ColliderComponent(aux, theGameEngine));
             theGameEngine.addGameObject(aux);
-
-
-            aux = new BasicGameObject((float)(getWidth())/2 + 1200, (float)(getHeight())/2 + 60,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Plataforma4",false);
+*/
+/*
+            BasicGameObject aux = new BasicGameObject((float)(getWidth())/2 + 1200, (float)(getHeight())/2 + 60,0,theGameEngine.getTheInputManager(),theGameEngine.ctx,"Plataforma4",false);
             aux.scale.x = 10;
             aux.preUpdateScale.x = 10;
             aux.scale.y = 5;
@@ -104,12 +197,15 @@ public class EditorActivity extends AppCompatActivity   {
             // aux.addComponent("GroundColliderComponent");
             aux.addComponent(new ColliderComponent(aux, theGameEngine));
             theGameEngine.addGameObject(aux);
-        }
-        if (mode == 0){
+*/          }
 
-            theGameEngine.mode = mode;
+
 
         }
+
+
+
+
         //saveProject();
         //if (savedInstanceState == null) {
              fm = getSupportFragmentManager();
@@ -120,13 +216,63 @@ public class EditorActivity extends AppCompatActivity   {
 
 
 
-        // View decorview = getWindow().getDecorView();
-         //decorview.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        currentApiVersion = android.os.Build.VERSION.SDK_INT;
 
+        final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
+        // This work only for android 4.4+
+        if(currentApiVersion >= Build.VERSION_CODES.KITKAT)
+        {
 
+            getWindow().getDecorView().setSystemUiVisibility(flags);
+
+            // Code below is to handle presses of Volume up or Volume down.
+            // Without this, after pressing volume buttons, the navigation bar will
+            // show up and won't hide
+            final View decorView = getWindow().getDecorView();
+            decorView
+                    .setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener()
+                    {
+
+                        @Override
+                        public void onSystemUiVisibilityChange(int visibility)
+                        {
+                            if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0)
+                            {
+                                decorView.setSystemUiVisibility(flags);
+                            }
+                        }
+                    });
+        }
 
     }
+
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus)
+    {
+        super.onWindowFocusChanged(hasFocus);
+        if(currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus)
+        {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
+
+
+
+
 
     public int getHeight(){
 

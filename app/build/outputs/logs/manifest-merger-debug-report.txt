@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
+ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
 MERGED from [com.firebaseui:firebase-ui-auth:6.4.0] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\6f0068b062f7052c99673b14fe32c16f\jetified-firebase-ui-auth-6.4.0\AndroidManifest.xml:2:1-109:12
 MERGED from [com.google.android.material:material:1.3.0] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\9c690320e80a4839b6727fe52ecf762c\material-1.3.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\8f1c30315aa2dc9bdcaaaf06c373f1f8\constraintlayout-2.0.4\AndroidManifest.xml:2:1-11:12
@@ -66,25 +66,25 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Á
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\b8f37ca8e856b6b5c10299b07c1782ef\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\31792490df47eafaec21a9ebfdf85e6d\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\cc5ec88546b4d1d9a0d12d08d43a6bfb\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
-INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
 	package
 		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml
 		INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
 		INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:1-35:12
 		INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:5:5-25:19
+ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:5:5-33:19
 MERGED from [com.firebaseui:firebase-ui-auth:6.4.0] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\6f0068b062f7052c99673b14fe32c16f\jetified-firebase-ui-auth-6.4.0\AndroidManifest.xml:15:5-107:19
 MERGED from [com.firebaseui:firebase-ui-auth:6.4.0] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\6f0068b062f7052c99673b14fe32c16f\jetified-firebase-ui-auth-6.4.0\AndroidManifest.xml:15:5-107:19
 MERGED from [com.google.android.material:material:1.3.0] C:\Users\Álvaro\.gradle\caches\transforms-2\files-2.1\9c690320e80a4839b6727fe52ecf762c\material-1.3.0\AndroidManifest.xml:22:5-20
@@ -132,33 +132,35 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Á
 	android:allowBackup
 		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:11:9-59
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:11:9-47
 activity#com.tfg.UIandroidGameEngine.LoginActivity
-ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:12:9-18:20
+ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:13:9-20:20
+	android:screenOrientation
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:13:49-85
 	android:name
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:12:19-48
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:13:19-48
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:13:13-17:29
+ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:15:13-19:29
 action#android.intent.action.MAIN
-ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:14:17-69
+ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:16:17-69
 	android:name
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:14:25-66
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:16:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:16:17-77
+ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:18:17-77
 	android:name
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:16:27-74
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:18:27-74
 activity#com.tfg.UIandroidGameEngine.EditorActivity
-ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:19:9-21:53
+ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:22:9-25:16
 	android:screenOrientation
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:21:13-50
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:23:44-81
 	android:name
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:20:13-43
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:23:13-43
 activity#com.tfg.UIandroidGameEngine.MainActivity
-ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:22:9-24:62
+ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:26:9-32:20
 	android:screenOrientation
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:24:13-50
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:27:43-79
 	android:name
-		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:23:13-41
+		ADDED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml:27:13-41
 uses-sdk
 INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\clase\Cuarto\TFG\UIandroidGameEngine\app\src\main\AndroidManifest.xml

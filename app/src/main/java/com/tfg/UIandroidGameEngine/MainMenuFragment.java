@@ -1,7 +1,9 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -12,23 +14,31 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainMenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainMenuFragment extends Fragment  {
+public class MainMenuFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    DatabaseReference db;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    String textString = " fhg";
     private FragmentManager fg;
+
 
     public MainMenuFragment() {
         // Required empty public constructor
@@ -59,8 +69,8 @@ public class MainMenuFragment extends Fragment  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        fg = getActivity().getSupportFragmentManager();
-        Toast.makeText(getActivity().getApplicationContext(), "CREATE", Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(getActivity().getApplicationContext(), "CREATE", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -71,32 +81,44 @@ public class MainMenuFragment extends Fragment  {
     }
 
     @Override
-    public void onViewCreated( View view, Bundle savedInstanceState){
-        super.onViewCreated(view,savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         Button newProject = (Button) view.findViewById(R.id.newproject);
         Button localProjects = (Button) view.findViewById(R.id.localprojects);
         Button usersProject = (Button) view.findViewById(R.id.usersprojects);
-        TextView users = (TextView) view.findViewById(R.id.usuario);
-        Button closeSesion = (Button) view.findViewById(R.id.cerrar_sesion);
-
-        closeSesion.setOnClickListener(new View.OnClickListener() {
+        ((MainActivity)getActivity()).slider = getActivity().findViewById(R.id.configSlider1);
+        ((MainActivity)getActivity()).slider.setTranslationX(((MainActivity)getActivity()).width);
+        TextView textUser = getActivity().findViewById(R.id.textUser);
+        getActivity().findViewById(R.id.logOutButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                FirebaseAuth.getInstance().signOut();
+                Intent a = new Intent(getActivity().getBaseContext(),LoginActivity.class);
+                startActivity(a);
             }
         });
-        users.setOnClickListener(new View.OnClickListener() {
+        db = FirebaseDatabase.getInstance().getReference("users/" +FirebaseAuth.getInstance().getCurrentUser().getUid()+"/username" );
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                textUser.setText( snapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        fg = getActivity().getSupportFragmentManager();
+
+
+
 
         newProject.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 // Do something in response to button click
-
+                ((MainActivity) getActivity()).slider = null;
                 fg.beginTransaction().replace(R.id.container, new NewProjectFragment()).addToBackStack(null).commit();
 
             }
@@ -106,7 +128,7 @@ public class MainMenuFragment extends Fragment  {
 
             public void onClick(View v) {
                 // Do something in response to button click
-
+                ((MainActivity) getActivity()).slider = null;
                 fg.beginTransaction().replace(R.id.container, new LocalProjectsFragment()).addToBackStack(null).commit();
             }
         });
@@ -115,10 +137,14 @@ public class MainMenuFragment extends Fragment  {
 
             public void onClick(View v) {
                 // Do something in response to button click
-
+                ((MainActivity) getActivity()).slider = null;
                 fg.beginTransaction().replace(R.id.container, new UsersProjectFragment()).addToBackStack(null).commit();
             }
         });
+
+    }
+
+    public void moveSlider(){
 
     }
 

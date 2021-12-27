@@ -19,15 +19,16 @@ public class BitmapSprite implements Sprite{
 
     Bitmap bitmap ;
     Context ctx;
-    Resources spriteDrawable;
-    Matrix m;
 
+    Matrix m;
+    int[] sprites = {R.drawable.sprite};
     public BitmapSprite(Context ctx)  {
 
         this.ctx = ctx;
-        ctx.getResources();
+       // ctx.getResources();
        //spriteDrawable = ctx.getResources();
          bitmap = BitmapFactory.decodeResource(ctx.getResources(),R.drawable.sprite);
+
         //Toast.makeText(ctx,""+    bitmap.getHeight(),Toast.LENGTH_SHORT).show();
 //bitmap.getHeight();
         m =  new Matrix();
@@ -43,4 +44,9 @@ public class BitmapSprite implements Sprite{
                 renderCanvas.drawBitmap(bitmap,m,null);
 
             }
+
+        @Override
+    public void loadSprite(int spriteNumber){
+            bitmap = BitmapFactory.decodeResource(ctx.getResources(),sprites[spriteNumber]);
+        }
 }

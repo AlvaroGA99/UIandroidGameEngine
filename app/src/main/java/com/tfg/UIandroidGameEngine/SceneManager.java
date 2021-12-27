@@ -17,8 +17,9 @@ public class SceneManager {
 
     public ArrayList<BasicGameObject> objectsInCurrentScene = new ArrayList<BasicGameObject>();
 
-    public String currentScene;
+    public int currentScene;
 
+    private long timeToNextTick ;
 
     public ArrayList<Event> eventsTriggered = new ArrayList<Event>();
 
@@ -34,52 +35,52 @@ public class SceneManager {
     }
 
     public SceneManager(){
-        this.currentScene = "ScaffoldScene";
+        this.currentScene = 0;
+        this.timeToNextTick = 0;
     }
 
 
 
     public void drawCurrentScene(Canvas renderCanvas,Camera camera){
-        for (int i = 0; i < objectsInCurrentScene.size(); i ++){
+        for (int i = 0; i < objectsInCurrentScene.size(); i ++ ){
             objectsInCurrentScene.get(i).draw(renderCanvas,camera);
         }
     }
 
     public void updateCurrentScene(long elapsedTime){
 
+        if(timeToNextTick > 1000){
+
+           // System.exit(-1);
+            eventsTriggered.add(new EachSecondEvent());
+
+            timeToNextTick = 0;
+        }else{
+
+            timeToNextTick  += elapsedTime;
+
+        }
 
         // añadir eventos a eventsTriggered
         // añadir a cada objeto  las collisiones : TODA LA LOGICA DEL QuadTree
         for(int i = 0; i < objectsInCurrentScene.size(); i++){
 
             for(int j = 0; j < objectsInCurrentScene.size(); j++){
+                float s1 = objectsInCurrentScene.get(j).position.x   - 25 * objectsInCurrentScene.get(j).scale.x;
+                float s2  = objectsInCurrentScene.get(j).position.x   + 25 * objectsInCurrentScene.get(j).scale.x;
+                float s3 = objectsInCurrentScene.get(j).position.y   - 25 * objectsInCurrentScene.get(j).scale.y;
+                float s4 = objectsInCurrentScene.get(j).position.y   + 25 * objectsInCurrentScene.get(j).scale.y;
+
+
+                float s5 = objectsInCurrentScene.get(i).position.x  - 25 * objectsInCurrentScene.get(i).scale.x;
+                float s6  = objectsInCurrentScene.get(i).position.x  + 25 * objectsInCurrentScene.get(i).scale.x;
+                float s7  = objectsInCurrentScene.get(i).position.y  - 25 * objectsInCurrentScene.get(i).scale.y;
+                float s8 = objectsInCurrentScene.get(i).position.y  + 25 * objectsInCurrentScene.get(i).scale.y;
+
+
                 if(j!= i){
-                    if ((objectsInCurrentScene.get(i).position.x  - 25 * objectsInCurrentScene.get(j).scale.x > objectsInCurrentScene.get(j).position.x  - 25 * objectsInCurrentScene.get(j).scale.x
-                            && objectsInCurrentScene.get(i).position.x - 25 * objectsInCurrentScene.get(j).scale.x < objectsInCurrentScene.get(j).position.x  + 25 * objectsInCurrentScene.get(j).scale.x
-                            && objectsInCurrentScene.get(i).position.y - 25 * objectsInCurrentScene.get(j).scale.y> objectsInCurrentScene.get(j).position.y  - 25 * objectsInCurrentScene.get(j).scale.y
-                            && objectsInCurrentScene.get(i).position.y - 25 * objectsInCurrentScene.get(j).scale.y< objectsInCurrentScene.get(j).position.y  + 25 * objectsInCurrentScene.get(j).scale.y)
-
-                            ||
-
-                            (objectsInCurrentScene.get(i).position.x  - 25 * objectsInCurrentScene.get(j).scale.x > objectsInCurrentScene.get(j).position.x  - 25 * objectsInCurrentScene.get(j).scale.x
-                                    && objectsInCurrentScene.get(i).position.x - 25 * objectsInCurrentScene.get(j).scale.x < objectsInCurrentScene.get(j).position.x  + 25 * objectsInCurrentScene.get(j).scale.x
-                                    && objectsInCurrentScene.get(i).position.y + 25 * objectsInCurrentScene.get(j).scale.y> objectsInCurrentScene.get(j).position.y  - 25 * objectsInCurrentScene.get(j).scale.y
-                                    && objectsInCurrentScene.get(i).position.y + 25 * objectsInCurrentScene.get(j).scale.y< objectsInCurrentScene.get(j).position.y  + 25 * objectsInCurrentScene.get(j).scale.y)
-
-                            ||
-
-                            (objectsInCurrentScene.get(i).position.x  + 25 * objectsInCurrentScene.get(j).scale.x > objectsInCurrentScene.get(j).position.x  - 25 * objectsInCurrentScene.get(j).scale.x
-                                    && objectsInCurrentScene.get(i).position.x + 25 * objectsInCurrentScene.get(j).scale.x < objectsInCurrentScene.get(j).position.x  + 25 * objectsInCurrentScene.get(j).scale.x
-                                    && objectsInCurrentScene.get(i).position.y - 25 * objectsInCurrentScene.get(j).scale.y> objectsInCurrentScene.get(j).position.y  - 25 * objectsInCurrentScene.get(j).scale.y
-                                    && objectsInCurrentScene.get(i).position.y - 25 * objectsInCurrentScene.get(j).scale.y< objectsInCurrentScene.get(j).position.y  + 25 * objectsInCurrentScene.get(j).scale.y)
-
-                            ||
-
-                            (objectsInCurrentScene.get(i).position.x  + 25 * objectsInCurrentScene.get(j).scale.x > objectsInCurrentScene.get(j).position.x  - 25 * objectsInCurrentScene.get(j).scale.x
-                                    && objectsInCurrentScene.get(i).position.x + 25 * objectsInCurrentScene.get(j).scale.x < objectsInCurrentScene.get(j).position.x  + 25 * objectsInCurrentScene.get(j).scale.x
-                                    && objectsInCurrentScene.get(i).position.y + 25 * objectsInCurrentScene.get(j).scale.y> objectsInCurrentScene.get(j).position.y  - 25 * objectsInCurrentScene.get(j).scale.y
-                                    && objectsInCurrentScene.get(i).position.y + 25 * objectsInCurrentScene.get(j).scale.y< objectsInCurrentScene.get(j).position.y  + 25 * objectsInCurrentScene.get(j).scale.y)
-                            ){
+                    if ((s1 > s5 && s1< s6 && s4 > s7 && s4 < s8) || (s1 > s5 && s1< s6 && s3> s7 && s3 < s8  ) || (s2 > s5 && s2 < s6 && s4 > s7 && s4 < s8 ) || (s2 > s5 && s2 < s6 && s3 > s7 && s3 < s8)
+                        || (s5 > s1 && s5< s2 && s7 > s3 && s7 < s4) || (s5 > s1 && s5< s2 && s8> s3 && s8 < s4  ) || (s6 > s1 && s6 < s2 && s7 > s3 && s7 < s4 ) || (s6 > s1 && s6 < s2 && s8 > s3 && s8 < s4)){
 
                        objectsInCurrentScene.get(i).collisionsReceived.add(new Collision(objectsInCurrentScene.get(j)));
 
@@ -92,12 +93,14 @@ public class SceneManager {
 
         for (int i = 0; i < objectsInCurrentScene.size(); i++){
             //añadir a este objeto los inputEvents
+
             objectsInCurrentScene.get(i).update(elapsedTime,eventsTriggered);
         }
 
         for (int i = 0; i < objectsInCurrentScene.size(); i++){
             objectsInCurrentScene.get(i).postUpdate();
         }
+        
 
         eventsTriggered.clear();
 
@@ -130,7 +133,7 @@ public class SceneManager {
 
             eventsTriggered.clear();
            objectsInCurrentScene.clear();
-            eventsTriggered.add(new StartSceneEvent());
+            //eventsTriggered.add(new StartSceneEvent());
        for (int i = 0; i < sceneObjects.size();i++){
 
            BasicGameObject aux = castDescriptionToObject(sceneObjects.get(i));
@@ -138,7 +141,8 @@ public class SceneManager {
 
            objectsInCurrentScene.add(aux);
 
-       }
+       }timeToNextTick = 0;
+
 
 
 

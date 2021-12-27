@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
 
 public class NotPublishedProjectsAdapter extends RecyclerView.Adapter<NotPublishedProjectsAdapter.ViewHolder>{
@@ -18,6 +20,8 @@ public class NotPublishedProjectsAdapter extends RecyclerView.Adapter<NotPublish
     public ArrayList<Project> localDataSet;
 
     private Activity mainActivity;
+
+    private DatabaseReference myRef;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -53,9 +57,10 @@ public class NotPublishedProjectsAdapter extends RecyclerView.Adapter<NotPublish
         }
     }
 
-    public NotPublishedProjectsAdapter(ArrayList<Project> dataSet, Activity mainActivity){
+    public NotPublishedProjectsAdapter(ArrayList<Project> dataSet, Activity mainActivity, DatabaseReference myRef){
         this.localDataSet = dataSet;
         this.mainActivity = mainActivity;
+        this.myRef = myRef;
     }
 
     @NonNull
@@ -89,7 +94,7 @@ public class NotPublishedProjectsAdapter extends RecyclerView.Adapter<NotPublish
         holder.getSaveOrPublishButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                myRef.child("projects/"+localDataSet.get(position).getKey()).child("published").setValue(true);
             }
         });
     }

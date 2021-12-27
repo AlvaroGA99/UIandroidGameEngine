@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/elements_drawable"
+        android:fontFamily="@font/dubai_light"
         android:gravity="center"
         android:padding="12dp"
         android:textAlignment="gravity"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="14sp" />
 
 

@@ -19,144 +19,192 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/saveInEditor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="35dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/roundborder_drawable"
-                android:text="Guardar" />
+                android:fontFamily="@font/dubai_light"
+                android:text="Guardar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="35dp"
                 android:layout_weight="1"
                 android:background="@drawable/roundborder_drawable">
 
-                <View
+                <ImageView
                     android:id="@+id/resume"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="28dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="7dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/playbutton_drawable" />
+                    app:srcCompat="@drawable/playbutton_drawable" />
 
-                <View
+                <ImageView
                     android:id="@+id/pause"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="7dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/pausebutton_drawable" />
+                    app:srcCompat="@drawable/pausebutton_drawable" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/publishInEditor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="35dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/roundborder_yellow_drawable"
+                android:fontFamily="@font/dubai_light"
                 android:text="Publicar"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/UI_CONTAINER"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:id="@+id/objectHierarchy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:text="\ntn">
 
+                <ImageView
+                    android:id="@+id/hideLeft"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="70dp"
+                    android:rotation="0"
+                    android:src="@drawable/right"
+                    android:translationZ="10dp" />
+
                 <View
                     android:id="@+id/h_"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/roundborder_drawable" />
+                    android:background="@drawable/text_view_drawable" />
 
                 <LinearLayout
                     android:id="@+id/objectHierarchyStructure"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="30dp"
 
-                    android:layout_marginBottom="20dp"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/linearLayout2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
                         android:orientation="horizontal">
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <Spinner
                             android:id="@+id/scenes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:orientation="horizontal"
-                            tools:layout_marginRight="25dp">
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintEnd_toStartOf="@+id/addScene"
+                            app:layout_constraintStart_toStartOf="parent">
 
-                        </androidx.recyclerview.widget.RecyclerView>
+                        </Spinner>
 
-                        <Button
+                        <ImageView
                             android:id="@+id/addScene"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/roundborder_yellow_drawable"
-                            android:text="Añadir Escena"
-                            android:textColor="@color/black" />
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/roundborder_drawable"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/deleteScene"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:srcCompat="@drawable/suma" />
 
-                    </LinearLayout>
+                        <ImageView
+                            android:id="@+id/deleteScene"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="65dp"
+                            android:background="@drawable/roundborder_red_drawable"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/bin" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/objectsInCurrentScene"
+                        <ImageView
+                            android:id="@+id/configureScene"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/elements2_drawable"
+                            android:translationZ="20dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.924"
+                            app:layout_constraintStart_toEndOf="@+id/deleteScene"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:srcCompat="@drawable/settings" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:visibility="visible">
+                        android:layout_height="match_parent">
 
-                    </androidx.recyclerview.widget.RecyclerView>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/objectsInCurrentScene"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="visible">
 
-                    <Button
-                        android:id="@+id/addObject"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:layout_marginRight="100dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/roundborder_yellow_drawable"
-                        android:text="Añadir objeto"
-                        android:textColor="@color/black" />
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <ImageView
+                                android:id="@+id/addObject"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/roundborder_drawable"
+                                app:srcCompat="@drawable/suma" />
+
+                        </LinearLayout>
+                    </ScrollView>
+
 
                 </LinearLayout>
 
@@ -166,25 +214,65 @@
                 android:id="@+id/inspector"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/hideRight"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="20dp"
+                    android:rotation="180"
+                    android:src="@drawable/right"
+                    android:translationZ="10dp" />
+
                 <View
                     android:id="@+id/inspector_"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/roundborder_drawable" />
+                    android:background="@drawable/text_view_drawable" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="30dp"
+                    android:clipChildren="false"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/nameOfObjectInInspector"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dubai_light"
+                        android:gravity="center"
+                        android:text="Jugador"
+                        android:textAlignment="gravity"
+                        android:textSize="24sp"
+                        android:textStyle="normal" />
+
+                    <Button
+                        android:id="@+id/deleteSelectedObject"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/roundborder_red_drawable"
+                        android:fontFamily="@font/dubai_light"
+                        android:text="Eliminar\nobjeto" />
+                </LinearLayout>
 
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="75dp">
 
                     <LinearLayout
                         android:id="@+id/objectProperties"
@@ -192,32 +280,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/nameOfObjectInInspector"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="18dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="TextView"
-                                android:textAlignment="gravity"
-                                android:textSize="36sp"
-                                android:textStyle="bold|italic" />
-
-                            <Button
-                                android:id="@+id/deleteSelectedObject"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/roundborder_red_drawable"
-                                android:text="Eliminar este objeto" />
-                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/Componentes"
@@ -227,31 +289,29 @@
                             android:layout_marginRight="20dp"
                             android:layout_marginBottom="10dp"
 
-                            android:background="@drawable/roundborder_black_drawable"
+                            android:fontFamily="@font/dubai_light"
                             android:gravity="center"
                             android:text="Componentes"
                             android:textAlignment="gravity"
                             android:textColor="@color/white"
-                            android:textSize="36sp" />
+                            android:textSize="24sp" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/componentsInObject"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp">
 
                         </androidx.recyclerview.widget.RecyclerView>
 
-                        <Button
+                        <ImageView
                             android:id="@+id/addComponent"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginLeft="100dp"
                             android:layout_marginRight="100dp"
                             android:layout_marginBottom="40dp"
-                            android:background="@drawable/roundborder_yellow_drawable"
-                            android:text="Añadir componente"
-                            android:textColor="@color/black" />
+                            android:src="@drawable/suma" />
 
                         <TextView
                             android:id="@+id/eventos"
@@ -261,32 +321,30 @@
                             android:layout_marginRight="20dp"
                             android:layout_marginBottom="10dp"
 
-                            android:background="@drawable/roundborder_black_drawable"
+                            android:fontFamily="@font/dubai_light"
                             android:gravity="center"
-                            android:text="Eventos"
 
+                            android:text="Eventos"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="36sp" />
+                            android:textSize="24sp" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/eventsInObject"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp">
 
                         </androidx.recyclerview.widget.RecyclerView>
 
-                        <Button
+                        <ImageView
                             android:id="@+id/addEvent"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginLeft="100dp"
                             android:layout_marginRight="100dp"
                             android:layout_marginBottom="40dp"
-                            android:background="@drawable/roundborder_yellow_drawable"
-                            android:text="Añadir evento"
-                            android:textColor="@color/black" />
+                            android:src="@drawable/suma" />
 
                         <Switch
                             android:id="@+id/isFocusedByCamera"
@@ -296,11 +354,13 @@
                             android:layout_marginRight="20dp"
                             android:layout_marginBottom="40dp"
                             android:autoText="false"
-                            android:background="@drawable/roundborder_black_drawable"
+                            android:fontFamily="@font/dubai_light"
                             android:text="Objetivo de la camara"
                             android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/white"
-                            android:textSize="40sp" />
+                            android:textSize="24sp"
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/Escala"
@@ -309,143 +369,124 @@
                             android:layout_marginLeft="40dp"
                             android:layout_marginRight="20dp"
                             android:layout_marginBottom="20dp"
-                            android:background="@drawable/roundborder_black_drawable"
+                            android:fontFamily="@font/dubai_light"
                             android:gravity="center"
                             android:text="Escala"
                             android:textAlignment="gravity"
                             android:textColor="@color/white"
-                            android:textSize="36sp" />
+                            android:textSize="24sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="65dp"
                             android:orientation="horizontal">
 
-                            <Button
+                            <ImageView
                                 android:id="@+id/disminuirEscalaX"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="20dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/roundborder_yellow_drawable"
-                                android:text="-"
-                                android:textColor="@color/black"
-                                android:textSize="50sp" />
+                                app:srcCompat="@drawable/suma" />
 
                             <TextView
                                 android:id="@+id/textoEscalaX"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/dubai_light"
                                 android:text="X : "
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="30sp" />
 
-                            <Button
+                            <ImageView
                                 android:id="@+id/aumentarEscalaX"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
                                 android:layout_marginRight="10dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/roundborder_yellow_drawable"
-                                android:text="+"
-                                android:textColor="@color/black"
-                                android:textSize="50sp" />
+                                app:srcCompat="@drawable/suma" />
                         </LinearLayout>
-
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginBottom="40dp"
                             android:orientation="horizontal">
 
-                            <Button
+                            <ImageView
                                 android:id="@+id/disminuirEscalaY"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="20dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/roundborder_yellow_drawable"
-                                android:text="-"
-                                android:textColor="@color/black"
-                                android:textSize="50sp" />
+                                app:srcCompat="@drawable/suma" />
 
                             <TextView
                                 android:id="@+id/textoEscalaY"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/dubai_light"
                                 android:text="Y : "
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="30sp" />
 
-                            <Button
+                            <ImageView
                                 android:id="@+id/aumentarEscalaY"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
                                 android:layout_marginRight="10dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/roundborder_yellow_drawable"
-                                android:text="+"
-                                android:textColor="@color/black"
-                                android:textSize="50sp" />
+                                app:srcCompat="@drawable/suma" />
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/Rotacion"
+                            android:id="@+id/Sprite"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
                             android:layout_marginRight="20dp"
                             android:layout_marginBottom="20dp"
-                            android:background="@drawable/roundborder_black_drawable"
+                            android:fontFamily="@font/dubai_light"
                             android:gravity="center"
-                            android:text="Rotación"
+                            android:text="Sprite"
                             android:textAlignment="gravity"
                             android:textColor="@color/white"
-                            android:textSize="36sp" />
+                            android:textSize="24sp" />
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="40dp"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <Button
-                                android:id="@+id/disminuirRotacion"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
+                            <ImageView
+                                android:id="@+id/previousSprite"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/roundborder_yellow_drawable"
-                                android:text="-"
-                                android:textColor="@color/black"
-                                android:textSize="50sp" />
+                                app:srcCompat="@drawable/right" />
 
-                            <TextView
-                                android:id="@+id/textoRotacion"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <ImageView
+                                android:id="@+id/spritePreview"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="100dp"
                                 android:layout_weight="1"
-                                android:text=""
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="30sp" />
+                                app:srcCompat="@drawable/sprite" />
 
-                            <Button
-                                android:id="@+id/aumentarRotacion"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
+                            <ImageView
+                                android:id="@+id/nextSprite"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/roundborder_yellow_drawable"
-                                android:text="+"
-                                android:textColor="@color/black"
-                                android:textSize="50sp" />
+                                android:rotation="182"
+                                app:srcCompat="@drawable/right"
+                                tools:rotation="180" />
                         </LinearLayout>
 
 
@@ -461,8 +502,15 @@
         android:id="@+id/selectComponentToAdd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/roundborder_drawable"
 
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_view_drawable"
         android:visibility="invisible">
 
         <LinearLayout
@@ -475,8 +523,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="@string/english_gravity_component"
+                android:background="@drawable/roundborder_drawable"
+                android:text="\n\nGravedad\n\n"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
 
@@ -485,8 +533,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="@string/english_ground_collider_component"
+                android:background="@drawable/roundborder_drawable"
+                android:text="\n\nColisión con el suelo\n\n"
                 android:textAlignment="center"
 
                 android:textColor="@color/black" />
@@ -496,8 +544,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="@string/english_input_movement_platformer_componentes"
+                android:background="@drawable/roundborder_drawable"
+                android:text="\n\nMovimiento Lateral\n\n"
                 android:textAlignment="center"
 
                 android:textColor="@color/black" />
@@ -507,8 +555,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="\n\nJumpComponent\n\n"
+                android:background="@drawable/roundborder_drawable"
+                android:text="\n\nSaltar\n\n"
                 android:textAlignment="center"
 
                 android:textColor="@color/black" />
@@ -518,8 +566,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="\n\nColliderComponent\n\n"
+                android:background="@drawable/roundborder_drawable"
+                android:text="\n\nCollisión\n\n"
                 android:textAlignment="center"
 
                 android:textColor="@color/black" />
@@ -529,8 +577,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="\n\nXAutoMoventComponent\n\n"
+                android:background="@drawable/roundborder_drawable"
+                android:text="\n\nMovimiento automático X\n\n"
                 android:textAlignment="center"
 
                 android:textColor="@color/black" />
@@ -540,8 +588,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="\n\nYAutoMoventComponent\n\n"
+                android:background="@drawable/roundborder_drawable"
+                android:text="\n\nMovimiento automático Y\n\n"
                 android:textAlignment="center"
 
                 android:textColor="@color/black" />
@@ -552,8 +600,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="\n\nDragableComponent\n\n"
+                android:background="@drawable/roundborder_drawable"
+                android:text="\n\nArrastrable\n\n"
                 android:textAlignment="center"
 
                 android:textColor="@color/black" />
@@ -566,7 +614,13 @@
         android:id="@+id/selectObjectToAdd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/roundborder_drawable"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_view_drawable"
         android:orientation="vertical"
         android:visibility="invisible">
 
@@ -576,25 +630,25 @@
             android:layout_weight="3"
             android:orientation="horizontal">
 
-            <Button
+            <ImageView
                 android:id="@+id/addRectangle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="Rectángulo"
-                android:textColor="@color/black" />
+                android:background="@drawable/roundborder_drawable"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/rectangle_preview" />
 
-            <Button
+            <ImageView
                 android:id="@+id/addCircle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="Círculo"
-                android:textColor="@color/black" />
+                android:background="@drawable/roundborder_drawable"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/circle_preview" />
 
             <Button
                 android:id="@+id/addSprite"
@@ -602,9 +656,12 @@
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundborder_yellow_drawable"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
                 android:text="Sprite"
-                android:textColor="@color/black" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/black"
+                android:textSize="36sp" />
         </LinearLayout>
 
 
@@ -616,7 +673,7 @@
             android:layout_marginRight="150dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/text_view_drawable"
+            android:background="@drawable/roundborder_drawable"
 
 
             android:textSize="24sp">
@@ -638,7 +695,13 @@
         android:id="@+id/selectEventToAdd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/roundborder_drawable"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_view_drawable"
         android:visibility="invisible">
 
         <LinearLayout
@@ -651,9 +714,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
                 android:gravity="center"
-                android:text="@string/english_OnClickEvent"
+                android:text="\n\nAl clicar\n\n"
                 android:textAlignment="gravity"
                 android:textColor="@color/black" />
 
@@ -663,9 +727,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
                 android:gravity="center"
-                android:text="\n\nOnStartSceneEvent\n\n"
+                android:text="\n\nAl empezzar la escena\n\n"
                 android:textAlignment="gravity"
                 android:textColor="@color/black" />
 
@@ -674,9 +739,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/roundborder_yellow_drawable"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
                 android:gravity="center"
-                android:text="\n\nOnEachSecondEvent\n\n"
+                android:text="\n\nCada segundo\n\n"
                 android:textAlignment="gravity"
                 android:textColor="@color/black" />
 
@@ -689,70 +755,44 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/selectVisual"
+        android:id="@+id/selectAsset"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_view_drawable"
+        android:orientation="horizontal"
         android:visibility="invisible">
 
-        <LinearLayout
+        <GridView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/previousVisual"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginBottom="50dp"
-                android:layout_weight="1"
-
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="Anterior"
-                android:textColor="@color/black"
-                android:textSize="36sp" />
-
-            <View
-                android:id="@+id/selectorColor"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="50dp"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/nextColor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="100dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/roundborder_yellow_drawable"
-                android:text="Siguiente"
-                android:textColor="@color/black"
-                android:textSize="36sp" />
-        </LinearLayout>
+        </GridView>
 
         <Button
-            android:id="@+id/aceptarVisual"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:layout_weight="2"
-            android:background="@drawable/roundborder_yellow_drawable"
-            android:text="Aceptar"
-            android:textColor="@color/black"
-            android:textSize="36sp" />
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/selectActionToAdd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/roundborder_drawable"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_view_drawable"
         android:visibility="invisible">
 
         <LinearLayout
@@ -764,12 +804,271 @@
                 android:id="@+id/DebugAction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/roundborder_yellow_drawable"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
                 android:gravity="center"
-                android:text="\n\nDebugAction\n\n"
+                android:text="\n\nBorrar\n\n"
                 android:textAlignment="gravity"
                 android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/invertXmov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nInvertir movimiento en X\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/invertYmov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\n\n\nInvertir movimiento en Y\n\n\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/nextScene"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nEscena siguiente\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/previousScene"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nEscena anterior\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/resetX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nReiniciar posición en X X\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/resetY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nReiniciar posición en Y\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/automovenegativeX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nMovimiento automático -X\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/automovenegativeY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nMovimiento automático -Y\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/automoveX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nMovimiento automático X\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/automoveY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nMovimiento automático Y\n\n"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/setCamerafollow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundborder_drawable"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="\n\nSeguir con la cámara\n\n"
+                android:textAlignment="gravity" />
         </LinearLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/configureSceneLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_view_drawable"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="870dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/renameEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="Fondo"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/right" />
+
+                <ImageView
+                    android:id="@+id/backgroundSprite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/background1" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:rotation="180"
+                    android:src="@drawable/right" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/dubai_light"
+                android:gravity="center"
+                android:text="Orden de escena"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/right" />
+
+                <TextView
+                    android:id="@+id/sceneOrderText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/dubai_light"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="36sp" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:rotation="180"
+                    android:src="@drawable/right" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/renameEditText"
+            android:layout_width="400dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/roundborder_drawable"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/applyChanges"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </EditText>
+
+        <ImageView
+            android:id="@+id/applyChanges"
+            android:layout_width="94dp"
+            android:layout_height="81dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundborder_drawable"
+            android:src="@drawable/bin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

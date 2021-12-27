@@ -4,25 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="@drawable/roundborder_drawable"
+    android:background="@drawable/text_view_drawable"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/projectName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/dubai_light"
         android:gravity="center"
         android:text="Proyecto de prueba"
         android:textSize="24sp"
-        android:textStyle="bold|italic"
         tools:textAlignment="gravity" />
 
     <TextView
         android:id="@+id/projectDescription"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:fontFamily="@font/dubai_light"
         android:gravity="center"
-        android:text="Usuario :                              Tipo de proyecto :" />
+        android:text="Usuario :                      Tipo de proyecto :" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,8 +36,10 @@
             android:layout_height="match_parent"
             android:layout_margin="7dp"
             android:layout_weight="1"
-            android:background="@drawable/roundborder_yellow_drawable"
+            android:background="@drawable/roundborder_drawable"
+            android:fontFamily="@font/dubai_light"
             android:text="Button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/black" />
 
         <Button
@@ -45,8 +48,10 @@
             android:layout_height="match_parent"
             android:layout_margin="7dp"
             android:layout_weight="1"
-            android:background="@drawable/roundborder_yellow_drawable"
+            android:background="@drawable/roundborder_drawable"
+            android:fontFamily="@font/dubai_light"
             android:text="Button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/black" />
     </LinearLayout>
 </LinearLayout>

@@ -11,10 +11,11 @@
         android:id="@+id/objectId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/elements_drawable"
+        android:background="@drawable/roundborder_drawable"
 
+        android:fontFamily="@font/dubai_light"
         android:padding="12dp"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

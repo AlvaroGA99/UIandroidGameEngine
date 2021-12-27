@@ -8,8 +8,8 @@ public class EachSecondEvent implements  Event {
 
     @Override
     public void dispatchEvent(BasicGameObject container) {
-        for(int i = 0; i < container.actionHolder.startSceneActions.size(); i ++){
-            container.actionHolder.startSceneActions.get(i).execute(-1);
+        for(int i = 0; i < container.actionHolder.updateActions.size(); i ++){
+            container.actionHolder.updateActions.get(i).execute(-1);
         }
     }
 }

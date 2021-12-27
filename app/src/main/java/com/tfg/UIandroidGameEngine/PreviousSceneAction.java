@@ -7,6 +7,9 @@ public class PreviousSceneAction  extends  Action{
 
     @Override
     public void execute(int evenTrigger) {
-
+        int sceneGo = theGameEngine.getCurrentScene() - 1;
+        if(sceneGo < theGameEngine.SceneList.size() && sceneGo >= 0){
+            theGameEngine.loadScene(sceneGo);
+        }
     }
 }

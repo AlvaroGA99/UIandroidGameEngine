@@ -1,20 +1,25 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +44,7 @@ public class LocalProjectsFragment extends Fragment {
     private RecyclerView myPublishedProjects;
     private RecyclerView myNotPublishedProjects;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    public DatabaseReference myRef = database.getReference("users/admin123");
+    public DatabaseReference myRef = database.getReference("users/"+ FirebaseAuth.getInstance().getCurrentUser().getUid());
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,7 +79,7 @@ public class LocalProjectsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Toast.makeText(getActivity().getApplicationContext(), "CREATE", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), "CREATE", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -86,22 +91,25 @@ public class LocalProjectsFragment extends Fragment {
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
 
+
+
         ArrayList<Project> dataPublished = new ArrayList<>();
 
         //HashMap<String, ArrayList<String[]>> aux = new HashMap<String, ArrayList<String[]>>();
         //aux.put("ScaffoldScene", new ArrayList<String[]>());
+        /*dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
-        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
-        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Platformer"));*/
 
 
         ArrayList<Project> dataNotPublished = new ArrayList<>();
 
+        /*dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
@@ -109,23 +117,51 @@ public class LocalProjectsFragment extends Fragment {
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
         dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
-        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
-        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));
+        dataPublished.add(new Project("p1","user1","Proyecto de prueba","Plataformas"));*/
+        ((MainActivity)getActivity()).slider = getActivity().findViewById(R.id.configSlider3);
+        ((MainActivity)getActivity()).slider.setTranslationX(((MainActivity)getActivity()).width);
+        TextView textUser = getActivity().findViewById(R.id.textUser3);
+        getActivity().findViewById(R.id.logOutButton3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent a = new Intent(getActivity().getBaseContext(),LoginActivity.class);
+                startActivity(a);
+            }
+        });
+        myRef.child("username").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                textUser.setText( snapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         myPublishedProjects =  (RecyclerView) getActivity().findViewById(R.id.publishedProjects);
 
-        PublishedProjectsAdapter publishedAdapter = new PublishedProjectsAdapter(dataPublished,getActivity());
+        PublishedProjectsAdapter publishedAdapter = new PublishedProjectsAdapter(dataPublished,getActivity(),myRef);
 
-        NotPublishedProjectsAdapter notPublishedAdapter = new NotPublishedProjectsAdapter(dataNotPublished, getActivity());
+        NotPublishedProjectsAdapter notPublishedAdapter = new NotPublishedProjectsAdapter(dataNotPublished, getActivity(),myRef);
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataPublished.clear();
                 dataNotPublished.clear();
-                Iterable<DataSnapshot> capture =  snapshot.getChildren();
+
+                Iterable<DataSnapshot> capture =  snapshot.child("projects").getChildren();
                 for (DataSnapshot project : capture){
-                    dataPublished.add(new Project(project.getKey(),"user1",project.child("title").getValue(String.class), project.child("project_type").getValue(String.class) ));
+
+                    if(project.child("published").getValue(Boolean.class)){
+                        dataPublished.add(new Project(project.getKey(),snapshot.child("username").getValue(String.class),project.child("title").getValue(String.class), project.child("project_type").getValue(String.class) ));
+                    }else{
+                        dataNotPublished.add(new Project(project.getKey(),snapshot.child("username").getValue(String.class),project.child("title").getValue(String.class), project.child("project_type").getValue(String.class) ));
+                    }
+
 
                 }
                notPublishedAdapter.notifyDataSetChanged();
@@ -148,8 +184,8 @@ public class LocalProjectsFragment extends Fragment {
 
 
         String[] data = {"Publicados", "No Publicados"};
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),R.layout.spinner_published_layout ,data );
+
 
         Spinner spinner = (Spinner) getActivity().findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
@@ -172,6 +208,58 @@ public class LocalProjectsFragment extends Fragment {
             }
         });
 
+
+        String[] dataProjectType = {"Todos","Plataformas","Matamarcianos"};
+        Spinner spinnerProjectType = getActivity().findViewById(R.id.spinner4);
+        ArrayAdapter<String> adapterprojecttype = new ArrayAdapter<String>(getContext(),R.layout.spinner_published_layout ,dataProjectType );
+        spinnerProjectType.setAdapter(adapterprojecttype);
+        spinnerProjectType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                       dataNotPublished.clear();
+                       dataPublished.clear();
+                       for(DataSnapshot project : snapshot.child("projects").getChildren()){
+                           if(position == 0){
+                               if(project.child("published").getValue(Boolean.class)){
+                                   dataPublished.add(new Project(project.getKey(),snapshot.child("username").getValue(String.class),project.child("title").getValue(String.class), project.child("project_type").getValue(String.class) ));
+                               }else{
+                                   dataNotPublished.add(new Project(project.getKey(),snapshot.child("username").getValue(String.class),project.child("title").getValue(String.class), project.child("project_type").getValue(String.class) ));
+                               }
+                           }else{
+
+                               if(project.child("project_type").getValue(String.class).equals(dataProjectType[position])) {
+
+                                   if(project.child("published").getValue(Boolean.class)){
+
+                                       dataPublished.add(new Project(project.getKey(), snapshot.child("username").getValue(String.class), project.child("title").getValue(String.class), project.child("project_type").getValue(String.class)));
+
+                                   }else{
+                                       dataNotPublished.add(new Project(project.getKey(),snapshot.child("username").getValue(String.class),project.child("title").getValue(String.class), project.child("project_type").getValue(String.class) ));
+                                   }
+                           }
+                           }
+                       }
+
+                        notPublishedAdapter.notifyDataSetChanged();
+                        publishedAdapter.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 }

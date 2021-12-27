@@ -39,8 +39,11 @@ public  class BasicGameObject  {
 
         public int sceneHierarchyID;
 
-        private int spriteType;
+        public int spriteType;
+        private int spriteNumber;
         private Sprite sprite;
+
+
 
         public ArrayList<Component> components = new ArrayList<Component>();
         public ArrayList<Event> inputEventsReceived = new ArrayList<Event>();
@@ -54,6 +57,8 @@ public  class BasicGameObject  {
              this.inputManager = inputmanager;
              this.spriteType = spriteType;
              switch(spriteType){
+
+
                  case 0 :
                      sprite = new RectangleSprite();
                      break;
@@ -78,7 +83,9 @@ public  class BasicGameObject  {
              preUpdateRotation = 0f;
              preUpdateScale = new Vector(1,1);
         }
+       public BasicGameObject(){
 
+       }
         public  void  addComponent(Component toAdd){
             components.add(toAdd);
         }
@@ -130,7 +137,7 @@ public  class BasicGameObject  {
 
 
             for(int i = 0;i < actionHolder.collisionActions.size(); i ++){
-                for(int j = 0; j < actionHolder.collisionActions.get(i).size(); i ++){
+                for(int j = 0; j < actionHolder.collisionActions.get(i).size(); j ++){
 
                     aux += "_OnCollisionEvent/" + i + "/" + actionHolder.collisionActions.get(i).get(j).name;
 
@@ -184,6 +191,8 @@ public  class BasicGameObject  {
              }
 
             for (int j = 0; j < eventsTriggered.size(); j ++){
+                //if(eventsTriggered.size() == 1)
+                //System.exit(-1);
                 eventsTriggered.get(j).dispatchEvent(this);
             }
 
@@ -217,6 +226,16 @@ public  class BasicGameObject  {
 
             rotation = preUpdateRotation;
         }
+
+        public void nextSprite(){
+             spriteNumber+=1;
+        }
+
+        public void previousSprite(){
+             spriteNumber-=1;
+             sprite.loadSprite(spriteNumber);
+        }
+
 
 
     }
