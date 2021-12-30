@@ -1,6 +1,5 @@
 package com.tfg.UIandroidGameEngine;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -76,7 +75,7 @@ public class NotPublishedProjectsAdapter extends RecyclerView.Adapter<NotPublish
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotPublishedProjectsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull NotPublishedProjectsAdapter.ViewHolder holder, int position) {
         holder.getPlayOrOpenButton().setText("Abrir Proyecto" );
         holder.getPlayOrOpenButton().setOnClickListener(new View.OnClickListener() {
             @Override
