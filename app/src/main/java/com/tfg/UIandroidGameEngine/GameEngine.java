@@ -42,7 +42,7 @@ public class GameEngine {
     public GameEngine(){
         //collisionQuadTree = new QuadTree(50,50, getObjectsInScene());
 
-        addScene("Scene 1");
+        //addScene("Scene 1");
         //addScene("ScaffoldScene2");
 
     }

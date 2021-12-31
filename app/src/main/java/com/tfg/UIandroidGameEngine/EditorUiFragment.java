@@ -122,7 +122,13 @@ public class EditorUiFragment extends Fragment {
         fragment.theGameEngine = gameEngine;
         return fragment;
     }
+    
+    @Override 
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        Toast.makeText(parentActivity.getApplicationContext(), "VOY DESPUES" + theGameEngine.SceneList.size(), Toast.LENGTH_SHORT).show();
 
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -268,7 +274,7 @@ public class EditorUiFragment extends Fragment {
 
         ArrayList<String> a = new ArrayList<>();
         for(int i = 0; i < theGameEngine.SceneList.size();i++){
-            a.add(theGameEngine.SceneList.get(0));
+            a.add(theGameEngine.SceneList.get(i));
         }
 
 
@@ -308,7 +314,7 @@ public class EditorUiFragment extends Fragment {
                 }
                 pointerToSelectedObject = null;
                 hideInspectorElements();
-                Toast.makeText(getActivity().getApplicationContext(),"Nombre : "+ theGameEngine.SceneList.get(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(),"Nombre : "+ theGameEngine.SceneList.get(position), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getActivity().getApplicationContext(),"ÍNDICE : "+ position, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getActivity().getApplicationContext()," / tamaño : "+ theGameEngine.SceneList.size(), Toast.LENGTH_SHORT).show();
                //theGameEngine.saveThisScene();
@@ -553,7 +559,7 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!buttonView.isPressed()) {
-                    Toast.makeText(getContext(),"NO HE PULSADO",Toast.LENGTH_SHORT).show();
+                    ///Toast.makeText(getContext(),"NO HE PULSADO",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(!isChecked){
@@ -569,7 +575,7 @@ public class EditorUiFragment extends Fragment {
                     }
                 }
 
-                Toast.makeText(getContext(),"" + pointerToSelectedObject.isFocusedByCamera,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(),"" + pointerToSelectedObject.isFocusedByCamera,Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -1941,7 +1947,7 @@ public class EditorUiFragment extends Fragment {
         //theGameEngine.addGameObject();
         //os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
 
-        Toast.makeText(getContext(), "" + theGameEngine.isGameRunning,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), "" + theGameEngine.isGameRunning,Toast.LENGTH_LONG).show();
     }
 
     @Override

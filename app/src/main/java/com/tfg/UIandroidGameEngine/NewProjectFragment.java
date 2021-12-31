@@ -156,7 +156,7 @@ public class NewProjectFragment extends Fragment {
         plantillaPlataformas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode = 1;
+                mode = 2;
                 template = "Plataformas";
                 tipoProyecto.setText("Tipo de Proyecto : Plataformas");
                 crearProyecto.setVisibility(View.VISIBLE);
