@@ -97,6 +97,13 @@ public class MainMenuFragment extends Fragment {
                 startActivity(a);
             }
         });
+        getActivity().findViewById(R.id.helpButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(getActivity().getBaseContext(),HelpActivity.class);
+                startActivity(a);
+            }
+        });
         db = FirebaseDatabase.getInstance().getReference("users/" +FirebaseAuth.getInstance().getCurrentUser().getUid()+"/username" );
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

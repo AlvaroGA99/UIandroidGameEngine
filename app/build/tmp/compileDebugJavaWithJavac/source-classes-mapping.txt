@@ -19,8 +19,14 @@ com/tfg/UIandroidGameEngine/Event.java
  com.tfg.UIandroidGameEngine.Event
 com/tfg/UIandroidGameEngine/DebugAction.java
  com.tfg.UIandroidGameEngine.DebugAction
-com/tfg/UIandroidGameEngine/Action.java
- com.tfg.UIandroidGameEngine.Action
+com/tfg/UIandroidGameEngine/EditorActivity.java
+ com.tfg.UIandroidGameEngine.EditorActivity
+ com.tfg.UIandroidGameEngine.EditorActivity$1
+ com.tfg.UIandroidGameEngine.EditorActivity$2
+ com.tfg.UIandroidGameEngine.EditorActivity$3
+ com.tfg.UIandroidGameEngine.EditorActivity$4
+ com.tfg.UIandroidGameEngine.EditorActivity$5
+ com.tfg.UIandroidGameEngine.EditorActivity$6
 com/tfg/UIandroidGameEngine/Vector.java
  com.tfg.UIandroidGameEngine.Vector
 com/tfg/UIandroidGameEngine/InvertMovementYAction.java
@@ -69,17 +75,16 @@ com/tfg/UIandroidGameEngine/LocalProjectsFragment.java
  com.tfg.UIandroidGameEngine.LocalProjectsFragment$3
  com.tfg.UIandroidGameEngine.LocalProjectsFragment$4
  com.tfg.UIandroidGameEngine.LocalProjectsFragment$5
- com.tfg.UIandroidGameEngine.LocalProjectsFragment$5$1
+ com.tfg.UIandroidGameEngine.LocalProjectsFragment$6
+ com.tfg.UIandroidGameEngine.LocalProjectsFragment$6$1
 com/tfg/UIandroidGameEngine/Sprite.java
  com.tfg.UIandroidGameEngine.Sprite
-com/tfg/UIandroidGameEngine/UsersProjectFragment.java
- com.tfg.UIandroidGameEngine.UsersProjectFragment
- com.tfg.UIandroidGameEngine.UsersProjectFragment$1
- com.tfg.UIandroidGameEngine.UsersProjectFragment$2
- com.tfg.UIandroidGameEngine.UsersProjectFragment$3
- com.tfg.UIandroidGameEngine.UsersProjectFragment$4
- com.tfg.UIandroidGameEngine.UsersProjectFragment$4$1
- com.tfg.UIandroidGameEngine.UsersProjectFragment$5
+com/tfg/UIandroidGameEngine/PublishedProjectsAdapter.java
+ com.tfg.UIandroidGameEngine.PublishedProjectsAdapter
+ com.tfg.UIandroidGameEngine.PublishedProjectsAdapter$1
+ com.tfg.UIandroidGameEngine.PublishedProjectsAdapter$2
+ com.tfg.UIandroidGameEngine.PublishedProjectsAdapter$2$1
+ com.tfg.UIandroidGameEngine.PublishedProjectsAdapter$ViewHolder
 com/tfg/UIandroidGameEngine/SetAutoMoveYAction.java
  com.tfg.UIandroidGameEngine.SetAutoMoveYAction
 com/tfg/UIandroidGameEngine/BasicGameObject.java
@@ -120,6 +125,9 @@ com/tfg/UIandroidGameEngine/ResetYAction.java
  com.tfg.UIandroidGameEngine.ResetYAction
 com/tfg/UIandroidGameEngine/SetFollowCameraAction.java
  com.tfg.UIandroidGameEngine.SetFollowCameraAction
+com/tfg/UIandroidGameEngine/HelpActivity.java
+ com.tfg.UIandroidGameEngine.HelpActivity
+ com.tfg.UIandroidGameEngine.HelpActivity$1
 com/tfg/UIandroidGameEngine/GameEngine.java
  com.tfg.UIandroidGameEngine.GameEngine
 com/tfg/UIandroidGameEngine/Project.java
@@ -133,29 +141,6 @@ com/tfg/UIandroidGameEngine/OnClickEvent.java
  com.tfg.UIandroidGameEngine.OnClickEvent
 com/tfg/UIandroidGameEngine/Asset.java
  com.tfg.UIandroidGameEngine.Asset
-com/tfg/UIandroidGameEngine/StartSceneEvent.java
- com.tfg.UIandroidGameEngine.StartSceneEvent
-com/tfg/UIandroidGameEngine/YAutoMovementComponent.java
- com.tfg.UIandroidGameEngine.YAutoMovementComponent
-com/tfg/UIandroidGameEngine/MainMenuFragment.java
- com.tfg.UIandroidGameEngine.MainMenuFragment
- com.tfg.UIandroidGameEngine.MainMenuFragment$1
- com.tfg.UIandroidGameEngine.MainMenuFragment$2
- com.tfg.UIandroidGameEngine.MainMenuFragment$3
- com.tfg.UIandroidGameEngine.MainMenuFragment$4
- com.tfg.UIandroidGameEngine.MainMenuFragment$5
-com/tfg/UIandroidGameEngine/SoundAsset.java
- com.tfg.UIandroidGameEngine.SoundAsset
-com/tfg/UIandroidGameEngine/SpriteAsset.java
- com.tfg.UIandroidGameEngine.SpriteAsset
-com/tfg/UIandroidGameEngine/EditorActivity.java
- com.tfg.UIandroidGameEngine.EditorActivity
- com.tfg.UIandroidGameEngine.EditorActivity$1
- com.tfg.UIandroidGameEngine.EditorActivity$2
- com.tfg.UIandroidGameEngine.EditorActivity$3
- com.tfg.UIandroidGameEngine.EditorActivity$4
- com.tfg.UIandroidGameEngine.EditorActivity$5
- com.tfg.UIandroidGameEngine.EditorActivity$6
 com/tfg/UIandroidGameEngine/EditorUiFragment.java
  com.tfg.UIandroidGameEngine.EditorUiFragment
  com.tfg.UIandroidGameEngine.EditorUiFragment$1
@@ -204,24 +189,47 @@ com/tfg/UIandroidGameEngine/EditorUiFragment.java
  com.tfg.UIandroidGameEngine.EditorUiFragment$49
  com.tfg.UIandroidGameEngine.EditorUiFragment$5
  com.tfg.UIandroidGameEngine.EditorUiFragment$50
+ com.tfg.UIandroidGameEngine.EditorUiFragment$51
  com.tfg.UIandroidGameEngine.EditorUiFragment$6
  com.tfg.UIandroidGameEngine.EditorUiFragment$7
  com.tfg.UIandroidGameEngine.EditorUiFragment$8
  com.tfg.UIandroidGameEngine.EditorUiFragment$9
-com/tfg/UIandroidGameEngine/PublishedProjectsAdapter.java
- com.tfg.UIandroidGameEngine.PublishedProjectsAdapter
- com.tfg.UIandroidGameEngine.PublishedProjectsAdapter$1
- com.tfg.UIandroidGameEngine.PublishedProjectsAdapter$2
- com.tfg.UIandroidGameEngine.PublishedProjectsAdapter$2$1
- com.tfg.UIandroidGameEngine.PublishedProjectsAdapter$ViewHolder
+com/tfg/UIandroidGameEngine/YAutoMovementComponent.java
+ com.tfg.UIandroidGameEngine.YAutoMovementComponent
+com/tfg/UIandroidGameEngine/MainMenuFragment.java
+ com.tfg.UIandroidGameEngine.MainMenuFragment
+ com.tfg.UIandroidGameEngine.MainMenuFragment$1
+ com.tfg.UIandroidGameEngine.MainMenuFragment$2
+ com.tfg.UIandroidGameEngine.MainMenuFragment$3
+ com.tfg.UIandroidGameEngine.MainMenuFragment$4
+ com.tfg.UIandroidGameEngine.MainMenuFragment$5
+ com.tfg.UIandroidGameEngine.MainMenuFragment$6
+com/tfg/UIandroidGameEngine/SoundAsset.java
+ com.tfg.UIandroidGameEngine.SoundAsset
+com/tfg/UIandroidGameEngine/SpriteAsset.java
+ com.tfg.UIandroidGameEngine.SpriteAsset
+com/tfg/UIandroidGameEngine/UsersProjectFragment.java
+ com.tfg.UIandroidGameEngine.UsersProjectFragment
+ com.tfg.UIandroidGameEngine.UsersProjectFragment$1
+ com.tfg.UIandroidGameEngine.UsersProjectFragment$2
+ com.tfg.UIandroidGameEngine.UsersProjectFragment$3
+ com.tfg.UIandroidGameEngine.UsersProjectFragment$4
+ com.tfg.UIandroidGameEngine.UsersProjectFragment$5
+ com.tfg.UIandroidGameEngine.UsersProjectFragment$5$1
+ com.tfg.UIandroidGameEngine.UsersProjectFragment$6
 com/tfg/UIandroidGameEngine/NewProjectFragment.java
  com.tfg.UIandroidGameEngine.NewProjectFragment
  com.tfg.UIandroidGameEngine.NewProjectFragment$1
  com.tfg.UIandroidGameEngine.NewProjectFragment$2
  com.tfg.UIandroidGameEngine.NewProjectFragment$3
  com.tfg.UIandroidGameEngine.NewProjectFragment$4
+ com.tfg.UIandroidGameEngine.NewProjectFragment$5
 com/tfg/UIandroidGameEngine/NotPublishedProjectsAdapter.java
  com.tfg.UIandroidGameEngine.NotPublishedProjectsAdapter
  com.tfg.UIandroidGameEngine.NotPublishedProjectsAdapter$1
  com.tfg.UIandroidGameEngine.NotPublishedProjectsAdapter$2
  com.tfg.UIandroidGameEngine.NotPublishedProjectsAdapter$ViewHolder
+com/tfg/UIandroidGameEngine/StartSceneEvent.java
+ com.tfg.UIandroidGameEngine.StartSceneEvent
+com/tfg/UIandroidGameEngine/Action.java
+ com.tfg.UIandroidGameEngine.Action

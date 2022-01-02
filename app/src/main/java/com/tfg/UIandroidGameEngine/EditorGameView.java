@@ -44,7 +44,9 @@ public class EditorGameView extends SurfaceView implements SurfaceHolder.Callbac
         m =  new Matrix();
     }
 
-
+    public void loadBackground(int drawable){
+        bitmap = BitmapFactory.decodeResource(getContext().getResources(),drawable);
+    }
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
         theGameEngine.getTheInputManager().setInputScreen(this.getWidth(),this.getHeight());

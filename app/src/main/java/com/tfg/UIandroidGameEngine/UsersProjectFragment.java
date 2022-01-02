@@ -123,7 +123,13 @@ public class UsersProjectFragment extends Fragment {
             }
         });
 
-
+        getActivity().findViewById(R.id.helpButton4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(getActivity().getBaseContext(),HelpActivity.class);
+                startActivity(a);
+            }
+        });
 
         Spinner filterby = getActivity().findViewById(R.id.spinner2); //2
         Spinner projectType= getActivity().findViewById(R.id.spinner3); //3

@@ -24,7 +24,7 @@ public class EditorGameSurfaceFragment extends Fragment  {
     public EditorGameView gv ;
     public GameEngine theGameEngine ;
     public ObjectsInSceneAdapter os;
-
+    // TO saadf
     // TODO: Rename and change types of parameters
 
 
@@ -37,8 +37,7 @@ public class EditorGameSurfaceFragment extends Fragment  {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+
      * @return A new instance of fragment EditorGameSurfaceFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -79,7 +78,7 @@ public class EditorGameSurfaceFragment extends Fragment  {
         ff.addView(gv);
 
 
-
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.editorContainer, ((EditorActivity)getActivity()).f2,null).commit();
 
 
 

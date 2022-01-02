@@ -108,6 +108,14 @@ public class NewProjectFragment extends Fragment {
                 startActivity(a);
             }
         });
+        getActivity().findViewById(R.id.helpButton2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(getActivity().getBaseContext(),HelpActivity.class);
+                startActivity(a);
+            }
+        });
+
         myRef.child("username").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

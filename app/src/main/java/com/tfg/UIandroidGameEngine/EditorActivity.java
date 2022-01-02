@@ -1,14 +1,19 @@
 package com.tfg.UIandroidGameEngine;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,8 +34,8 @@ public class EditorActivity extends AppCompatActivity   {
    public GameEngine theGameEngine = new GameEngine();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     public DatabaseReference myRef ;
-   private EditorGameSurfaceFragment f1 = EditorGameSurfaceFragment.newInstance(theGameEngine);
-    private EditorUiFragment f2 = EditorUiFragment.newInstance(theGameEngine);
+   public EditorGameSurfaceFragment f1 = EditorGameSurfaceFragment.newInstance(theGameEngine);
+    public EditorUiFragment f2 = EditorUiFragment.newInstance(theGameEngine);
     public int mode ;
     public String key;
 
@@ -82,13 +87,30 @@ public class EditorActivity extends AppCompatActivity   {
                         }
 
 
+                        theGameEngine.SceneBackgrounds.clear();
+
+                        for(DataSnapshot bgs : snapshot.child("backgrounds").getChildren()){
+                            theGameEngine.SceneBackgrounds.add(bgs.getValue(Integer.class));
+                        }
+
+
+
+
+
                        // if(SceneList.size() > 0){theGameEngine.loadScene(0);}
-                        Toast.makeText(getApplicationContext(),"VOY PRIMERO" + theGameEngine.SceneList.size(),Toast.LENGTH_SHORT).show();
+                        Toast toast = Toast.makeText(getApplicationContext(),"\n    Voy primero    \n" + theGameEngine.SceneList.size(),Toast.LENGTH_SHORT);
+                        View view = toast.getView();
+                        view.getBackground().setColorFilter(getResources().getColor(R.color.backgroundEditorUI), PorterDuff.Mode.SRC_IN);
+                        TextView text = view.findViewById(android.R.id.message);
+                        text.setTextColor(Color.WHITE);
+                        Typeface typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.dubai_light);
+                        text.setTypeface(typeface);
+                        toast.show();
                         //Toast.makeText(EditorActivity.this, "" + theGameEngine.SceneList.size() , Toast.LENGTH_SHORT).show();
                         fm = getSupportFragmentManager();
 
 
-                        fm.beginTransaction().add(R.id.editorContainer, f1).add(R.id.editorContainer, f2,null).commit();
+                        fm.beginTransaction().add(R.id.editorContainer, f1).commit();
 
                     }
 
@@ -142,12 +164,21 @@ public class EditorActivity extends AppCompatActivity   {
                     break;
             }
 
+                Toast toast = Toast.makeText(getApplicationContext(),"VOY PRIMERO" + theGameEngine.SceneList.size(),Toast.LENGTH_SHORT);
+                View view = toast.getView();
+                view.getBackground().setColorFilter(getResources().getColor(R.color.backgroundEditorUI), PorterDuff.Mode.SRC_IN);
+                TextView text = view.findViewById(android.R.id.message);
+                text.setTextColor(Color.WHITE);
 
+
+                Typeface typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.dubai_light);
+                text.setTypeface(typeface);
+                toast.show();
 
                 fm = getSupportFragmentManager();
 
 
-                fm.beginTransaction().add(R.id.editorContainer, f1).add(R.id.editorContainer, f2,null).commit();
+                fm.beginTransaction().add(R.id.editorContainer, f1).commit();
             /*
 
             BasicGameObject aux = new BasicGameObject((float)(getWidth())/2, (float)(getHeight())/2,0, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Meta",false);

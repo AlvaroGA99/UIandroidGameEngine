@@ -75,17 +75,20 @@ public class EditorUiFragment extends Fragment {
     private ImageView spritePreview ;
     private ImageView hideRight;
     private ImageView hideLeft;
+    private ImageView nextBackground;
+    private ImageView previousbackground;
+    private ImageView backgroundPreview;
 
     private boolean passedBySelection = true;
     private String selectedEvent;
-    int[] backgrounds = {R.drawable.background1};
+    int[] backgrounds = {R.drawable.background1,R.drawable.background2};
     int[] circles = {R.drawable.circle_shape_drawable,R.drawable.circle_shape_drawable1,R.drawable.circle_shape_drawable2,R.drawable.circle_shape_drawable3,R.drawable.circle_shape_drawable4,R.drawable.circle_shape_drawable5,R.drawable.circle_shape_drawable6,R.drawable.circle_shape_drawable7,R.drawable.circle_shape_drawable8,R.drawable.circle_shape_drawable9,R.drawable.circle_shape_drawable10,R.drawable.circle_shape_drawable11,R.drawable.circle_shape_drawable12,R.drawable.circle_shape_drawable13,R.drawable.circle_shape_drawable14,R.drawable.circle_shape_drawable15};
     int[] rectangles = {R.drawable.rectangle_shape_drawable,R.drawable.rectangle_shape_drawable1,R.drawable.rectangle_shape_drawable2,R.drawable.rectangle_shape_drawable3,R.drawable.rectangle_shape_drawable4,R.drawable.rectangle_shape_drawable5,R.drawable.rectangle_shape_drawable6,R.drawable.rectangle_shape_drawable7,R.drawable.rectangle_shape_drawable8,R.drawable.rectangle_shape_drawable9,R.drawable.rectangle_shape_drawable10,R.drawable.rectangle_shape_drawable11,R.drawable.rectangle_shape_drawable12,R.drawable.rectangle_shape_drawable13,R.drawable.rectangle_shape_drawable14,R.drawable.rectangle_shape_drawable15};
-     int[] sprites  = {};
+     int[] sprites  = {R.drawable.sprite};
 
      ArrayList<int[]> visualAssets;
-    int bgIndex;
-    int spriteIndex;
+    int bgIndex = 0;
+
     private int previousSelectedId;
      private TextView scaleX;
      private TextView scaleY;
@@ -155,6 +158,7 @@ public class EditorUiFragment extends Fragment {
     public void onViewCreated( View view, Bundle savedInstanceState){
 
         if (theGameEngine.mode >= 2){
+            theGameEngine.mode = 1;
             //Toast.makeText(getContext(),"" +theGameEngine.getObjectsInScene().size(),Toast.LENGTH_SHORT).show();
             theGameEngine.saveThisScene();
            // Toast.makeText(getContext(),"" +theGameEngine.getObjectsInScene().size(),Toast.LENGTH_SHORT).show();
@@ -181,6 +185,9 @@ public class EditorUiFragment extends Fragment {
         nextSprite = (ImageView) parentActivity.findViewById(R.id.nextSprite);
          previousSprite = (ImageView) parentActivity.findViewById(R.id.previousSprite);
        spritePreview = (ImageView) parentActivity.findViewById(R.id.spritePreview);
+        nextBackground = (ImageView) parentActivity.findViewById(R.id.nextBackground);
+        previousbackground = (ImageView) parentActivity.findViewById(R.id.previousBackground);
+        backgroundPreview = (ImageView) parentActivity.findViewById(R.id.backgroundSprite);
 
 
 
@@ -280,6 +287,7 @@ public class EditorUiFragment extends Fragment {
 
                 theGameEngine.SceneHierarchyDescription.put(s,new ArrayList<String[]>());
                 theGameEngine.SceneList.add(s);
+                theGameEngine.SceneBackgrounds.add(0);
                 sa.add(s);
 
                 //sa.notifyDataSetChanged();
@@ -311,6 +319,8 @@ public class EditorUiFragment extends Fragment {
 
                 //}
                 theGameEngine.loadScene(position);
+                parentActivity.f1.gv.loadBackground(backgrounds[theGameEngine.SceneBackgrounds.get(position)]);
+                backgroundPreview.setImageResource(backgrounds[theGameEngine.SceneBackgrounds.get(position)]);
 
                 //Toast.makeText(getActivity().getApplicationContext(),"ÍNDICE : "+ position, Toast.LENGTH_SHORT).show();
                 passedBySelection = true;
@@ -337,6 +347,7 @@ public class EditorUiFragment extends Fragment {
                     sa.remove(s);
 
                     theGameEngine.SceneList.remove(s);
+                    theGameEngine.SceneBackgrounds.remove(previousScene);
                     theGameEngine.SceneHierarchyDescription.remove(s);
                     //sa.clear();
                     //for(int i = 0; i < theGameEngine.SceneList.size();i++){
@@ -402,7 +413,8 @@ public class EditorUiFragment extends Fragment {
         animation2.setDuration(2000)*/;
 
 
-
+        hideRight.setImageResource(R.drawable.right_simple);
+        hideLeft.setImageResource(R.drawable.right_simple);
 
         ObjectHierarchy.setTranslationX(-1*(parentActivity.getWidth()/2  - 100));
         inspector.setTranslationX((parentActivity.getWidth()/2  - 100));
@@ -490,6 +502,35 @@ public class EditorUiFragment extends Fragment {
             public void onClick(View v) {
                 pointerToSelectedObject.previousSprite(visualAssets.get(pointerToSelectedObject.spriteType).length);
                 spritePreview.setImageResource(visualAssets.get(pointerToSelectedObject.spriteType)[pointerToSelectedObject.spriteNumber]);
+            }
+        });
+
+        nextBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bgIndex == backgrounds.length - 1){
+                    bgIndex = 0;
+                }else {
+                    bgIndex += 1;
+                }
+                theGameEngine.SceneBackgrounds.set(theGameEngine.getCurrentScene(),bgIndex);
+                backgroundPreview.setImageResource(backgrounds[bgIndex]);
+                parentActivity.f1.gv.loadBackground(backgrounds[bgIndex]);
+            }
+        });
+
+        previousbackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bgIndex == 0){
+                    bgIndex = backgrounds.length - 1;
+                }else {
+                    bgIndex -= 1;
+                }
+                theGameEngine.SceneBackgrounds.set(theGameEngine.getCurrentScene(),bgIndex);
+                backgroundPreview.setImageResource(backgrounds[bgIndex]);
+                parentActivity.f1.gv.loadBackground(backgrounds[bgIndex]);
+
             }
         });
      //   scaleX.setText("X : " + pointerToSelectedObject.scale.x);
@@ -1928,6 +1969,9 @@ public class EditorUiFragment extends Fragment {
         });
         //Toast.makeText(getContext(),"" +theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(theGameEngine.getCurrentScene())).size(),Toast.LENGTH_SHORT).show();
         theGameEngine.loadScene();
+        parentActivity.f1.gv.loadBackground(backgrounds[theGameEngine.SceneBackgrounds.get(0)]);
+        backgroundPreview.setImageResource(backgrounds[theGameEngine.SceneBackgrounds.get(0)]);
+
         //Toast.makeText(getContext(),"" +theGameEngine.SceneList.get(theGameEngine.getCurrentScene())+ "___"+theGameEngine.getObjectsInScene().size(),Toast.LENGTH_SHORT).show();
         //Toast.makeText(getContext(),"" +theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(theGameEngine.getCurrentScene())).size(),Toast.LENGTH_SHORT).show();
         os.notifyDataSetChanged();
@@ -1952,6 +1996,8 @@ public class EditorUiFragment extends Fragment {
 
     private void saveToDatabase(){
         EditorActivity a = (EditorActivity) getActivity();
+
+        a.myRef.child("backgrounds").setValue(theGameEngine.SceneBackgrounds);
 
         a.myRef.child("scenes").removeValue();
         //HashMap aux = new HashMap<String, ArrayList<ArrayList<String>>>();

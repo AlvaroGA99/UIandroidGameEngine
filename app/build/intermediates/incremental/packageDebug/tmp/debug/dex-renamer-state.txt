@@ -1,4 +1,4 @@
-#Sat Jan 01 20:29:56 CET 2022
+#Sun Jan 02 23:37:27 CET 2022
 base.0=D\:\\clase\\Cuarto\\TFG\\UIandroidGameEngine\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex

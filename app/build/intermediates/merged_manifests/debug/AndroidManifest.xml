@@ -22,6 +22,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat" >
         <activity
+            android:name="com.tfg.UIandroidGameEngine.HelpActivity"
+            android:exported="false" />
+        <activity
             android:name="com.tfg.UIandroidGameEngine.LoginActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -32,12 +35,10 @@
         </activity>
         <activity
             android:name="com.tfg.UIandroidGameEngine.EditorActivity"
-            android:screenOrientation="landscape" >
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name="com.tfg.UIandroidGameEngine.MainActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.version"

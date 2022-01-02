@@ -107,11 +107,11 @@ public class PublishedProjectsAdapter extends  RecyclerView.Adapter<PublishedPro
                 a.child("published").setValue(false);
                 a.child("title").setValue(localDataSet.get(position).getName());
                 a.child("project_type").setValue(localDataSet.get(position).getType());
-                myRef.child(localDataSet.get(position).getKey()).child("Scenes").addListenerForSingleValueEvent(new ValueEventListener() {
+                myRef.child(localDataSet.get(position).getKey()).child("scenes").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot Scene : snapshot.getChildren()){
-                            a.child("Scenes").child(Scene.getKey()).setValue(Scene.getValue(ArrayList.class));
+                            a.child("scenes").child(Scene.getKey()).setValue(Scene.getValue(ArrayList.class));
                         }
                     }
 

@@ -119,6 +119,7 @@ public class SceneManager {
             aux.actionHolder.collisionActions.add(new ArrayList<Action>());
         }
         aux.spriteNumber = Integer.parseInt(objectDescription[7]);
+        aux.reloadSprite();
         aux.scale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
         aux.preUpdateScale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
         aux.rotation = Float.parseFloat(objectDescription[5]);

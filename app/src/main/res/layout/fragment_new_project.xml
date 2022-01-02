@@ -322,7 +322,7 @@
             android:textSize="23sp" />
 
         <Button
-            android:id="@+id/helpButton"
+            android:id="@+id/helpButton2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20dp"

@@ -32,6 +32,8 @@ public class GameEngine {
 
     public ArrayList<String> SceneList = new ArrayList<>();
 
+    public ArrayList<Integer> SceneBackgrounds = new ArrayList<>();
+
     public Camera camera = new Camera();
 
     public ArrayList<BasicGameObject> deleteQueue= new ArrayList<BasicGameObject>();
@@ -139,6 +141,7 @@ public class GameEngine {
         if(!SceneHierarchyDescription.containsKey(key)){
             SceneHierarchyDescription.put(key, new ArrayList<String[]>());
             SceneList.add(key);
+            SceneBackgrounds.add(0);
         }
     }
 

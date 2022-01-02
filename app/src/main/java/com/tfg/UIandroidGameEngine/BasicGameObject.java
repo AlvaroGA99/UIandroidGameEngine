@@ -247,6 +247,8 @@ public  class BasicGameObject  {
              sprite.loadSprite(spriteNumber);
         }
 
-
+        public void reloadSprite(){
+             sprite.loadSprite(spriteNumber);
+        }
 
     }
