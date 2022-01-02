@@ -108,16 +108,17 @@ public class SceneManager {
 
     private BasicGameObject castDescriptionToObject(String[] objectDescription){
 
-        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[1]),Float.parseFloat(objectDescription[2]),Integer.parseInt(objectDescription[6]),theInputManager,ctx,objectDescription[0],Boolean.parseBoolean(objectDescription[7]));
+        BasicGameObject aux = new BasicGameObject(Float.parseFloat(objectDescription[1]),Float.parseFloat(objectDescription[2]),Integer.parseInt(objectDescription[6]),theInputManager,ctx,objectDescription[0],Boolean.parseBoolean(objectDescription[8]));
         //BasicGameObject aux = new BasicGameObject(Float.parseFloat("1500.0") ,Float.parseFloat("1500.0"),0,theInputManager,ctx, objectDescription[0]);
 
       // Toast.makeText(ctx,objectDescription[6] , Toast.LENGTH_SHORT).show();
         //Toast.makeText(ctx,objectDescription[2] , Toast.LENGTH_SHORT).show();
 
         aux.actionHolder.collisionActions = new ArrayList<>();
-        for (int i = 0; i < Integer.parseInt(objectDescription[8]); i ++){
+        for (int i = 0; i < Integer.parseInt(objectDescription[9]); i ++){
             aux.actionHolder.collisionActions.add(new ArrayList<Action>());
         }
+        aux.spriteNumber = Integer.parseInt(objectDescription[7]);
         aux.scale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
         aux.preUpdateScale = new Vector(Float.parseFloat(objectDescription[3]),Float.parseFloat(objectDescription[4]));
         aux.rotation = Float.parseFloat(objectDescription[5]);

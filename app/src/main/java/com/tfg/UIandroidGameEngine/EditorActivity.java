@@ -44,14 +44,17 @@ public class EditorActivity extends AppCompatActivity   {
         setContentView(R.layout.activity_editor/*new EditorGameView(this)*/);
         key = getIntent().getStringExtra("KEY");
         myRef = database.getReference("users/"+ FirebaseAuth.getInstance().getCurrentUser().getUid()+"/projects/" + key/*getIntent().getStringExtra("KEY")*/);
+
+
         mode = getIntent().getIntExtra("MODE",1);
+        theGameEngine.mode = mode;
         theGameEngine.setContext(getApplicationContext());
         if(theGameEngine.getObjectsInScene().size() == 0){
 
             if (mode == 0 || mode == 1){
 
 
-                theGameEngine.mode = mode;
+
                 ArrayList<String> SceneList = new ArrayList<>();
                 ArrayList<String> auxObjectDescriptionList = new ArrayList<>();
 
@@ -80,7 +83,8 @@ public class EditorActivity extends AppCompatActivity   {
 
 
                        // if(SceneList.size() > 0){theGameEngine.loadScene(0);}
-                        Toast.makeText(EditorActivity.this, "" + theGameEngine.SceneList.size() , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"VOY PRIMERO" + theGameEngine.SceneList.size(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EditorActivity.this, "" + theGameEngine.SceneList.size() , Toast.LENGTH_SHORT).show();
                         fm = getSupportFragmentManager();
 
 
@@ -96,6 +100,8 @@ public class EditorActivity extends AppCompatActivity   {
                 });
 
 
+
+
             }else{
 
 
@@ -108,6 +114,8 @@ public class EditorActivity extends AppCompatActivity   {
 
             switch (mode){
                 case 2:
+
+                    theGameEngine.addScene("Nueva Escena");
                     BasicGameObject aux = new BasicGameObject(-300,250,2, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Jugador",false);
                     aux.addComponent("GravityComponent");
                     aux.addComponent("InputMovementPlatformerComponent");
@@ -127,10 +135,15 @@ public class EditorActivity extends AppCompatActivity   {
                      aux = new BasicGameObject(300,14,1, theGameEngine.getTheInputManager(),theGameEngine.ctx,"Meta",false);
 
                     theGameEngine.addGameObject(aux);
+                    //System.exit(-1);
+                    Toast.makeText(getApplicationContext(),"asdasda" + theGameEngine.mode,Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
                     break;
             }
+
+
+
                 fm = getSupportFragmentManager();
 
 
@@ -217,7 +230,7 @@ public class EditorActivity extends AppCompatActivity   {
         //if (savedInstanceState == null) {
 
         //}
-        Toast.makeText(getApplicationContext(),"VOY PRIMERO" + theGameEngine.SceneList.size(),Toast.LENGTH_SHORT).show();
+
 
 
         currentApiVersion = android.os.Build.VERSION.SDK_INT;

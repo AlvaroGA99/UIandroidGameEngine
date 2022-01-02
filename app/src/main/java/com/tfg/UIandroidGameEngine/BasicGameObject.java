@@ -40,7 +40,7 @@ public  class BasicGameObject  {
         public int sceneHierarchyID;
 
         public int spriteType;
-        private int spriteNumber;
+        public int spriteNumber;
         private Sprite sprite;
 
 
@@ -109,7 +109,7 @@ public  class BasicGameObject  {
 
         public String[] castObjectToDescription(){
              String aux = "";
-             aux += "" + name + "_"+ position.x + "_" + position.y + "_" + scale.x + "_" + scale.y + "_" + rotation + "_" + spriteType + "_" + isFocusedByCamera;
+             aux += "" + name + "_"+ position.x + "_" + position.y + "_" + scale.x + "_" + scale.y + "_" + rotation + "_" + spriteType + "_" + spriteNumber +"_" +  isFocusedByCamera;
                 aux += "_" + actionHolder.collisionActions.size();
              for(int i = 0; i < components.size(); i ++){
                  aux += "_" + components.get(i).name;
@@ -227,12 +227,23 @@ public  class BasicGameObject  {
             rotation = preUpdateRotation;
         }
 
-        public void nextSprite(){
-             spriteNumber+=1;
+        public void nextSprite(int length){
+             if(spriteNumber == length - 1){
+                 spriteNumber = 0;
+             }else{
+                 spriteNumber += 1;
+             }
+
+            sprite.loadSprite(spriteNumber);
         }
 
-        public void previousSprite(){
-             spriteNumber-=1;
+        public void previousSprite(int length){
+             if(spriteNumber == 0){
+                 spriteNumber = length - 1;
+             }else{
+                 spriteNumber-=1;
+             }
+
              sprite.loadSprite(spriteNumber);
         }
 

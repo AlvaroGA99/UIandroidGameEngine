@@ -155,7 +155,7 @@ public class GameEngine {
         String[] auxSplit ;
         for (int i = 0; i < getObjectsInScene().size();i++){
 
-            for (int j = 9; j < aux.get(i).length; j++){
+            for (int j = 10; j < aux.get(i).length; j++){
                 auxSplit = aux.get(i)[j].split("/");
                 switch(auxSplit[0]){
                     case "InputMovementPlatformerComponent" :
@@ -336,7 +336,7 @@ public class GameEngine {
         String[] auxSplit ;
         for (int i = 0; i < getObjectsInScene().size();i++){
 
-            for (int j = 9; j < aux.get(i).length; j++){
+            for (int j = 10; j < aux.get(i).length; j++){
                 auxSplit = aux.get(i)[j].split("/");
                switch(auxSplit[0]){
                     case "InputMovementPlatformerComponent" :

@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_preview.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable1.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable10.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable11.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable12.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable13.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable14.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable15.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable2.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable3.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable4.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable5.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable6.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable7.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable8.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/circle_shape_drawable9.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable1.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable10.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable11.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable12.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable13.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable14.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable15.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable2.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable3.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable4.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable5.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable6.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable7.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable8.xml" value="0.221875" />
+        <entry key="..\:/clase/Cuarto/TFG/UIandroidGameEngine/app/src/main/res/drawable/rectangle_shape_drawable9.xml" value="0.221875" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

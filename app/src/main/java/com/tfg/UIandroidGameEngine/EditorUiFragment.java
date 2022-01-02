@@ -79,8 +79,11 @@ public class EditorUiFragment extends Fragment {
     private boolean passedBySelection = true;
     private String selectedEvent;
     int[] backgrounds = {R.drawable.background1};
+    int[] circles = {R.drawable.circle_shape_drawable,R.drawable.circle_shape_drawable1,R.drawable.circle_shape_drawable2,R.drawable.circle_shape_drawable3,R.drawable.circle_shape_drawable4,R.drawable.circle_shape_drawable5,R.drawable.circle_shape_drawable6,R.drawable.circle_shape_drawable7,R.drawable.circle_shape_drawable8,R.drawable.circle_shape_drawable9,R.drawable.circle_shape_drawable10,R.drawable.circle_shape_drawable11,R.drawable.circle_shape_drawable12,R.drawable.circle_shape_drawable13,R.drawable.circle_shape_drawable14,R.drawable.circle_shape_drawable15};
+    int[] rectangles = {R.drawable.rectangle_shape_drawable,R.drawable.rectangle_shape_drawable1,R.drawable.rectangle_shape_drawable2,R.drawable.rectangle_shape_drawable3,R.drawable.rectangle_shape_drawable4,R.drawable.rectangle_shape_drawable5,R.drawable.rectangle_shape_drawable6,R.drawable.rectangle_shape_drawable7,R.drawable.rectangle_shape_drawable8,R.drawable.rectangle_shape_drawable9,R.drawable.rectangle_shape_drawable10,R.drawable.rectangle_shape_drawable11,R.drawable.rectangle_shape_drawable12,R.drawable.rectangle_shape_drawable13,R.drawable.rectangle_shape_drawable14,R.drawable.rectangle_shape_drawable15};
+     int[] sprites  = {};
 
-
+     ArrayList<int[]> visualAssets;
     int bgIndex;
     int spriteIndex;
     private int previousSelectedId;
@@ -104,7 +107,10 @@ public class EditorUiFragment extends Fragment {
 
     public EditorUiFragment() {
 
-
+        visualAssets = new ArrayList<>();
+        visualAssets.add(rectangles);
+        visualAssets.add(circles);
+        visualAssets.add(sprites);
         // Required empty public constructor
 
     }
@@ -126,7 +132,7 @@ public class EditorUiFragment extends Fragment {
     @Override 
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        Toast.makeText(parentActivity.getApplicationContext(), "VOY DESPUES" + theGameEngine.SceneList.size(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(parentActivity.getApplicationContext(), "VOY DESPUES" + theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(0)).get(0)[0], Toast.LENGTH_SHORT).show();
 
     }
     @Override
@@ -148,7 +154,13 @@ public class EditorUiFragment extends Fragment {
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState){
 
-
+        if (theGameEngine.mode >= 2){
+            //Toast.makeText(getContext(),"" +theGameEngine.getObjectsInScene().size(),Toast.LENGTH_SHORT).show();
+            theGameEngine.saveThisScene();
+           // Toast.makeText(getContext(),"" +theGameEngine.getObjectsInScene().size(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(),"" +theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(theGameEngine.getCurrentScene())).size(),Toast.LENGTH_SHORT).show();
+            saveToDatabase();
+        }
 
         View ObjectHierarchy =  parentActivity.findViewById(R.id.objectHierarchy);
         View inspector = parentActivity.findViewById(R.id.inspector);
@@ -162,7 +174,7 @@ public class EditorUiFragment extends Fragment {
         ImageView addScene = (ImageView) parentActivity.findViewById(R.id.addScene);
         ImageView deleteScene = (ImageView) parentActivity.findViewById(R.id.deleteScene);
         ImageView configureScene = (ImageView) parentActivity.findViewById(R.id.configureScene);
-
+          //  Toast.makeText(getContext(),"VOY DESPUES" ,Toast.LENGTH_SHORT).show();
         hideRight = parentActivity.findViewById(R.id.hideRight);
         hideLeft = parentActivity.findViewById(R.id.hideLeft);
 
@@ -170,12 +182,6 @@ public class EditorUiFragment extends Fragment {
          previousSprite = (ImageView) parentActivity.findViewById(R.id.previousSprite);
        spritePreview = (ImageView) parentActivity.findViewById(R.id.spritePreview);
 
-        nextSprite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
 
 
@@ -199,28 +205,7 @@ public class EditorUiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 theGameEngine.saveThisScene();
-               EditorActivity a = (EditorActivity) getActivity();
-                
-                a.myRef.child("scenes").removeValue();
-                //HashMap aux = new HashMap<String, ArrayList<ArrayList<String>>>();
-                ArrayList<String> auxlist = new ArrayList<>();
-
-
-                for(String key : theGameEngine.SceneList){
-                    auxlist.clear();
-                    for(String[] objectDescription : theGameEngine.SceneHierarchyDescription.get(key)){
-                        String aux = "";
-                        for(int i = 0; i < objectDescription.length; i++){
-                            aux += objectDescription[i] + "_";
-                        }
-                        auxlist.add(aux);
-
-                    }
-                    a.myRef.child("scenes").child(key).setValue(auxlist);
-
-                    auxlist.clear();
-                }
-
+               saveToDatabase();
                 Toast.makeText(getContext(), "GUARDAR", Toast.LENGTH_SHORT).show();
             }
         });
@@ -495,14 +480,16 @@ public class EditorUiFragment extends Fragment {
         nextSprite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                pointerToSelectedObject.nextSprite(visualAssets.get(pointerToSelectedObject.spriteType).length);
+                spritePreview.setImageResource(visualAssets.get(pointerToSelectedObject.spriteType)[pointerToSelectedObject.spriteNumber]);
             }
         });
 
         previousSprite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                pointerToSelectedObject.previousSprite(visualAssets.get(pointerToSelectedObject.spriteType).length);
+                spritePreview.setImageResource(visualAssets.get(pointerToSelectedObject.spriteType)[pointerToSelectedObject.spriteNumber]);
             }
         });
      //   scaleX.setText("X : " + pointerToSelectedObject.scale.x);
@@ -629,6 +616,7 @@ public class EditorUiFragment extends Fragment {
                 switch(pointerToSelectedObject.spriteType){
                     case 0:
                         spritePreview.setImageResource(R.drawable.rectangle_shape_drawable);
+
                         break;
                     case 1:
                         spritePreview.setImageResource(R.drawable.circle_shape_drawable);
@@ -655,7 +643,7 @@ public class EditorUiFragment extends Fragment {
                 selectObject.setVisibility(View.INVISIBLE);
                 int id = theGameEngine.addGameObject(0,gameObjectTextViewName.getText().toString());
                 os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
-                Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"" + theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(theGameEngine.getCurrentScene())).size() ,Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -666,7 +654,7 @@ public class EditorUiFragment extends Fragment {
                 selectObject.setVisibility(View.INVISIBLE);
                 int id = theGameEngine.addGameObject(1,gameObjectTextViewName.getText().toString());
                 os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
-                Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"" + theGameEngine.SceneList.size() ,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -676,7 +664,7 @@ public class EditorUiFragment extends Fragment {
                 selectObject.setVisibility(View.INVISIBLE);
                 int id = theGameEngine.addGameObject(2,gameObjectTextViewName.getText().toString());
                 os.notifyItemInserted(theGameEngine.getObjectsInScene().size()-1);
-                Toast.makeText(getContext(),"" + id,Toast.LENGTH_SHORT).show();
+               Toast.makeText(getContext(),"" + theGameEngine.SceneList.size() ,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -1938,6 +1926,12 @@ public class EditorUiFragment extends Fragment {
                 oe.updateLocalDataSet(pointerToSelectedObject.actionHolder);
             }
         });
+        //Toast.makeText(getContext(),"" +theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(theGameEngine.getCurrentScene())).size(),Toast.LENGTH_SHORT).show();
+        theGameEngine.loadScene();
+        //Toast.makeText(getContext(),"" +theGameEngine.SceneList.get(theGameEngine.getCurrentScene())+ "___"+theGameEngine.getObjectsInScene().size(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"" +theGameEngine.SceneHierarchyDescription.get(theGameEngine.SceneList.get(theGameEngine.getCurrentScene())).size(),Toast.LENGTH_SHORT).show();
+        os.notifyDataSetChanged();
+
 
     }
     @Override
@@ -1953,6 +1947,31 @@ public class EditorUiFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+
+    }
+
+    private void saveToDatabase(){
+        EditorActivity a = (EditorActivity) getActivity();
+
+        a.myRef.child("scenes").removeValue();
+        //HashMap aux = new HashMap<String, ArrayList<ArrayList<String>>>();
+        ArrayList<String> auxlist = new ArrayList<>();
+
+
+        for(String key : theGameEngine.SceneList){
+            auxlist.clear();
+            for(String[] objectDescription : theGameEngine.SceneHierarchyDescription.get(key)){
+                String aux = "";
+                for(int i = 0; i < objectDescription.length; i++){
+                    aux += objectDescription[i] + "_";
+                }
+                auxlist.add(aux);
+
+            }
+            a.myRef.child("scenes").child(key).setValue(auxlist);
+
+            auxlist.clear();
+        }
 
     }
 }
