@@ -84,7 +84,7 @@ public class EditorUiFragment extends Fragment {
     int[] backgrounds = {R.drawable.background1,R.drawable.background2};
     int[] circles = {R.drawable.circle_shape_drawable,R.drawable.circle_shape_drawable1,R.drawable.circle_shape_drawable2,R.drawable.circle_shape_drawable3,R.drawable.circle_shape_drawable4,R.drawable.circle_shape_drawable5,R.drawable.circle_shape_drawable6,R.drawable.circle_shape_drawable7,R.drawable.circle_shape_drawable8,R.drawable.circle_shape_drawable9,R.drawable.circle_shape_drawable10,R.drawable.circle_shape_drawable11,R.drawable.circle_shape_drawable12,R.drawable.circle_shape_drawable13,R.drawable.circle_shape_drawable14,R.drawable.circle_shape_drawable15};
     int[] rectangles = {R.drawable.rectangle_shape_drawable,R.drawable.rectangle_shape_drawable1,R.drawable.rectangle_shape_drawable2,R.drawable.rectangle_shape_drawable3,R.drawable.rectangle_shape_drawable4,R.drawable.rectangle_shape_drawable5,R.drawable.rectangle_shape_drawable6,R.drawable.rectangle_shape_drawable7,R.drawable.rectangle_shape_drawable8,R.drawable.rectangle_shape_drawable9,R.drawable.rectangle_shape_drawable10,R.drawable.rectangle_shape_drawable11,R.drawable.rectangle_shape_drawable12,R.drawable.rectangle_shape_drawable13,R.drawable.rectangle_shape_drawable14,R.drawable.rectangle_shape_drawable15};
-     int[] sprites  = {R.drawable.sprite};
+     int[] sprites  = {R.drawable.sprite,R.drawable.sprite2};
 
      ArrayList<int[]> visualAssets;
     int bgIndex = 0;
@@ -218,7 +218,7 @@ public class EditorUiFragment extends Fragment {
         });
 
 
-
+    saveInEditor.setTranslationY(-150);
 
 
         addComponent.setOnClickListener(new View.OnClickListener() {
@@ -432,10 +432,12 @@ public class EditorUiFragment extends Fragment {
                     inspector.animate().translationX(0);
                     v.animate().rotation(180);
 
+
                 }else{
 
                     inspector.animate().translationX(parentActivity.getWidth()/2  - 100);
                     v.animate().rotation(0);
+
                 }
                 inspectorReverse = !inspectorReverse;
 
@@ -444,7 +446,6 @@ public class EditorUiFragment extends Fragment {
 
             }
         });
-
         hideLeft.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -454,10 +455,11 @@ public class EditorUiFragment extends Fragment {
                 if(!hierarchyReverse){
                     ObjectHierarchy.animate().translationX(0);
                     v.animate().rotation(0);
-
+                    saveInEditor.animate().translationY(0);
                 }else{
                     ObjectHierarchy.animate().translationX(-1*(parentActivity.getWidth()/2  - 100));
                     v.animate().rotation(180);
+                    saveInEditor.animate().translationY(-150);
                 }
                 hierarchyReverse = !hierarchyReverse;
 

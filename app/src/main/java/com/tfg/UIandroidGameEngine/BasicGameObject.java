@@ -201,8 +201,11 @@ public  class BasicGameObject  {
                 //Execute and remove fiorst element to avoid arraayList dinamic size conflicts
 
                 //System.exit(-1);
-                inputEventsReceived.get(0).dispatchEvent(this);
-                inputEventsReceived.remove(0);
+                if(inputEventsReceived.size() != 0){
+                    inputEventsReceived.get(0).dispatchEvent(this);
+                    inputEventsReceived.remove(0);
+                }
+
             }
 
 

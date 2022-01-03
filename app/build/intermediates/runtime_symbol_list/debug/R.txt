@@ -1850,11 +1850,12 @@ int drawable roundborder_yellow_drawable 0x7f0700f0
 int drawable settings 0x7f0700f1
 int drawable simple_right 0x7f0700f2
 int drawable sprite 0x7f0700f3
-int drawable suma 0x7f0700f4
-int drawable test_custom_background 0x7f0700f5
-int drawable text_view_drawable 0x7f0700f6
-int drawable tooltip_frame_dark 0x7f0700f7
-int drawable tooltip_frame_light 0x7f0700f8
+int drawable sprite2 0x7f0700f4
+int drawable suma 0x7f0700f5
+int drawable test_custom_background 0x7f0700f6
+int drawable text_view_drawable 0x7f0700f7
+int drawable tooltip_frame_dark 0x7f0700f8
+int drawable tooltip_frame_light 0x7f0700f9
 int font dubai_light 0x7f080000
 int font dubai_light_regular 0x7f080001
 int id ALT 0x7f090000

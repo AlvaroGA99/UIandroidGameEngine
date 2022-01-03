@@ -1851,6 +1851,7 @@ drawable roundborder_yellow_drawable
 drawable settings
 drawable simple_right
 drawable sprite
+drawable sprite2
 drawable suma
 drawable test_custom_background
 drawable text_view_drawable

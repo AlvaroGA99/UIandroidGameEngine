@@ -21,7 +21,7 @@ public class BitmapSprite implements Sprite{
     Context ctx;
 
     Matrix m;
-    int[] sprites = {R.drawable.sprite};
+    int[] sprites = {R.drawable.sprite,R.drawable.sprite2};
     public BitmapSprite(Context ctx)  {
 
         this.ctx = ctx;

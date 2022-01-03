@@ -182,6 +182,8 @@ public class GameEngine {
                         break;
                     case "DragableComponent":
                         getObjectsInScene().get(i).addComponent(new DragableComponent(getObjectsInScene().get(i),this));
+                    case "ColliderComponent":
+                        getObjectsInScene().get(i).addComponent(new ColliderComponent(getObjectsInScene().get(i),this));
                         break;
                     case "OnClickEvent" :
                         switch (auxSplit[1]){
